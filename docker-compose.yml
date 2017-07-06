@@ -1,0 +1,32 @@
+version: '2.1'
+
+services:
+  api:
+    user: ${UID}
+    build:
+      context: ./api
+    image: speaktome-api
+    volumes:
+      - ./api/src:/app
+
+  speech2text:
+    user: ${UID}
+    build:
+      context: ./speech2text
+    image: speaktome-speech2text
+    volumes:
+      - ./speech2text/src:/app
+    environment:
+      - PORT=8000
+
+  frontend:
+    build:
+      context: ./frontend
+    image: speaktome-frontend
+    links:
+      - api
+      - speech2text
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend/src:/static
