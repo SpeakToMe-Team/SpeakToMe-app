@@ -12,6 +12,9 @@ class SpeechController extends Controller
 {
     use Helpers;
 
+    private $intent;
+    private $targetApi;
+
     public function index(Request $request)
     {
         $this->request = $request;
@@ -21,24 +24,21 @@ class SpeechController extends Controller
             return "Query is empty.";
         }
 
+        $intentAnalyser = new IntentAnalyserController($query);
+        $this->intent = $intentAnalyser->run();
         $this->targetApi = $this->getTargetApi();
 
         return $this->targetApi->run();
     }
 
-    public function getTargetApi ()
-    {
-        $sentence = $this->request->query('query');
+    public function getTargetApi() {
 
-        foreach (config('external_api.keywords') as $api_slug => $keywords) {
-            foreach ($keywords as $keyword) {
-                if (strpos($sentence, $keyword) !== false) {
-                    $className = 'App\Http\Controllers\Api\v1\\' . ucfirst($api_slug) . 'Controller';
-                    return new $className;
-                }
+        if (isset($this->intent['entities']['intent'][0])) {
+            $intent = $this->intent['entities']['intent'][0]['value'];
+            if (array_key_exists($intent, config('external_api.keywords'))) {
+                $className = 'App\Http\Controllers\Api\v1\\' . ucfirst($intent) . 'Controller';
+                return new $className($this->intent);
             }
         }
-
-        return null;
     }
 }

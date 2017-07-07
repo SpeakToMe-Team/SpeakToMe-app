@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Api\v1;
 
 use GuzzleHttp\Client;
 
-class Travel extends ApiController
+class TravelController extends ApiController
 {
     public function run() {
         $client = new Client();
@@ -30,8 +30,8 @@ class Travel extends ApiController
 
         $params = [
             'form_params' => [
-                'client_id' => config('external_api.params.travel.client_id'),
-                'client_secret' => config('external_api.params.travel.client_secret')
+                'client_id' => env('YELP_CLIENT_ID'),
+                'client_secret' => env('YELP_CLIENT_SECRET')
             ]
         ];
 
