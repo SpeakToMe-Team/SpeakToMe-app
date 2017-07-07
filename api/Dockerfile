@@ -2,9 +2,6 @@ FROM php:7.1-fpm
 
 ENV APP_HOME /app
 
-RUN mkdir -p $APP_HOME
-WORKDIR $APP_HOME
-
 RUN apt-get update && apt-get install -y \  
       libicu-dev \
       libpq-dev \
@@ -33,8 +30,10 @@ RUN mkdir -p /usr/local/laravel && \
 
 RUN mkdir -p /.composer && chmod 777 /.composer
 
+RUN mkdir -p $APP_HOME
 COPY ./src $APP_HOME
+WORKDIR $APP_HOME/speakToMe-api
 
-# RUN composer install --no-interaction
+RUN composer install --no-interaction
 
 RUN chown -R www-data:www-data $APP_HOME
