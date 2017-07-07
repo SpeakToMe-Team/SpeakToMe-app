@@ -1,4 +1,6 @@
 vendor/
+
+# node
 node_modules/
 npm-debug.log
 
@@ -19,4 +21,6 @@ Homestead.json
 # Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
 .rocketeer/
 
+# Temporary files
 .DS_Store
+*~

@@ -22,6 +22,7 @@ services:
   frontend:
     build:
       context: ./frontend
+      dockerfile: Dockerfile-nginx
     image: speaktome-frontend
     links:
       - api
@@ -29,4 +30,16 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./frontend/src:/static
+      - ./frontend/src/dist:/app
+
+  frontend-node:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile-node
+    image: speaktome-frontend-node
+    links:
+      - speech2text
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./frontend/src:/app
