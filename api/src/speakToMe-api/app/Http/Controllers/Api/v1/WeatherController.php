@@ -5,7 +5,7 @@ use GuzzleHttp\Client;
 
 class WeatherController extends ApiController
 {
-    protected $name = 'travel';
+    protected $name = 'weather';
 
     public function run() {
         $client = new Client();

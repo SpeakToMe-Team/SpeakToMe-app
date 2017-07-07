@@ -14,7 +14,7 @@ abstract class ApiController implements ApiInterface
             return $model->token;
         }
 
-        return $this->{$this->name . 'ApiGenerateToken'}();
+        return $this->generateToken();
     }
 
     public function saveToken($token)

@@ -3,8 +3,10 @@ namespace App\Http\Controllers\Api\v1;
 
 use GuzzleHttp\Client;
 
-class Travel extends ApiController
+class TravelController extends ApiController
 {
+    protected $name = 'travel';
+
     public function run() {
         $client = new Client();
 
