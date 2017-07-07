@@ -32,8 +32,8 @@ class TravelController extends ApiController
 
         $params = [
             'form_params' => [
-                'client_id' => config('external_api.params.travel.client_id'),
-                'client_secret' => config('external_api.params.travel.client_secret')
+                'client_id' => env('YELP_CLIENT_ID'),
+                'client_secret' => env('YELP_CLIENT_SECRET')
             ]
         ];
 
