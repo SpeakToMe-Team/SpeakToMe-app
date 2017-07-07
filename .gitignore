@@ -1,8 +1,14 @@
 vendor/
 
-# node
-node_modules/
-npm-debug.log
+# node/vue
+frontend/src/node_modules/
+frontend/src/npm-debug.log
+frontend/src/dist
+frontend/src/yarn-debug.log*
+frontend/src/yarn-error.log*
+frontend/src/test/unit/coverage
+frontend/src/test/e2e/reports
+frontend/src/selenium-debug.log
 
 # Laravel 4 specific
 bootstrap/compiled.php
