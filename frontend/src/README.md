@@ -19,6 +19,7 @@ npm run build --report
 ```
 
 ## Bing Speech API
+- Go to https://azure.microsoft.com/fr-fr/services/cognitive-services/speech/
 - Go to https://docs.microsoft.com/fr-fr/azure/cognitive-services/speech/getstarted/getstartedjswebsockets
 - Go to https://azure.microsoft.com/fr-fr/services/cognitive-services/
 - Create your key
