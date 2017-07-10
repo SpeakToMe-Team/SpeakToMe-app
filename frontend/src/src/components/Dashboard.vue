@@ -65,6 +65,12 @@
             <td>Status: <span id="statusDiv"></span></td>
         </tr>
     </table>
+    <p>Exemples</p>
+    <ul>
+        <li>donne moi la météo</li>
+        <li>donne moi le programme tv de ce soir</li>
+    </ul>
+
   </div>
   
 </template>

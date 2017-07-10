@@ -112,90 +112,86 @@
 
   <!-- Browser Hooks -->
   <script>
-        var startBtn, stopBtn, hypothesisDiv, phraseDiv, statusDiv, key, languageOptions, formatOptions;
-        var SDK;
-        var recognizer;
-        var previousSubscriptionKey;
+    var startBtn, stopBtn, hypothesisDiv, phraseDiv, statusDiv, key, languageOptions, formatOptions;
+    var SDK;
+    var recognizer;
+    var previousSubscriptionKey;
 
-        document.addEventListener("DOMContentLoaded", function () {
-          createBtn = document.getElementById("createBtn");
-          startBtn = document.getElementById("startBtn");
-          stopBtn = document.getElementById("stopBtn");
-          phraseDiv = document.getElementById("phraseDiv");
-          hypothesisDiv = document.getElementById("hypothesisDiv");
-          statusDiv = document.getElementById("statusDiv");
-          key = 'METTRE_VOTRE_KEY';
-          //key = document.getElementById("key");
-          languageOptions = 'fr-FR';
-          //languageOptions = document.getElementById("languageOptions");
-          console.log(languageOptions);
-        
-          formatOptions = 'Detailed';
-          //formatOptions = document.getElementById("formatOptions");
+    Initialize(function (speechSdk) {
+      SDK = speechSdk;
+      startBtn.disabled = false;
+    });
 
-          /*languageOptions.addEventListener("change", function () {
-            Setup();
-          });*/
 
-          /*formatOptions.addEventListener("change", function () {
-            Setup();
-          });*/
+    function Setup() {
+      //recognizer = RecognizerSetup(SDK, SDK.RecognitionMode.Interactive, languageOptions.value, SDK.SpeechResultFormat[formatOptions.value], key.value);
+      recognizer = RecognizerSetup(SDK, SDK.RecognitionMode.Conversation, languageOptions, SDK.SpeechResultFormat[formatOptions], key);
+    }
 
-          startBtn.addEventListener("click", function () {
-            if (!recognizer || previousSubscriptionKey != key) {
-              previousSubscriptionKey = key;
-              Setup();
-            }
-            /*
-            if (!recognizer || previousSubscriptionKey != key.value) {
-              previousSubscriptionKey = key.value;
-              Setup();
-            }*/
+    function UpdateStatus(status) {
+      statusDiv.innerHTML = status;
+    }
 
-            hypothesisDiv.innerHTML = "";
-            phraseDiv.innerHTML = "";
-            RecognizerStart(SDK, recognizer);
-            startBtn.disabled = true;
-            stopBtn.disabled = false;
-          });
+    function UpdateRecognizedHypothesis(text) {
+      hypothesisDiv.innerHTML = text;
+    }
 
-          stopBtn.addEventListener("click", function () {
-            RecognizerStop(SDK);
-            startBtn.disabled = false;
-            stopBtn.disabled = true;
-          });
+    function OnSpeechEndDetected() {
+      stopBtn.disabled = true;
+    }
 
-          Initialize(function (speechSdk) {
-            SDK = speechSdk;
-            startBtn.disabled = false;
-          });
-        });
+    function UpdateRecognizedPhrase(json) {
+      phraseDiv.innerHTML = json;
+    }
 
-        function Setup() {
-          //recognizer = RecognizerSetup(SDK, SDK.RecognitionMode.Interactive, languageOptions.value, SDK.SpeechResultFormat[formatOptions.value], key.value);
-          recognizer = RecognizerSetup(SDK, SDK.RecognitionMode.Interactive, languageOptions, SDK.SpeechResultFormat[formatOptions], key);
+    function OnComplete() {
+      startBtn.disabled = false;
+      stopBtn.disabled = true;
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      startBtn = document.getElementById("startBtn");
+      stopBtn = document.getElementById("stopBtn");
+      phraseDiv = document.getElementById("phraseDiv");
+      hypothesisDiv = document.getElementById("hypothesisDiv");
+      statusDiv = document.getElementById("statusDiv");
+      key = '';
+      //key = document.getElementById("key");
+      languageOptions = 'fr-FR';
+      //languageOptions = document.getElementById("languageOptions");
+
+      formatOptions = 'Detailed';
+      //formatOptions = document.getElementById("formatOptions");
+
+      /*languageOptions.addEventListener("change", function () {
+        Setup();
+      });*/
+
+      /*formatOptions.addEventListener("change", function () {
+        Setup();
+      });*/
+
+      startBtn.addEventListener("click", function () {
+        if (!recognizer || previousSubscriptionKey != key) {
+          previousSubscriptionKey = key;
+          Setup();
         }
 
-        function UpdateStatus(status) {
-          statusDiv.innerHTML = status;
-        }
+        hypothesisDiv.innerHTML = "";
+        phraseDiv.innerHTML = "";
+        RecognizerStart(SDK, recognizer);
+        startBtn.disabled = true;
+        stopBtn.disabled = false;
+      });
 
-        function UpdateRecognizedHypothesis(text) {
-          hypothesisDiv.innerHTML = text;
-        }
+      stopBtn.addEventListener("click", function () {
+        RecognizerStop(SDK);
+        startBtn.disabled = false;
+        stopBtn.disabled = true;
+      });
 
-        function OnSpeechEndDetected() {
-          stopBtn.disabled = true;
-        }
 
-        function UpdateRecognizedPhrase(json) {
-          phraseDiv.innerHTML = json;
-        }
-
-        function OnComplete() {
-          startBtn.disabled = false;
-          stopBtn.disabled = true;
-        }
+    });
   </script>
 
 
