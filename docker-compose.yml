@@ -33,6 +33,7 @@ services:
       - ./frontend/src/dist:/app
 
   frontend-node:
+    user: ${UID}
     build:
       context: ./frontend
       dockerfile: Dockerfile-node
