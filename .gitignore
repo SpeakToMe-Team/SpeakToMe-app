@@ -1,5 +1,8 @@
 vendor/
 
+# load-balancer.conf
+frontend/load-balancer.conf
+
 # node/vue
 frontend/src/node_modules/
 frontend/src/npm-debug.log
