@@ -14,6 +14,8 @@ services:
     build:
       context: ./speech2text
     image: speaktome-speech2text
+    ports:
+      - "8000:8000"
     volumes:
       - ./speech2text/src:/app
     environment:
