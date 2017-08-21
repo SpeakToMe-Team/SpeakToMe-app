@@ -8,6 +8,18 @@ services:
     image: speaktome-api
     volumes:
       - ./api/src:/app
+    depends_on:
+      - api-db
+
+  api-db:
+    image: mysql:5.7
+    volumes:
+      - speakToMe-api-db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
 
   speech2text:
     user: ${UID}
@@ -46,3 +58,6 @@ services:
       - "8080:8080"
     volumes:
       - ./frontend/src:/app
+
+volumes:
+  speakToMe-api-db:
