@@ -28,27 +28,32 @@ class WeatherController extends ApiController
         $response = $client->request('GET', 'api.openweathermap.org/data/2.5/forecast/daily', $this->getQueryParams());
         $body = $response->getBody();
         $objResponse = json_decode($body, true);
-        /**/
-        $objResponse=$this->getAQI($objResponse);
-        return $objResponse;
+        /*DEBUG, a enlever si appel des infos complémentaires côté front*/
+        $objResponse['aqi']=$this->getAQI($objResponse['city']['coord']['lat'],$objResponse['city']['coord']['lon']);
+
+
+        return $this->addIntent($objResponse);
     }
 
 
-    /*CASCADE: Renvoie la qualité de l'air en fonction du jeu de resultat de la requete meteo*/
-    public function getAQI($objResponse){
-        if(isset($objResponse['city']['coord']['lon']) && isset($objResponse['city']['coord']['lat'])){
-            $params = array();
-            $params['lon']=$objResponse['city']['coord']['lon'];
-            $params['lat']=$objResponse['city']['coord']['lat'];
-            $aqi=new AirqualityController($params);
-            $aqi=$aqi->run();
-        }
-        $objResponse['aqi']['station']=$aqi['data']['city']['name'];
-        $objResponse['aqi']['index']=$aqi['data']['aqi'];
-        $objResponse['aqi']['msg']=$this->getAQImsg($aqi);
-        $objResponse['aqi']['rawdata']=$aqi;
+    /*CASCADE: Renvoie la qualité de l'air en fonction du jeu de resultat de la requete meteo
+    @param $lat latitude string
+    @param $lon longitude string
+    @return
+    */
 
-        return $objResponse;
+    public function getAQI($lat,$lon){
+
+      $params = array();
+      $params['lon']=$lon;
+      $params['lat']=$lat;
+      $aqi=new AirqualityController($params);
+      $aqi=$aqi->run();
+        $result['station']=$aqi['data']['city']['name'];
+        $result['index']=$aqi['data']['aqi'];
+        $result['msg']=htmlentities($this->getAQImsg($aqi));
+        $result['rawdata']=$aqi;
+        return $result;
     }
 
     /*Enrichie le contenu de aqi par un message en fonction de l'indice aqi*/
@@ -97,6 +102,7 @@ class WeatherController extends ApiController
                 'cnt' => config('external_api.params.weather.day_count'),
                 'units' => config('external_api.params.weather.units'),
                 'APPID' => env('OPENWEATHERMAP_APPID'),
+                'lang' => 'fr'
             ]
         ];
 

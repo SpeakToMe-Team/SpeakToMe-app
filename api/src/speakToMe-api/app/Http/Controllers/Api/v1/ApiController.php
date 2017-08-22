@@ -33,4 +33,12 @@ abstract class ApiController implements ApiInterface
             $model->save();
         }
     }
+
+    public function addIntent($response) {
+
+        return [
+            'intent' => $this->name,
+            'response' => $response
+        ];
+    }
 }
