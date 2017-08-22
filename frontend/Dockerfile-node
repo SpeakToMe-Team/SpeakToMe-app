@@ -10,7 +10,10 @@ COPY ./src $APP_HOME
 
 RUN mkdir -p /.config && chmod 777 /.config && \
     mkdir -p /.cache && chmod 777 /.cache && \
-    touch /.yarnrc && chmod 777 /.yarnrc
+    touch /.yarnrc && chmod 777 /.yarnrc && \
+    mkdir -p /home/node/.config && chmod 777 /home/node/.config && \
+    mkdir -p /home/node/.cache && chmod 777 /home/node/.cache && \
+    touch /home/node/.yarnrc && chmod 777 /home/node/.yarnrc
 
 CMD [ "yarn", "run", "dev" ]
 
