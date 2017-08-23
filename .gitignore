@@ -32,4 +32,5 @@ Homestead.json
 
 # Temporary files
 .DS_Store
+.idea/
 *~

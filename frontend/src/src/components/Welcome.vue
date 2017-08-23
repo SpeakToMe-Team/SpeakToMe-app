@@ -1,10 +1,14 @@
 <template>
-  <div class="welcome">
-    <img src="../assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <router-link to="/">Welcome</router-link><br />
-    <router-link to="/dashboard">Dashboard</router-link><br />
-    <router-link to="/settings">Settings</router-link>
+  <div class="welcome-page">
+    <div class="welcome-container">
+      <img class="animated bounceInDown" src="../assets/microphone.png">
+    
+      <h1 class="animated rollIn">{{ msg }}</h1>
+
+      <router-link to="/">Welcome</router-link><br />
+      <router-link to="/dashboard">Dashboard</router-link><br />
+      <router-link to="/settings">Settings</router-link>
+    </div>
   </div>
 </template>
 
@@ -13,29 +17,39 @@ export default {
   name: 'welcome',
   data () {
     return {
-      msg: 'Welcome to your Smart Speech Assistant'
+      msg: 'Speak To Me'
     }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
+<style>
+
+html, body, .container, #app, .welcome-page{
+  height: 100%;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
+.welcome-page{
+  display: flex;
 }
 
-li {
-  display: inline-block;
-  margin: 0 10px;
+.welcome-container{
+  margin: auto;
 }
 
-a {
-  color: #42b983;
+.welcome-page .welcome-container img{
+  width: 60%;
+  opacity: 0.7;
+  margin-bottom: 55px;
+  -webkit-animation-duration: 1.5s;
+  -webkit-animation-delay: 0.5s;
+}
+
+h1{
+  font-size: 4em;
+  font-family: 'Reenie Beanie', cursive;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-delay: 0,5s;
 }
 </style>
