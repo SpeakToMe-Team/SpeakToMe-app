@@ -1,13 +1,20 @@
 <template>
   <div class="welcome-page">
     <div class="welcome-container">
-      <img class="animated bounceInDown" src="../assets/microphone.png">
-    
+      <div> 
+        <img class="logo animated bounceInDown" src="../assets/images/microphone.png">
+      </div>
       <h1 class="animated rollIn">{{ msg }}</h1>
 
+      <div class="temp">
       <router-link to="/">Welcome</router-link><br />
       <router-link to="/dashboard">Dashboard</router-link><br />
-      <router-link to="/settings">Settings</router-link>
+      <router-link to="/settings">Settings</router-link><br />
+      </div>
+
+      <div>
+        <img class="authen animated fadeIn" src="../assets/images/googleAuth.png" alt="google authentificator">
+      </div>
     </div>
   </div>
 </template>
@@ -17,7 +24,7 @@ export default {
   name: 'welcome',
   data () {
     return {
-      msg: 'Speak To Me'
+      msg: 'SpeakToMe'
     }
   }
 }
@@ -25,31 +32,46 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-
-html, body, .container, #app, .welcome-page{
+html, body, .container, #app{
   height: 100%;
 }
+</style>
 
+<style scoped>
 .welcome-page{
+  height: 100%;
   display: flex;
+  text-align: center;
 }
 
 .welcome-container{
   margin: auto;
 }
 
-.welcome-page .welcome-container img{
+.logo{
   width: 60%;
-  opacity: 0.7;
-  margin-bottom: 55px;
-  -webkit-animation-duration: 1.5s;
-  -webkit-animation-delay: 0.5s;
+  opacity: 0.5;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-delay: 1s;
 }
 
 h1{
-  font-size: 4em;
-  font-family: 'Reenie Beanie', cursive;
-  -webkit-animation-duration: 2s;
+  -webkit-animation-duration: 1.5s;
   -webkit-animation-delay: 0,5s;
+  padding: 30px 0px;
+  margin-bottom: 60px;
 }
+
+.authen{
+  width: 40%;
+  -webkit-animation-duration: 8s;
+  -webkit-animation-delay: 3s;
+}
+
+.temp{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+}
+
 </style>

@@ -1,12 +1,10 @@
 <template>
-  <div class="dashboard">    
+  <div class="dashboard container">    
     <h1>{{ msg }}</h1>
-    <router-link to="/">Welcome 2</router-link><br />
+    <router-link to="/">Welcome</router-link><br />
     <router-link to="/settings">Settings</router-link><br />
     <a href="https://www.microsoft.com/cognitive-services/en-us/sign-up" target="_blank">Subscription Bing Speech API</a>
     <a href="https://docs.microsoft.com/fr-fr/azure/cognitive-services/speech/getstarted/getstartedjswebsockets" target="_blank">Bing Speech API</a>
-
-
 
     <table width="100%">
  
