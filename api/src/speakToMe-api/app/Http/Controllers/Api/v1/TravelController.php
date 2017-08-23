@@ -21,9 +21,9 @@ class TravelController extends ApiController
         ];
 
         $response = $client->request('GET', 'https://api.yelp.com/v3/businesses/search', $params);
-
         $body = $response->getBody();
         $objResponse = json_decode($body);
+
         return $objResponse->businesses;
     }
 
