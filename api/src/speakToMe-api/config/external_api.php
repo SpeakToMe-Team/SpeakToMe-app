@@ -8,7 +8,7 @@ return [
     ],
     'params' => [
         'weather' => [
-            'day_count' => '7',
+            'day_count' => '15',
             'units' => 'metric'
         ],
     ]

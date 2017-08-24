@@ -1,76 +1,50 @@
 <template>
-  <div class="dashboard">    
-    <h1>{{ msg }}</h1>
-    <router-link to="/">Welcome 2</router-link><br />
-    <router-link to="/settings">Settings</router-link><br />
-    <a href="https://www.microsoft.com/cognitive-services/en-us/sign-up" target="_blank">Subscription Bing Speech API</a>
-    <a href="https://docs.microsoft.com/fr-fr/azure/cognitive-services/speech/getstarted/getstartedjswebsockets" target="_blank">Bing Speech API</a>
+  <div class="dashboard">
+    <nav class="container-fluid">
+        <router-link to="/">
+        <div class="logo animated bounceInLeft">
+            <img src="../assets/images/microphone.png" alt="logo">
+            <p>Speak To Me</p>
+        </div>
+        </router-link>
+        <div class="perso animated bounceInRight">
+        
+            <div class="settings">
+                <router-link to="/settings">
+                    <i class="fa fa-cogs fa-spin"></i>
+                </router-link>
+            </div>
+            <div class="myAccount">
+                <i class="fa fa-user" aria-hidden="true"></i>
+            </div>
+        </div>
+    </nav>
+    <section class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-8 col-lg-9">
+                <article class="search col-sm-12 animated zoomInUp">
+                    <i class="fa fa-microphone" aria-hidden="true"></i>
+                    <input type="text" name="request">
+                </article>
 
+                <article class="result col-sm-12 animated zoomInUp">
+                </article>
 
-
-    <table width="100%">
- 
-        <!--
-        <tr>
-            <td align="right"><a href="https://www.microsoft.com/cognitive-services/en-us/sign-up" target="_blank">Subscription</a>:</td>
-            <td><input id="key" type="text" size="40" value="KEY_API"></td>
-        </tr>
-        -->
-        <!--
-        <tr>
-            <td align="right">Laguage:</td>
-            <td align="left">
-                <select id="languageOptions">
-                    <option value="zh-CN">Chinese - CN</option>
-                    <option value="en-GB">English - GB</option>
-                    <option value="en-US">English - US</option>
-                    <option value="fr-FR" selected="selected">French - FR</option>
-                    <option value="de-DE">German - DE</option>
-                    <option value="it-IT">Italian - IT</option>
-                    <option value="es-ES">Spanish - ES</option>
-                </select>
-            </td>
-        </tr>
-        -->
-        <!--
-        <tr>
-            <td align="right">Format:</td>
-            <td align="left">
-                <select id="formatOptions">
-                    <option value="Simple" selected="selected">Simple Result</option>
-                    <option value="Detailed">Detailed Result</option>
-                </select>
-            </td>
-        </tr>
-        -->
-        <tr>
-            <td></td>
-            <td>
-                <button id="startBtn" disabled="disabled">Start</button>
-                <button id="stopBtn" disabled="disabled">Stop</button>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>Current hypothesis: <span id="hypothesisDiv"></span></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <textarea id="phraseDiv" style="width:500px;height:200px"></textarea>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>Status: <span id="statusDiv"></span></td>
-        </tr>
-    </table>
-    <p>Exemples</p>
-    <ul>
-        <li>donne moi la météo</li>
-        <li>donne moi le programme tv de ce soir</li>
-    </ul>
-
+                <article class="recommandation col-sm-12 animated zoomInUp">
+                </article>
+            </div>
+            
+            <div class="col-sm-12 col-md-4 col-lg-3">
+                <article class="help col-md-12 animated zoomInUp">
+                </article>
+            </div>
+            
+        </div>
+    </section>
+    <section>
+        <router-link to="/">Welcome</router-link><br />
+        <router-link to="/settings">Settings</router-link>
+    </section>
   </div>
   
 </template>
@@ -88,21 +62,117 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
+    *{
+        margin: 0;
+        padding: 0;
+    }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
+    nav{
+        height: 65px;
+        text-align: center;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #f4f4f4;
+    }
+    nav a{
+        text-decoration: none;
+        color: inherit;
+    }
+    nav .logo{
+        float: left;
+        text-align: left;
+        height: 100%;
+        display: flex;
+        padding: 0px 10px;
+        -webkit-animation-duration: 1s;
+        -webkit-animation-delay: 0s;
+    }
+    nav .logo img,p{
+        display: inline-block;
+        margin: auto;
+    }
+    nav .logo img{
+        width: 45px;
+        margin-right: 5px;
+    }
+    nav .logo p{
+        font-family: 'Reenie Beanie', cursive;
+        font-size: 27px;
+        font-weight: bold; 
+    }
+    nav .perso{
+        float: right;
+        height: 100%;
+        display: flex;
+        -webkit-animation-duration: 1s;
+        -webkit-animation-delay: 0s;
+    }
+    nav .perso .myAccount,.settings{
+        display: inline-block;
+        width: 50px;
+        margin: auto;
+        font-size: 25px;
+        margin-right: 15px;
+    }
 
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
+    section{
+        margin: auto;
+    }
 
-a {
-  color: #42b983;
-}
+    article{
+        margin-bottom: 20px;
+    }
+
+    .search{
+        height: 70px;
+        -webkit-animation-duration: 0.8s;
+        -webkit-animation-delay: 1.5s;
+        text-align: center;
+        display: flex;
+        border: 3px solid black;
+        border-radius: 50px;
+    }
+    .search i,input{
+        display: inline-block;
+        margin: auto;
+    }
+    .search i{
+        font-size: 30px;
+        color: white;
+        background-color: black;
+        width: 50px;
+        height: 50px;
+        padding-top: 11px;
+        margin-left: 11px;
+        border-radius: 30px;
+    }
+    .search input{
+        width: 83%;
+        height: 100%;
+        margin-right: 0;
+        margin-left: 0;
+        padding-right: 20px;
+        border: none;
+        border-radius: 0px 50px 50px 0px;
+        outline:  none;
+    }
+    .result{
+        background-color:blue;
+        height: 500px;
+        -webkit-animation-duration: 0.8s;
+        -webkit-animation-delay: 2s;
+    }
+    .recommandation{
+        background-color:blueviolet;
+        height: 200px;
+        -webkit-animation-duration: 0.8s;
+        -webkit-animation-delay: 2.5s;
+    }
+    .help{
+        background-color:brown;
+        height: 500px;
+        -webkit-animation-duration: 0.8s;
+        -webkit-animation-delay: 3s;
+    }
+    
+    
 </style>

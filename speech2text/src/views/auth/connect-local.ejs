@@ -1,0 +1,25 @@
+<% layout('../layout') %>
+
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+
+        <% if (error_msg.length > 0){ %>
+        <div class="alert alert-danger"><%= error_msg %></div>
+        <% } %>
+
+        <form class="form-signin" action="/auth/connect/local" method="post">
+            <h2 class="form-signin-heading"><span class="fa fa-user-plus"></span> Add Local Account</h2>
+            <label for="inputEmail" class="sr-only">Email address</label>
+            <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+            <br />
+            <button class="btn btn-lg btn-warning" type="submit">Add Local</button>
+        </form>
+        <br />
+        <a href="/profile"><span class="fa fa-user"></span> Go back to profile</a>
+
+
+    </div>
+
+</div>

@@ -14,13 +14,17 @@ class SpeechController extends Controller
 
     private $intent;
     private $targetApi;
+    private $geo;
 
     public function index(Request $request)
     {
         $this->request = $request;
         $query = $request->query('query');
 
+        //$this->geo=$request->headers('geo');
+
         if (empty($query)) {
+
             return "Query is empty.";
         }
 
@@ -37,7 +41,7 @@ class SpeechController extends Controller
             $intent = $this->intent['entities']['intent'][0]['value'];
             if (array_key_exists($intent, config('external_api.keywords'))) {
                 $className = 'App\Http\Controllers\Api\v1\\' . ucfirst($intent) . 'Controller';
-                return new $className($this->intent);
+                return new $className($this->intent,$this->geo=null);
             }
         }
     }

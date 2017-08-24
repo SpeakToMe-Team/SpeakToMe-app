@@ -1,0 +1,43 @@
+<% layout('layout') %>
+
+<div id="app">
+
+    <% if (success_msg.length > 0){ %>
+        <div class="alert alert-success"><%= success_msg %></div>
+    <% } %>
+
+    <div class="jumbotron text-center">
+        <h1><span class="fa fa-lock"></span> {{ title }}</h1>
+
+        <p>Login or Register with :</p>
+        <a href="/auth/login" class="btn btn-default">
+            <span class="fa fa-user"></span> Local Login
+        </a>
+        <a href="/auth/signup" class="btn btn-default">
+            <span class="fa fa-user"></span> Local signup
+        </a>
+        <a href="/auth/facebook" class="btn btn-primary">
+            <span class="fa fa-facebook"></span> Facebook
+        </a>
+        <a href="/auth/google" class="btn btn-danger">
+            <span class="fa fa-google"></span> Google
+        </a>
+            
+
+    </div>
+
+</div>
+
+
+<script>
+
+    var app = new Vue({
+        el: "#app",
+        data: {
+            title: "Node Authentication *"
+        },
+        methods: {
+        }
+    });
+
+</script>

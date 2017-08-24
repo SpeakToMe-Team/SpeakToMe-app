@@ -13,6 +13,17 @@ frontend/src/test/unit/coverage
 frontend/src/test/e2e/reports
 frontend/src/selenium-debug.log
 
+# speech2text
+speech2text/src/node_modules/
+speech2text/src/npm-debug.log
+speech2text/src/dist
+speech2text/src/yarn-debug.log*
+speech2text/src/yarn-error.log*
+speech2text/src/test/unit/coverage
+speech2text/src/test/e2e/reports
+speech2text/src/selenium-debug.log
+speech2text/src/config/*.js
+
 # Laravel 4 specific
 bootstrap/compiled.php
 app/storage/
