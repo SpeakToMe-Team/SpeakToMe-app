@@ -24,6 +24,14 @@
 
 
 <script>
+/*
+import Vue from 'vue'
+import io from 'socket.io-client'
+import VueSocketio from 'vue-socket.io'
+
+var ioInstance = io('http://127.0.0.1.nip.io', { 'path': '/speech2text/socket.io' })
+Vue.use(VueSocketio, ioInstance)
+*/
 export default {
   name: 'welcome',
   data () {
@@ -32,6 +40,7 @@ export default {
     }
   }
 }
+
 </script>
 
 

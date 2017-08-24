@@ -20,184 +20,39 @@
     crossorigin="anonymous"></script>
   <script src="https://use.fontawesome.com/5bfddbc387.js"></script>
 
-  <!-- The SDK has a dependency on requirejs (http://requirejs.org/). -->
-  <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.3.3/require.min.js"></script>
+<body>
+  <div class="container-fluid">
+    <div id="app"></div>
+      <a class="btn btn-default" id="poke" href="#">Poke</a>
+  </div>
+  <!-- built files will be auto injected -->
+
+
+  <!-- Socket.io client -->
+  <!-- Ne plus utiliser car on utilise le paquet vue-socket.io -->
+  <!--<script src="http://127.0.0.1.nip.io/speech2text/socket.io-client/dist/socket.io.js"></script>-->
+
+  <script src="https://cdn.jsdelivr.net/socket.io-client/1.3.2/socket.io.min.js"></script>
+  
   <script>
-    // Special handling to let the sample work when loaded directly from file system.
-    if (window.location.protocol == "file:") {
-      document.write('\<script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.3/require.min.js">\<\/script>');
-    }
-  </script>
 
-  <!-- SDK REFERENCE -->
-  <script src="static/SpeechToText/speech.browser.sdk-min.js"></script>
+    /*var socket = io.connect('http://127.0.0.1:8000', { 
+      'secure': false,
+      'path': '/speech2text'
+     });*/
 
-  <!-- SDK USAGE -->
-  <script>
-    // On doument load resolve the SDK dependecy
-    function Initialize(onComplete) {
-      require(["Speech.Browser.Sdk"], function (SDK) {
-        onComplete(SDK);
-      });
-    }
+     var socket = io.connect('http://127.0.0.1:8000');
 
-    // Setup the recongizer
-    function RecognizerSetup(SDK, recognitionMode, language, format, subscriptionKey) {
-      var recognizerConfig = new SDK.RecognizerConfig(
-        new SDK.SpeechConfig(
-          new SDK.Context(
-            new SDK.OS(navigator.userAgent, "Browser", null),
-            new SDK.Device("SpeechSample", "SpeechSample", "1.0.00000"))),
-        recognitionMode, // SDK.RecognitionMode.Interactive  (Options - Interactive/Conversation/Dictation>)
-        language, // Supported laguages are specific to each recognition mode. Refer to docs.
-        format); // SDK.SpeechResultFormat.Simple (Options - Simple/Detailed)
+    /*socket.on('message', function(message) {
+      console.log('message du serveur : ' + message.title);
+        $('#title').html(message.title);
+    })
 
-      // Alternatively use SDK.CognitiveTokenAuthentication(fetchCallback, fetchOnExpiryCallback) for token auth
-      var authentication = new SDK.CognitiveSubscriptionKeyAuthentication(subscriptionKey);
-
-      return SDK.CreateRecognizer(recognizerConfig, authentication);
-    }
-
-    // Start the recognition
-    function RecognizerStart(SDK, recognizer) {
-      recognizer.Recognize((event) => {
-        /*
-         Alternative syntax for typescript devs.
-         if (event instanceof SDK.RecognitionTriggeredEvent)
-        */
-        switch (event.Name) {
-          case "RecognitionTriggeredEvent":
-            UpdateStatus("Initializing");
-            break;
-          case "ListeningStartedEvent":
-            UpdateStatus("Listening");
-            break;
-          case "RecognitionStartedEvent":
-            UpdateStatus("Listening_Recognizing");
-            break;
-          case "SpeechStartDetectedEvent":
-            UpdateStatus("Listening_DetectedSpeech_Recognizing");
-            console.log(JSON.stringify(event.Result)); // check console for other information in result
-            break;
-          case "SpeechHypothesisEvent":
-            UpdateRecognizedHypothesis(event.Result.Text);
-            console.log(JSON.stringify(event.Result)); // check console for other information in result
-            break;
-          case "SpeechEndDetectedEvent":
-            OnSpeechEndDetected();
-            UpdateStatus("Processing_Adding_Final_Touches");
-            console.log(JSON.stringify(event.Result)); // check console for other information in result
-            break;
-          case "SpeechSimplePhraseEvent":
-            UpdateRecognizedPhrase(JSON.stringify(event.Result, null, 3));
-            break;
-          case "SpeechDetailedPhraseEvent":
-            UpdateRecognizedPhrase(JSON.stringify(event.Result, null, 3));
-            break;
-          case "RecognitionEndedEvent":
-            OnComplete();
-            UpdateStatus("Idle");
-            console.log(JSON.stringify(event)); // Debug information
-            break;
-        }
-      })
-        .On(() => {
-          // The request succeeded. Nothing to do here.
-        },
-        (error) => {
-          console.error(error);
-        });
-    }
-
-    // Stop the Recognition.
-    function RecognizerStop(SDK, recognizer) {
-      // recognizer.AudioSource.Detach(audioNodeId) can be also used here. (audioNodeId is part of ListeningStartedEvent)
-      recognizer.AudioSource.TurnOff();
-    }
-  </script>
-
-  <!-- Browser Hooks -->
-  <script>
-    var startBtn, stopBtn, hypothesisDiv, phraseDiv, statusDiv, key, languageOptions, formatOptions;
-    var SDK;
-    var recognizer;
-    var previousSubscriptionKey;
-
-    Initialize(function (speechSdk) {
-      SDK = speechSdk;
-      startBtn.disabled = false;
-    });
-
-
-    function Setup() {
-      //recognizer = RecognizerSetup(SDK, SDK.RecognitionMode.Interactive, languageOptions.value, SDK.SpeechResultFormat[formatOptions.value], key.value);
-      recognizer = RecognizerSetup(SDK, SDK.RecognitionMode.Conversation, languageOptions, SDK.SpeechResultFormat[formatOptions], key);
-    }
-
-    function UpdateStatus(status) {
-      statusDiv.innerHTML = status;
-    }
-
-    function UpdateRecognizedHypothesis(text) {
-      hypothesisDiv.innerHTML = text;
-    }
-
-    function OnSpeechEndDetected() {
-      stopBtn.disabled = true;
-    }
-
-    function UpdateRecognizedPhrase(json) {
-      phraseDiv.innerHTML = json;
-    }
-
-    function OnComplete() {
-      startBtn.disabled = false;
-      stopBtn.disabled = true;
-    }
-
-    document.addEventListener("DOMContentLoaded", function () {
-      startBtn = document.getElementById("startBtn");
-      stopBtn = document.getElementById("stopBtn");
-      phraseDiv = document.getElementById("phraseDiv");
-      hypothesisDiv = document.getElementById("hypothesisDiv");
-      statusDiv = document.getElementById("statusDiv");
-      key = 'INSERT_YOUR_KEY';
-      //key = document.getElementById("key");
-      languageOptions = 'fr-FR';
-      //languageOptions = document.getElementById("languageOptions");
-
-      formatOptions = 'Detailed';
-      //formatOptions = document.getElementById("formatOptions");
-
-      /*languageOptions.addEventListener("change", function () {
-        Setup();
-      });*/
-
-      /*formatOptions.addEventListener("change", function () {
-        Setup();
-      });*/
-
-      startBtn.addEventListener("click", function () {
-        if (!recognizer || previousSubscriptionKey != key) {
-          previousSubscriptionKey = key;
-          Setup();
-        }
-
-        hypothesisDiv.innerHTML = "";
-        phraseDiv.innerHTML = "";
-        RecognizerStart(SDK, recognizer);
-        startBtn.disabled = true;
-        stopBtn.disabled = false;
-      });
-
-      stopBtn.addEventListener("click", function () {
-        RecognizerStop(SDK);
-        startBtn.disabled = false;
-        stopBtn.disabled = true;
-      });
-
-
-    });
+    $('#poke').click(function (event) {
+        event.preventDefault();
+        console.log('poke');
+        socket.emit('message', 'Salut serveur, ça va ?');
+    })*/
   </script>
 
 

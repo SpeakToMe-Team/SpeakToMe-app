@@ -1,0 +1,3 @@
+module.exports = {
+    'url': 'mongodb://<ip_address>/<db>'
+}

@@ -1,0 +1,109 @@
+<% layout('../layout') %>
+
+<div class="page-header text-center">
+    <h2><span class="fa fa-anchor"></span> Profile page</h2>
+    <a href="/dashboard" class="btn btn-primary btn-sm" >Dashboard</a>
+    <a href="/auth/logout" class="btn btn-danger btn-sm">Logout</a>
+</div>
+
+<div class="row">    
+    <div class="col-sm-6 col-sm-offset-3">
+        <div class="well">
+            <h3><span class="fa fa-user"></span> Local</h3>
+            <% if (user.local.email){ %>
+                <ul>
+                    <li><strong>ID :</strong> <%= user._id %></li>
+                    <li><strong>Email :</strong> <%= user.local.email %></li>
+                    <li><strong>Password :</strong> <%= user.local.password %></li>
+                </ul>
+
+                <a href="/auth/unlink/local" class="btn btn-default">Unlink</a>
+            <% }else{ %>
+                <a href="/auth/connect/local" class="btn btn-default">Connect local</a>
+            <% } %>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-sm-offset-3">
+        <div class="well">
+            <h3><span class="fa fa-facebook"></span> Facebook</h3>
+            <% if (user.facebook.token){ %>
+                <div class="row">
+                    <div class="col-sm-6 overText">
+                        <ul>
+                            <li><strong>Facebook ID :</strong> <%= user.facebook.id %></li>
+                            <li><strong>Token :</strong> <%= user.facebook.token %></li>
+                            <li><strong>Email :</strong> <%= user.facebook.email %></li>
+                            <li><strong>Name :</strong> <%= user.facebook.name %></li>
+                        </ul>
+                    </div>    
+                    <div class="col-sm-6 text-right">
+                        <img class="" src="<%= user.facebook.picture %>" alt="Photo de <%= user.facebook.name %>"/>
+                    </div>
+                </div>
+                <a href="/auth/unlink/facebook" class="btn btn-primary">Unlink</a>
+            <% }else{ %>
+                <a href="/auth/connect/facebook" class="btn btn-primary">Connect Facebook</a>
+            <% } %>
+        </div>
+    </div>
+    
+    <div class="col-sm-6 col-sm-offset-3">
+        <div class="well">
+            <h3><span class="fa fa-google-plus"></span> Google+</h3>
+            <% if (user.google.token){ %>
+                <div class="row">
+                    <div class="col-sm-6 overText">
+                        <ul>
+                            <li><strong>Google ID :</strong> <%= user.google.id %></li>
+                            <li><strong>Token :</strong> <%= user.google.token %></li>
+                            <li><strong>Email :</strong> <%= user.google.email %></li>
+                            <li><strong>Name :</strong> <%= user.google.name %></li>
+                        </ul>
+                    </div>    
+                    <div class="col-sm-6 text-right">
+                        <img class="" src="<%= user.google.picture %>" alt="Photo de <%= user.google.name %>"/>
+                    </div>
+                </div>
+                <a href="/auth/unlink/google" class="btn btn-danger">Unlink</a>
+            <% }else{ %>
+                <a href="/auth/connect/google" class="btn btn-danger">Connect Google</a>
+            <% } %>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-sm-offset-3">
+        <div class="well">
+            <h3 class="text-warning"><span class="fa fa-cogs" aria-hidden="true"></span> API Token</h3>
+            <% if (user.token) { %>
+                <strong>Token :</strong> <%= user.token.value %>
+            <% }else{ %>
+                <a href="/getToken" class="btn btn-warning">Get Token</a>
+            <% } %>    
+        </div>
+    </div>   
+
+</div>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+<script>
+    if (annyang) {
+    
+
+    // Let's define our first command. First the text we expect, and then the function it should call
+    var commands = {
+        'dashboard': function() {
+            window.location.href = "/dashboard";
+        }
+    };
+
+    // Add our commands to annyang
+    annyang.addCommands(commands);
+
+     annyang.setLanguage('fr-FR');
+
+    // Start listening. You can call this here, or attach this call to an event, button, etc.
+    annyang.start();
+    }
+</script>

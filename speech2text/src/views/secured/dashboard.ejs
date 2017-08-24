@@ -1,0 +1,85 @@
+<% layout('../layout') %>
+
+<div id="dashboard">
+
+    <div class="page-header text-center">
+        <h1><span class="fa fa-tachometer"></span> {{ title }}</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h2 id="title"></h2>
+
+            <a class="btn btn-default" id="btn-profile" href="/profile">Mon compte</a>
+
+            <a class="btn btn-danger" id="poke" href="#">Serveur</a>
+
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Paramètres</button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-primary">Valider</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+<script>
+    if (annyang) {       
+
+        // Let's define our first command. First the text we expect, and then the function it should call
+        var commands = {
+            'ouvrir panneau': function() {
+                $('#myModal').modal('show');
+            },
+            'fermer panneau': function() {
+                $('#myModal').modal('hide');
+            },
+            'voir profil': function() {
+                window.location.href = "/profile";
+            }
+        };
+
+        // Add our commands to annyang
+        annyang.addCommands(commands);
+
+        annyang.setLanguage('fr-FR');
+
+        annyang.addCallback('result', function(phrases) {
+            console.log("I think the user said: ", phrases[0]);
+            console.log("But then again, it could be any of the following: ", phrases);
+        });
+
+        // Start listening. You can call this here, or attach this call to an event, button, etc.
+        annyang.start();
+    }
+</script>
+
+<script>
+
+    var dashboard = new Vue({
+        el: "#dashboard",
+        data: {
+            title: "Super Dashboard"
+        },
+        methods: {
+        }
+    });
+
+</script>
