@@ -19,6 +19,7 @@ class IntentAnalyserController extends ApiController
         $response = $client->request('GET', 'message', $this->getQueryParams());
         $body = $response->getBody();
         $objResponse = json_decode($body, true);
+//        dd($objResponse);
         return $objResponse;
     }
     
@@ -30,7 +31,8 @@ class IntentAnalyserController extends ApiController
             ],
             'headers' => [
                 'Authorization' => 'Bearer ' . env('WIT_SERVER_TOKEN'),
-            ]
+            ],
+            'http_errors' => false
         ];
         return $params;
     }

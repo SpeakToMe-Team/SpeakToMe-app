@@ -43,6 +43,8 @@ class SpeechController extends Controller
                 $className = 'App\Http\Controllers\Api\v1\\' . ucfirst($intent) . 'Controller';
                 return new $className($this->intent,$this->geo=null);
             }
+            return ['error' => true, 'message' => "La requete n'a pu aboutir."];
         }
+        return ['error' => true, 'message' => "La requete n'a pas été comprise."];
     }
 }
