@@ -1,67 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Smart Speech Assistant">
     <!--<link rel="icon" href="../../../../favicon.ico">-->
+    <title>Smart Speech Assistant</title>
 
-    <title>Signin Template for Bootstrap</title>
+    <!--<link href="https://fonts.googleapis.com/css?family=Covered+By+Your+Grace|Reenie+Beanie|Oswald" rel="stylesheet">-->
+    <link href="/css/fonts.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/animate.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="/js/tether.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/fontawesome.js"></script>
+    <!--<script src="https://use.fontawesome.com/5bfddbc387.js"></script>-->
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
-    
     <!-- Custom styles for this template -->
-    <!--<link href="signin.css" rel="stylesheet">-->
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
 
     <!-- Vue Js -->
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="/js/vue.js"></script>
 
-     <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>       
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- Annyang -->
+    <script src="/js/annyang.js"></script>
 </head>
 
 <body>
-
     <div class="container">
-
          <%- body %>
-
     </div>
-    <!-- /container -->
-
-
-   
-
-    <!-- Placed at the end of the document so the pages load faster -->
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <!--<script src="../../../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
         var socket = io.connect('http://localhost:8000');
 
-        socket.on('message', function(message) {
+        /*socket.on('message', function(message) {
             $('#title').html(message.title);
         })
 
         $('#poke').click(function (event) {
             event.preventDefault();
             socket.emit('message', 'Salut serveur, ça va ?');
-        })
-
-
+        })*/
 
     </script>
 

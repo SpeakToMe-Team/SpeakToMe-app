@@ -1,0 +1,170 @@
+body {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+}
+
+/* Page welcome */
+.welcome-page{
+  height: 100%;
+  display: flex;
+  text-align: center;
+}
+.welcome-container{
+  margin: auto;
+}
+.logo{
+  width: 60%;
+  opacity: 0.5;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-delay: 1s;
+}
+h1{
+  font-size: 6em;
+  font-family: 'Reenie Beanie', cursive;
+  -webkit-animation-duration: 1.5s;
+  -webkit-animation-delay: 0,5s;
+  padding: 30px 0px;
+  margin-bottom: 60px;
+}
+.authen{
+  width: 40%;
+  -webkit-animation-duration: 8s;
+  -webkit-animation-delay: 3s;
+}
+.temp{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+}
+/* Fin page welcome */
+
+
+
+/* Page dashboard */
+.dashboard-page * {
+    margin: 0;
+    padding: 0;
+}
+.title{
+    font-family: 'Oswald', sans-serif;
+    color: white;
+    padding: 8px 20px;
+    border-bottom: 3px solid #f4f4f4;
+    font-size: 28px;
+}
+nav{
+    height: 65px;
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #f4f4f4;
+}
+nav a{
+    text-decoration: none;
+    color: inherit;
+}
+nav .logo{
+    float: left;
+    text-align: left;
+    height: 100%;
+    display: flex;
+    padding: 0px 10px;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-delay: 0s;
+}
+nav .logo img,p{
+    display: inline-block;
+    margin: auto;
+}
+nav .logo img{
+    width: 45px;
+    margin-right: 5px;
+}
+nav .logo p{
+    font-family: 'Reenie Beanie', cursive;
+    font-size: 27px;
+    font-weight: bold; 
+}
+nav .perso{
+    float: right;
+    height: 100%;
+    display: flex;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-delay: 0s;
+}
+nav .perso .myAccount,.settings{
+    display: inline-block;
+    width: 50px;
+    margin: auto;
+    font-size: 25px;
+    margin-right: 15px;
+}
+section{
+    margin: auto;
+}
+article{
+    margin-bottom: 20px;
+    border: 3px solid #f4f4f4;
+}
+.search{
+    height: 70px;
+    -webkit-animation-duration: 0.8s;
+    -webkit-animation-delay: 1.5s;
+    text-align: center;
+    display: flex;
+    border: 3px solid #f4f4f4;
+    border-radius: 50px;
+}
+.search i,input{
+    display: inline-block;
+    margin: auto;
+}
+.search i{
+    font-size: 30px;
+    color: white;
+    background-color: #ff6c6c;
+    width: 50px;
+    height: 50px;
+    padding-top: 11px;
+    margin-left: 11px;
+    border-radius: 30px;
+}
+.search input{
+    width: 83%;
+    height: 100%;
+    margin-right: 0;
+    margin-left: 0;
+    padding-right: 20px;
+    border: none;
+    border-radius: 0px 50px 50px 0px;
+    outline:  none;
+}
+.result{
+    height: 500px;
+    -webkit-animation-duration: 0.8s;
+    -webkit-animation-delay: 2s;
+    background-color:#d9f4ff;
+}
+.result h2{
+    background-color: #00b8ff;
+}
+.recommandation{
+    background-color:#ffeded;
+    height: 200px;
+    -webkit-animation-duration: 0.8s;
+    -webkit-animation-delay: 2.5s;
+}
+.recommandation h2{
+    background-color:#ff5656;
+}
+.help{
+    background-color:#ddeedd;
+    height: 500px;
+    -webkit-animation-duration: 0.8s;
+    -webkit-animation-delay: 3s;
+}
+.help h2{
+    background-color:#57ab57;
+}
+/* Fin page dashboard */

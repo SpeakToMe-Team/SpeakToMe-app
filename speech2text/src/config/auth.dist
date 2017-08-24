@@ -10,3 +10,11 @@ module.exports = {
         'callbackURL' : ''
     }
 }
+
+/* facebookAuth
+* https://developers.facebook.com/apps
+*/
+
+/* ID clients OAuth 2.0
+* https://console.developers.google.com/projectselector/apis/library
+ */

@@ -3,7 +3,7 @@ module.exports = function(router, passport){
     
     router.get('/', function(req, res){
 
-        res.render('index.ejs');
+        res.render('welcome.ejs');
     });
 
     router.get('/signup', function(req, res){

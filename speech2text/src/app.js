@@ -1,4 +1,5 @@
 var express = require('express');
+var path = require('path');
 var app = express();
 var port = process.env.PORT || 8000;
 
@@ -9,10 +10,9 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var flash = require('connect-flash');
-//var MongoStore = require('connect-mongo')(session);
+var MongoStore = require('connect-mongo')(session);
 
 var configDB = require('./config/database.js');
-//console.log("**** url mongo db : ", configDB.url);
 
 /*var db = mongoose.connect(configDB.url, {
     useMongoClient: true
@@ -47,11 +47,11 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(session({
                     secret: 'anystringoftext',
                     saveUninitialized: true,
-                    resave: true/*,
+                    resave: true,
                     store: new MongoStore({
                         mongooseConnection: mongoose.connection,
                         ttl : 2 * 24 * 60 * 60    
-                    })*/
+                    })
                 }));
 
 app.use(passport.initialize());
@@ -73,6 +73,7 @@ app.use(function(req, res, next){
     next();
 });*/
 
+app.use(express.static(path.join(__dirname, 'assets')));
 app.engine('ejs', require('ejs-locals'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
@@ -89,19 +90,14 @@ var secure = express.Router();
 require('./app/routes/secure')(secure, passport);
 app.use('/', secure);
 
-//require('./app/routes')(app, passport);
 
 var server = app.listen(port);
 
+/* Partie Socket.Io */
 var io = require('socket.io').listen(server);
-
-// define interactions with client
 io.on('connection', function (socket) {
     console.log("un client vient de se connecter.");
-    //send data to client
-   // setInterval(function () {
-       
-    //}, 1000);
+    /* setInterval(function () { }, 1000); */
 
     socket.on('message', function (message) {
         console.log('Un client me parle ! Il me dit : ' + message);

@@ -81,29 +81,19 @@
                 <a href="/getToken" class="btn btn-warning">Get Token</a>
             <% } %>    
         </div>
-    </div>   
+    </div>
 
 </div>
 
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
 <script>
     if (annyang) {
-    
-
-    // Let's define our first command. First the text we expect, and then the function it should call
-    var commands = {
-        'dashboard': function() {
-            window.location.href = "/dashboard";
-        }
-    };
-
-    // Add our commands to annyang
-    annyang.addCommands(commands);
-
-     annyang.setLanguage('fr-FR');
-
-    // Start listening. You can call this here, or attach this call to an event, button, etc.
-    annyang.start();
+        var commands = {
+            'dashboard': function() {
+                window.location.href = "/dashboard";
+            }
+        };        
+        annyang.addCommands(commands);
+        annyang.setLanguage('fr-FR');        
+        annyang.start();
     }
 </script>
