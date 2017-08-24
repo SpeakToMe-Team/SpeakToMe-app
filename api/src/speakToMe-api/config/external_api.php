@@ -2,7 +2,7 @@
 return [
     'keywords' => [
         'travel' => ['voyage', 'voyager', 'vacances'],
-        'movie' => ['film'],
+        'movie' => ['film', 'séance', 'cinéma', 'movie'],
         'music' => ['chanson', 'musique', 'écouter'],
         'weather' => ['météo'],
     ],
