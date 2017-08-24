@@ -1,6 +1,8 @@
 <template>
   <div class="welcome-page">
     <div class="welcome-container">
+      
+    
       <div> 
         <img class="logo animated bounceInDown" src="../assets/images/microphone.png">
       </div>
@@ -19,6 +21,8 @@
   </div>
 </template>
 
+
+
 <script>
 export default {
   name: 'welcome',
@@ -29,6 +33,8 @@ export default {
   }
 }
 </script>
+
+
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
