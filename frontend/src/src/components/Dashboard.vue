@@ -15,7 +15,7 @@
                 </router-link>
             </div>
             <div class="myAccount">
-                <i class="fa fa-user" aria-hidden="true"></i>
+                <i class="fa fa-user"></i>
             </div>
         </div>
     </nav>
@@ -24,18 +24,21 @@
             <div class="col-sm-12 col-md-8 col-lg-9">
                 <article class="search col-sm-12 animated zoomInUp">
                     <i class="fa fa-microphone" aria-hidden="true"></i>
-                    <input type="text" name="request">
+                    <input type="text" name="request" placeholder="Dictez ou écrivez votre recherche ...">
                 </article>
 
                 <article class="result col-sm-12 animated zoomInUp">
+                    <h2 class="title">Resultats</h2>
                 </article>
 
                 <article class="recommandation col-sm-12 animated zoomInUp">
+                    <h2 class="title">Suggestions</h2>
                 </article>
             </div>
             
             <div class="col-sm-12 col-md-4 col-lg-3">
                 <article class="help col-md-12 animated zoomInUp">
+                    <h2 class="title">Aide</h2>
                 </article>
             </div>
             
@@ -66,7 +69,14 @@ export default {
         margin: 0;
         padding: 0;
     }
-
+    .title{
+        font-family: 'Oswald', sans-serif;
+        color: white;
+        padding: 8px 20px;
+        border-bottom: 3px solid #f4f4f4;
+        font-size: 28px;
+    }
+    
     nav{
         height: 65px;
         text-align: center;
@@ -120,6 +130,7 @@ export default {
 
     article{
         margin-bottom: 20px;
+        border: 3px solid #f4f4f4;
     }
 
     .search{
@@ -128,7 +139,7 @@ export default {
         -webkit-animation-delay: 1.5s;
         text-align: center;
         display: flex;
-        border: 3px solid black;
+        border: 3px solid #f4f4f4;
         border-radius: 50px;
     }
     .search i,input{
@@ -138,7 +149,7 @@ export default {
     .search i{
         font-size: 30px;
         color: white;
-        background-color: black;
+        background-color: #ff6c6c;
         width: 50px;
         height: 50px;
         padding-top: 11px;
@@ -156,23 +167,31 @@ export default {
         outline:  none;
     }
     .result{
-        background-color:blue;
         height: 500px;
         -webkit-animation-duration: 0.8s;
         -webkit-animation-delay: 2s;
+        background-color:#d9f4ff;
+    }
+    .result h2{
+        background-color: #00b8ff;
     }
     .recommandation{
-        background-color:blueviolet;
+        background-color:#ffeded;
         height: 200px;
         -webkit-animation-duration: 0.8s;
         -webkit-animation-delay: 2.5s;
     }
+    .recommandation h2{
+        background-color:#ff5656;
+    }
     .help{
-        background-color:brown;
+        background-color:#ddeedd;
         height: 500px;
         -webkit-animation-duration: 0.8s;
         -webkit-animation-delay: 3s;
     }
-    
+    .help h2{
+        background-color:#57ab57;
+    }
     
 </style>
