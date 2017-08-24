@@ -6,9 +6,8 @@ use GuzzleHttp\Client;
 class MusicController extends ApiController
 {
     protected $name = 'music';
-    protected $query;
-    protected $regenerate;
-    protected $i = 0;
+    private $query;
+    private $regenerate;
 
     public function __construct($intent) {
         if (isset($intent['entities']['search_query'][0]['value'])) {
@@ -29,21 +28,14 @@ class MusicController extends ApiController
 
         if ($response->getStatusCode() == 401) {
 
-            if ($this->regenerate != true) {
-
-                $this->regenerate = true;
-                $this->generateToken();
-
-                return $this->run();
-
-            } else {
-                return json_encode(['message' => "Unable to generate token."]);
-            }
+            return $this->regenerateTokenAndRun();
         }
+
         $body = $response->getBody();
         $objResponse = json_decode($body, true);
         return $objResponse;
     }
+
     public function generateToken() {
         
         $client = new Client([
@@ -64,6 +56,19 @@ class MusicController extends ApiController
         $this->saveToken($token);
 
         return $token;
+    }
+
+    public function regenerateTokenAndRun() {
+        if ($this->regenerate != true) {
+
+            $this->regenerate = true;
+            $this->generateToken();
+
+            return $this->run();
+
+        } else {
+            return json_encode(['error' => true, 'message' => "Accès refusé"]);
+        }
     }
 
 
