@@ -1,3 +1,7 @@
+html,body{
+height: 100%;
+}
+
 body {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -28,15 +32,17 @@ body {
   padding: 30px 0px;
   margin-bottom: 60px;
 }
+
+.welcome-container p{
+  -webkit-animation-duration: 8s;
+  -webkit-animation-delay: 3s;
+  margin: 5px;
+}
 .welcome-container .authen{
   width: 40%;
   -webkit-animation-duration: 8s;
   -webkit-animation-delay: 3s;
-}
-.temp{
-  position: fixed;
-  top: 0px;
-  left: 0px;
+  margin: 5px;
 }
 /* Fin page welcome */
 
@@ -117,8 +123,8 @@ body {
     font-size: 25px;
     margin-right: 15px;
 }
-.dashboard-page section .container.main{
-    margin: auto;
+#main{
+    margin: 0px 50px;
 }
 .dashboard-page article{
     margin-bottom: 20px;
