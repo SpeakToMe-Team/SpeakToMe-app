@@ -32,6 +32,9 @@ class SpeechController extends Controller
         $this->intent = $intentAnalyser->run();
         $this->targetApi = $this->getTargetApi();
 
+        if (is_array($this->targetApi) && isset($this->targetApi) && $this->targetApi == true) {
+            return json_encode($this->targetApi);
+        }
         return $this->targetApi->run();
     }
 
