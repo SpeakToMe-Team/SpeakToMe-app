@@ -24,7 +24,7 @@ class MusicController extends ApiController
             ],
             'http_errors' => false
         ]);
-        $response = $client->request('GET','search?query=' . $this->query . '&type=track&limit=1&offset=1');
+        $response = $client->request('GET','search?query=' . $this->query . '&type=track&limit=10');
 
         if ($response->getStatusCode() == 401) {
 
@@ -33,6 +33,7 @@ class MusicController extends ApiController
 
         $body = $response->getBody();
         $objResponse = json_decode($body, true);
+        dd($objResponse);
         return $objResponse;
     }
 
