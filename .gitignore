@@ -23,6 +23,7 @@ speech2text/src/test/unit/coverage
 speech2text/src/test/e2e/reports
 speech2text/src/selenium-debug.log
 speech2text/src/config/*.js
+!speech2text/src/config/passport.js
 
 # Laravel 4 specific
 bootstrap/compiled.php
