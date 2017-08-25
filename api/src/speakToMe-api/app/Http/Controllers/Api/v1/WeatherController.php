@@ -89,7 +89,7 @@ class WeatherController extends ApiController
                     }
                 }
             }
-            //dd($objResponse, $this->time);
+            dd($objResponse, $this->time);
             return $this->addIntent($objResponse);
         }
 
