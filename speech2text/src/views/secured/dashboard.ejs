@@ -42,6 +42,22 @@
 
                     <article class="result col-sm-12 col-md-8 animated zoomInUp">
                         <h2 class="title">Resultats</h2>
+
+
+                    <div class="module">
+                        <div class="spotify">
+                            <iframe src="https://open.spotify.com/embed?uri=spotify:user:spotify:playlist:3rgsDhGHZxZ9sB9DQWQfuf" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
+                        </div>
+                    </div>
+
+                    <div class="module">
+                        <div class="spotify">
+                            <form action="/profile" method="get">
+                            <button id="test-button">test</button>
+                            </form>
+                        </div>
+                    </div>
+
                     </article>
 
                     <article class="recommandation col-sm-12 col-md-4 animated zoomInUp">
@@ -68,12 +84,58 @@
 
 <script>
     $("#menu-toggle").click(function(e) {
-            console.log('test');
-            e.preventDefault();
-            $("#wrapper").toggleClass("toggled");
-        });
+        console.log('test');
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+      
+    if (annyang) {
 
-    if (annyang) {        
+        var show = function(tag) {
+            console.log('tag de la recherche : ' + tag)
+            var url = 'http://127.0.0.1.nip.io/api/speech?query='+tag;
+
+            $.getJSON( "ajax/test.json", function( data ) {
+                var items = [];
+                let module = data.intent;
+
+                switch(module) {
+                    case 'weather':
+                        console.log('module weather');
+                        break;
+                    case 'travel':
+                        console.log("module travel");
+                        break;
+                    case 'movie':
+                        console.log("movie");
+                        break;                    
+                    case 'music':
+                        console.log("music");
+                        break;           
+                    default:
+                        console.log("désolé je n'ai pas compris...");
+                        break;
+                }
+
+                $.each( data, function( key, val ) {
+                    console.log(key + ' => ' + val);
+                    //items.push( "<li id='" + key + "'>" + val + "</li>" );
+                });
+            
+                
+            });
+        }
+
+        var activerModule = function(module) {
+            console.log('activation : ' + module)
+            // afficher avec Vue
+        }
+
+        var desactiverModule = function(module) {
+            console.log('désactivation : ' + module)
+            // cacher avec Vue
+        }
+
         var commands = {
             'ouvrir panneau': function() {
                 $('#myModal').modal('show');
@@ -83,8 +145,19 @@
             },
             'voir profil': function() {
                 window.location.href = "/profile";
-            }
-        };        
+            },
+            'activer *module': activerModule,
+            'désactiver *module': désactiverModule,
+            
+            'écouter musique': function() { // Ne marche pas
+                //$('#play-button').click();
+                console.log('lancer la musique');
+                $('#test-button').trigger('submit');
+                
+            },
+            // Pour toutes les recherches avec l'API : définir un mot clé 'ok google'...
+            'ok google *tag': show
+        }; 
         annyang.addCommands(commands);
         annyang.setLanguage('fr-FR');
         annyang.addCallback('result', function(phrases) {
