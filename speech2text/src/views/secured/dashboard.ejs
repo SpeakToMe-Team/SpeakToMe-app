@@ -32,7 +32,7 @@
             </div>
         </nav>
         
-        <section class="container main">
+        <section class="container-fluid" id="main">
             <div class="row">
                 
                     <article class="search col-sm-12 animated zoomInUp">
@@ -40,7 +40,7 @@
                         <input v-bind:value="phrase" type="text" name="request" placeholder="Dictez ou écrivez votre recherche ...">
                     </article>
 
-                    <article class="result col-sm-12 col-md-8 animated zoomInUp">
+                    <article class="result col-sm-12 col-lg-8 animated zoomInUp">
                         <h2 class="title">Resultats</h2>
 
 
@@ -60,7 +60,7 @@
 
                     </article>
 
-                    <article class="recommandation col-sm-12 col-md-4 animated zoomInUp">
+                    <article class="recommandation col-sm-12 col-lg-4 animated zoomInUp">
                         <h2 class="title">Suggestions</h2>
                     </article>
                    
@@ -136,6 +136,8 @@
             // cacher avec Vue
         }
 
+    if (annyang) {   
+        var i = false;     
         var commands = {
             'ouvrir panneau': function() {
                 $('#myModal').modal('show');
@@ -160,11 +162,15 @@
         }; 
         annyang.addCommands(commands);
         annyang.setLanguage('fr-FR');
-        annyang.addCallback('result', function(phrases) {
+        
+            console.log(i);
+            annyang.addCallback('result', function(phrases) {
             console.log("I think the user said: ", phrases[0]);
             dashboard.phrase = phrases[0];
             console.log("But then again, it could be any of the following: ", phrases);
-        });        
+            });   
+        
+        
         annyang.start();
     }
 </script>
