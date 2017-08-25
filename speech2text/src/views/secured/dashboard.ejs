@@ -83,8 +83,19 @@
             },
             'voir profil': function() {
                 window.location.href = "/profile";
-            }
-        };        
+            },
+            'activer *module': activerModule,
+            'désactiver *module': désactiverModule,
+            
+            'écouter musique': function() { // Ne marche pas
+                //$('#play-button').click();
+                console.log('lancer la musique');
+                $('#test-button').trigger('submit');
+                
+            },
+            // Pour toutes les recherches avec l'API : définir un mot clé 'ok google'...
+            'ok google *tag': show
+        }; 
         annyang.addCommands(commands);
         annyang.setLanguage('fr-FR');
         annyang.addCallback('result', function(phrases) {
