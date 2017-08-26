@@ -2,39 +2,38 @@
 
 <div class="dashboard-page" id="dashboard">
     <div id="wrapper">
-            <div id="sidebar-wrapper">
-                <div id="sidebar-wrapper" class="col-sm-12">
-                    <article class="help col-md-12 animated zoomInUp">
-                        <h2 class="title">Aide</h2>
-                    </article>
-                </div>        
-            </div>
+        <div id="sidebar-wrapper">
+            <div id="sidebar-wrapper" class="col-sm-12">
+                <article class="help col-md-12 animated zoomInUp">
+                    <h2 class="title">Aide</h2>
+                </article>
+            </div>        
+        </div>
         <div id="page-content-wrapper">
-        <a href="#menu-toggle" class="dicta" id="menu-toggle">Dictatiel</a>
-        <nav class="container-fluid">
-            <a href="/">
-                <div class="logo animated bounceInLeft">
-                    <img src="/images/microphone.png" alt="logo">
-                    <p>{{ title }}</p>
+            <a href="#menu-toggle" class="dicta" id="menu-toggle">Dictatiel</a>
+            <nav class="container-fluid">
+                <a href="/">
+                    <div class="logo animated bounceInLeft">
+                        <img src="/images/microphone.png" alt="logo">
+                        <p>{{ title }}</p>
+                    </div>
+                </a>
+                <div class="perso animated bounceInRight">        
+                    <div class="settings">
+                        <a href="#" data-toggle="modal" data-target="#myModal">
+                            <i class="fa fa-cogs fa-spin"></i>
+                        </a>
+                    </div>
+                    <div class="myAccount">
+                        <a href="/profile">
+                            <i class="fa fa-user"></i>
+                        </a>
+                    </div>
                 </div>
-            </a>
-            <div class="perso animated bounceInRight">        
-                <div class="settings">
-                    <a href="#" data-toggle="modal" data-target="#myModal">
-                        <i class="fa fa-cogs fa-spin"></i>
-                    </a>
-                </div>
-                <div class="myAccount">
-                    <a href="/profile">
-                        <i class="fa fa-user"></i>
-                    </a>
-                </div>
-            </div>
-        </nav>
+            </nav>
         
-        <section class="container-fluid" id="main">
-            <div class="row">
-                
+            <section class="container-fluid" id="main">
+                <div class="row">                    
                     <article class="search col-sm-12 animated zoomInUp">
                         <i class="fa fa-microphone" aria-hidden="true"></i>
                         <input v-bind:value="phrase" type="text" name="request" placeholder="Dictez ou écrivez votre recherche ...">
@@ -46,7 +45,7 @@
 
                     <div class="module">
                         <div class="spotify">
-                            <iframe src="https://open.spotify.com/embed?uri=spotify:user:spotify:playlist:3rgsDhGHZxZ9sB9DQWQfuf" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
+                            <!--<iframe src="https://open.spotify.com/embed?uri=spotify:user:spotify:playlist:3rgsDhGHZxZ9sB9DQWQfuf" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>-->
                         </div>
                     </div>
 
@@ -62,12 +61,11 @@
 
                     <article class="recommandation col-sm-12 col-lg-4 animated zoomInUp">
                         <h2 class="title">Suggestions</h2>
-                    </article>
-                   
-            </div>
-        </section>
+                    </article>                    
+                </div>
+            </section>
+        </div>
     </div>
-</div>
 </div>
 
 <script>
@@ -84,60 +82,57 @@
 
 <script>
     $("#menu-toggle").click(function(e) {
-        console.log('test');
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
-      
-    if (annyang) {
 
-        var show = function(tag) {
-            console.log('tag de la recherche : ' + tag)
-            var url = 'http://127.0.0.1.nip.io/api/speech?query='+tag;
+    var show = function(tag) {
+        console.log('tag de la recherche : ' + tag)
+        var url = 'http://127.0.0.1.nip.io/api/speech?query='+tag;
 
-            $.getJSON( "ajax/test.json", function( data ) {
-                var items = [];
-                let module = data.intent;
+        $.getJSON( url, function( data ) {
+            var items = [];
+            let module = data.intent;
 
-                switch(module) {
-                    case 'weather':
-                        console.log('module weather');
-                        break;
-                    case 'travel':
-                        console.log("module travel");
-                        break;
-                    case 'movie':
-                        console.log("movie");
-                        break;                    
-                    case 'music':
-                        console.log("music");
-                        break;           
-                    default:
-                        console.log("désolé je n'ai pas compris...");
-                        break;
-                }
+            switch(module) {
+                case 'weather':
+                    console.log('module weather');
+                    break;
+                case 'travel':
+                    console.log("module travel");
+                    break;
+                case 'movie':
+                    console.log("movie");
+                    break;                    
+                case 'music':
+                    console.log("music");
+                    break;           
+                default:
+                    console.log("désolé je n'ai pas compris...");
+                    break;
+            }
 
-                $.each( data, function( key, val ) {
-                    console.log(key + ' => ' + val);
-                    //items.push( "<li id='" + key + "'>" + val + "</li>" );
-                });
-            
-                
+            $.each( data, function( key, val ) {
+                console.log(key + ' => ' + val);
+                //items.push( "<li id='" + key + "'>" + val + "</li>" );
             });
-        }
+        
+            
+        });
+    }
 
-        var activerModule = function(module) {
-            console.log('activation : ' + module)
-            // afficher avec Vue
-        }
+    var activerModule = function(module) {
+        console.log('activation : ' + module)
+        // afficher avec Vue
+    }
 
-        var desactiverModule = function(module) {
-            console.log('désactivation : ' + module)
-            // cacher avec Vue
-        }
+    var desactiverModule = function(module) {
+        console.log('désactivation : ' + module)
+        // cacher avec Vue
+    }
 
-    if (annyang) {   
-        var i = false;     
+    if (annyang) {
+        var i = false;
         var commands = {
             'ouvrir panneau': function() {
                 $('#myModal').modal('show');
@@ -149,7 +144,7 @@
                 window.location.href = "/profile";
             },
             'activer *module': activerModule,
-            'désactiver *module': désactiverModule,
+            'désactiver *module': desactiverModule,
             
             'écouter musique': function() { // Ne marche pas
                 //$('#play-button').click();
@@ -163,14 +158,13 @@
         annyang.addCommands(commands);
         annyang.setLanguage('fr-FR');
         
-            console.log(i);
-            annyang.addCallback('result', function(phrases) {
+        console.log(i);
+        annyang.addCallback('result', function(phrases) {
             console.log("I think the user said: ", phrases[0]);
             dashboard.phrase = phrases[0];
             console.log("But then again, it could be any of the following: ", phrases);
-            });   
-        
-        
+        });
+
         annyang.start();
     }
 </script>
