@@ -44,8 +44,14 @@
                    </div>
                    <div class="myAccount">
                        <a href="/profile">
-                           <i class="fa fa-user"></i>
-                       </a>
+                            <% if (user.google.token){ %>
+                            <img class="" src="<%= user.google.picture %>" alt="Photo de <%= user.google.name %>"/>
+                            <% } else if (user.facebook.token){ %>
+                            <img class="" src="<%= user.facebook.picture %>" alt="Photo de <%= user.google.name %>"/>
+                            <% } else { %>
+                            <i class="fa fa-user"></i>
+                            <% } %>  
+                        </a>
                    </div>
                </div>
            </nav>

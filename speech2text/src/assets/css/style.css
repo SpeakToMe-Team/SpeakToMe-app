@@ -176,6 +176,11 @@ body {
     font-size: 25px;
     margin-right: 15px;
 }
+.dashboard-page nav .perso .myAccount img{
+width: 40px;
+border-radius: 20px;
+}
+
 #main{
     margin: 0px 50px;
 }
