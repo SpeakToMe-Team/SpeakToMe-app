@@ -1,71 +1,74 @@
 <% layout('../layout') %>
 
 <div class="dashboard-page" id="dashboard">
-    <div id="wrapper">
-        <div id="sidebar-wrapper">
-            <div id="sidebar-wrapper" class="col-sm-12">
-                <article class="help col-md-12 animated zoomInUp">
-                    <h2 class="title">Aide</h2>
-                </article>
-            </div>        
-        </div>
-        <div id="page-content-wrapper">
-            <a href="#menu-toggle" class="dicta" id="menu-toggle">Dictatiel</a>
-            <nav class="container-fluid">
-                <a href="/">
-                    <div class="logo animated bounceInLeft">
-                        <img src="/images/microphone.png" alt="logo">
-                        <p>{{ title }}</p>
-                    </div>
-                </a>
-                <div class="perso animated bounceInRight">        
-                    <div class="settings">
-                        <a href="#" data-toggle="modal" data-target="#myModal">
-                            <i class="fa fa-cogs fa-spin"></i>
-                        </a>
-                    </div>
-                    <div class="myAccount">
-                        <a href="/profile">
-                            <i class="fa fa-user"></i>
-                        </a>
-                    </div>
-                </div>
-            </nav>
-        
-            <section class="container-fluid" id="main">
-                <div class="row">                    
-                    <article class="search col-sm-12 animated zoomInUp">
-                        <i class="fa fa-microphone" aria-hidden="true"></i>
-                        <input v-bind:value="phrase" type="text" name="request" placeholder="Dictez ou écrivez votre recherche ...">
-                    </article>
+   <div id="wrapper">
+       <div id="sidebar-wrapper">
+           <div id="sidebar-wrapper" class="col-sm-12">
+               <article class="help col-md-12 animated zoomInUp">
+                   <h2 class="title">Aide</h2>
+               </article>
+           </div>       
+       </div>
+       <div id="page-content-wrapper">
+           <a href="#menu-toggle" class="dicta" id="menu-toggle">Dictatiel</a>
+           <nav class="container-fluid">
+               <a href="/">
+                   <div class="logo animated bounceInLeft">
+                       <img src="/images/microphone.png" alt="logo">
+                       <p>{{ title }}</p>
+                   </div>
+               </a>
+               <div class="perso animated bounceInRight">       
+                   <div class="settings">
+                       <a href="#" data-toggle="modal" data-target="#myModal">
+                           <i class="fa fa-cogs fa-spin"></i>
+                       </a>
+                   </div>
+                   <div class="myAccount">
+                       <a href="/profile">
+                           <i class="fa fa-user"></i>
+                       </a>
+                   </div>
+               </div>
+           </nav>
+      
+           <section class="container-fluid" id="main">
+               <div class="row">                   
+                   <article class="search col-sm-12 animated zoomInUp">
+                       <i class="fa fa-microphone" aria-hidden="true"></i>
+                       <input v-bind:value="phrase" type="text" name="request" placeholder="Dictez ou écrivez votre recherche ...">
+                   </article>
 
-                    <article class="result col-sm-12 col-lg-8 animated zoomInUp">
-                        <h2 class="title">Resultats</h2>
+                   <article class="result col-sm-12 col-lg-8 animated zoomInUp">
+                       <h2 class="title">Resultats</h2>
+                     
+                       <div class="module-weather" :class="{ hide: !isActiveWeatherModule }">
+                           <h2>recherche de la météo</h2><br />
+                           <p id="msgVocal">{{ contentWeather.msgVocal }}</p><br />
+                           <p>
+                            <i class="fa fa-map-marker fa-3x" aria-hidden="true"></i> {{ contentWeather.location }}<br />
+                            <i class="fa fa-calendar fa-3x" aria-hidden="true"></i> {{ contentWeather.date }}<br />
+                            <i class="fa fa-thermometer-empty fa-3x" aria-hidden="true"></i> {{ tempWeather.day }} C° la journée<br />
+                            <i class="fa fa-thermometer-empty fa-3x" aria-hidden="true"></i> {{ tempWeather.morn }} C° le matin<br />
+                            <i class="fa fa-thermometer-empty fa-3x" aria-hidden="true"></i> {{ tempWeather.eve }} C° le soir<br />
+                            <i class="fa fa-thermometer-empty fa-3x" aria-hidden="true"></i> {{ tempWeather.night }} C° la nuit<br />
+                           </p>
+                           
+                                                      
 
+                           <br />
+                           <p><i>info raw : {{ contentWeather }}</i></p>
+                       </div>
 
-                    <div class="module">
-                        <div class="spotify">
-                            <!--<iframe src="https://open.spotify.com/embed?uri=spotify:user:spotify:playlist:3rgsDhGHZxZ9sB9DQWQfuf" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>-->
-                        </div>
-                    </div>
+                   </article>
 
-                    <div class="module">
-                        <div class="spotify">
-                            <form action="/profile" method="get">
-                            <button id="test-button">test</button>
-                            </form>
-                        </div>
-                    </div>
-
-                    </article>
-
-                    <article class="recommandation col-sm-12 col-lg-4 animated zoomInUp">
-                        <h2 class="title">Suggestions</h2>
-                    </article>                    
-                </div>
-            </section>
-        </div>
-    </div>
+                   <article class="recommandation col-sm-12 col-lg-4 animated zoomInUp">
+                       <h2 class="title">Suggestions</h2>
+                   </article>
+               </div>
+           </section>
+       </div>
+   </div>
 </div>
 
 <script>
@@ -73,98 +76,245 @@
         el: "#dashboard",
         data: {
             title: "SpeakToMe",
-            phrase: ''
+            phrase: '',
+            isActiveMovieModule: false,
+            isActiveMusicModule: false,
+            isActiveTravelModule: false,
+            isActiveWeatherModule: false,
+            contentWeather: '',
+            tempWeather: ''
         },
         methods: {
+            init: function () {
+                this.isActiveMovieModule = false
+                this.isActiveMusicModule = false
+                this.isActiveTravelModule = false
+                this.isActiveWeatherModule = false
+                this.contentWeather = ''
+            }
         }
     });
 </script>
 
 <script>
+
+    class WeatherModule {
+
+        constructor (json) {
+            this._jsonWeather = JSON.parse(json);
+            this._jour = false;
+        }
+
+        get jsonWeather() {
+            return this._jsonWeather;
+        }
+
+        set jsonWeather(newJson){
+            this._jsonWeather = JSON.parse(newJson);
+        }
+
+        getIntent () {
+            return this._jsonWeather.intent;
+        }
+
+        getLocation () {
+            return this._jsonWeather.response.city.name;
+        }
+
+        getNumberList() {
+            if(this._jsonWeather.response['list'].length > 0){
+                return this._jsonWeather.response['list'].length;
+            }else{
+                return false;
+            }
+        }
+
+        getElementDisplay () {
+            let number = this.getNumberList();
+            if(number > 0 ){
+                let list = this._jsonWeather.response['list'];        
+
+                    list.forEach(function(element, index) {
+                        if(element.display === true){
+                            console.log(index + ' => ' + element.temp.min);
+                            this._jour = index;
+                        }
+                    }, this);
+                    
+                    console.log('jour ? : ' + this._jour);
+
+                return this._jour;
+            }else{
+                return "Pas d'informations !";
+            }          
+        }        
+    }
+
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
 
-    var show = function(tag) {
-        console.log('tag de la recherche : ' + tag)
-        var url = 'http://127.0.0.1.nip.io/api/speech?query='+tag;
+    var emitQuestion = function(question){
+        console.log('question ? ' + question);
+        socket.emit('question', question);
+    }
 
-        $.getJSON( url, function( data ) {
-            var items = [];
-            let module = data.intent;
+    var show = function(anwser) {
+               
+        // Réinitialisation
+        dashboard.init();
 
-            switch(module) {
-                case 'weather':
-                    console.log('module weather');
-                    break;
-                case 'travel':
-                    console.log("module travel");
-                    break;
-                case 'movie':
-                    console.log("movie");
-                    break;                    
-                case 'music':
-                    console.log("music");
-                    break;           
-                default:
-                    console.log("désolé je n'ai pas compris...");
-                    break;
-            }
-
-            $.each( data, function( key, val ) {
-                console.log(key + ' => ' + val);
-                //items.push( "<li id='" + key + "'>" + val + "</li>" );
-            });
         
+
+        /* Traitement pour le weather */
+        let  weather = new WeatherModule(anwser);
+
+        let stringIntent = weather.getIntent();
+        console.log('intent : ' + stringIntent);
+        let stringLocation = weather.getLocation();
+        console.log('ville : ' + stringLocation);
+        console.log('nombre : ' + weather.getNumberList());
+
+        dashboard.isActiveWeatherModule = true;
             
-        });
+        console.log('jour ? ' + weather.getElementDisplay());
+        let jourAfficher = weather.getElementDisplay();
+        let jourAfficherContent = weather.jsonWeather.response['list'][jourAfficher];
+        let dateJourAfficher = jourAfficherContent.dt * 1000;
+        console.log('time : ' + dateJourAfficher);
+        var stringJour = moment(dateJourAfficher).format("dddd D MMMM YYYY");
+        var stringDescription = jourAfficherContent.weather['0']['description'];
+        var temperatureDescription = jourAfficherContent.temp;
+
+        console.log('moment js : ' + stringJour);
+
+        var stringVoiceMsg = 'La météo de ' + stringJour + ' à ' + stringLocation + ', la journée sera ' + stringDescription + ' avec des températures de ' + Math.floor(temperatureDescription.morn) + ' degré le matin, ' + Math.floor(temperatureDescription.eve) + ' degré le soir et ' + Math.floor(temperatureDescription.night) + ' degré la nuit.';
+        console.log('msg vocal ' + stringVoiceMsg);
+
+        // On fait une pause pendant la lecture de la météo
+        annyang.pause();
+
+        var synth = window.speechSynthesis;
+
+        var utterThis = new SpeechSynthesisUtterance(stringVoiceMsg);
+        utterThis.lang = 'fr-FR';
+        utterThis.pitch = 1;
+        utterThis.rate = 1;
+
+        //Vue js
+        var content = {
+            location: stringLocation,
+            date: stringJour,
+            msgVocal: stringVoiceMsg
+        }
+
+        var temp = {
+            day: temperatureDescription.day,
+            morn: temperatureDescription.morn,
+            eve: temperatureDescription.eve,
+            night: temperatureDescription.night
+        }
+        
+        dashboard.contentWeather = content;
+        dashboard.tempWeather = temp;
+
+        synth.speak(utterThis);          
+
+        // Une fois la diction terminée
+        annyang.resume();
+
+        
     }
 
     var activerModule = function(module) {
-        console.log('activation : ' + module)
+        console.log('activation : ' + module);
         // afficher avec Vue
+        dashboard.module_weather = true;
     }
 
     var desactiverModule = function(module) {
-        console.log('désactivation : ' + module)
+        console.log('désactivation : ' + module);
+        dashboard.module_weather = false;
         // cacher avec Vue
     }
 
-    if (annyang) {
-        var i = false;
-        var commands = {
-            'ouvrir panneau': function() {
-                $('#myModal').modal('show');
-            },
-            'fermer panneau': function() {
-                $('#myModal').modal('hide');
-            },
-            'voir profil': function() {
-                window.location.href = "/profile";
-            },
-            'activer *module': activerModule,
-            'désactiver *module': desactiverModule,
-            
-            'écouter musique': function() { // Ne marche pas
-                //$('#play-button').click();
-                console.log('lancer la musique');
-                $('#test-button').trigger('submit');
-                
-            },
-            // Pour toutes les recherches avec l'API : définir un mot clé 'ok google'...
-            'ok google *tag': show
-        }; 
-        annyang.addCommands(commands);
-        annyang.setLanguage('fr-FR');
-        
-        console.log(i);
-        annyang.addCallback('result', function(phrases) {
-            console.log("I think the user said: ", phrases[0]);
-            dashboard.phrase = phrases[0];
-            console.log("But then again, it could be any of the following: ", phrases);
-        });
+    var repeterModule = function() {
+        var text = $('#msgVocal').text();
+        if(text.length > 0){
+            var stringVoiceMsg = text;
+        }else{
+            var stringVoiceMsg = "Désolé, je n'ai pas message à vous dire !";
+        }
 
-        annyang.start();
+        annyang.pause();
+
+        var synth = window.speechSynthesis;
+
+        var utterThis = new SpeechSynthesisUtterance(stringVoiceMsg);
+        utterThis.lang = 'fr-FR';
+        utterThis.pitch = 1;
+        utterThis.rate = 1;
+
+        synth.speak(utterThis);          
+
+        annyang.resume();
+
     }
+
+   if (annyang) {
+       var i = false;
+       var commands = {
+           'effacer recherche': function() {
+               dashboard.phrase = '';
+               dashboard.content = '';
+               dashboard.init();
+           },
+           'répéter message': repeterModule,
+           'ouvrir panneau': function() {
+               $('#myModal').modal('show');
+           },
+           'fermer panneau': function() {
+               $('#myModal').modal('hide');
+           },
+           'ouvrir aide': function() {
+               $("#wrapper").toggleClass("toggled");
+           },
+           'fermer aide': function() {
+               $("#wrapper").toggleClass("toggled");
+           },
+           'voir profil': function() {
+               window.location.href = "/profile";
+           },
+           'activer *module': activerModule,
+           'désactiver *module': desactiverModule,
+          
+           'écouter musique': function() { // Ne marche pas
+               //$('#play-button').click();
+               console.log('lancer la musique');
+               $('#test-button').trigger('submit');
+              
+           },
+           // Pour toutes les recherches avec l'API : définir un mot clé 'ok google'...
+           'ok google *question': emitQuestion
+       };
+       annyang.addCommands(commands);
+       annyang.setLanguage('fr-FR');
+      
+       console.log(i);
+       annyang.addCallback('result', function(phrases) {
+           console.log("I think the user said: ", phrases[0]);
+           dashboard.phrase = phrases[0];
+           console.log("But then again, it could be any of the following: ", phrases);
+       });
+
+       annyang.start();
+    }
+
+    socket.on('anwser', function(anwser) {
+        console.log('réception de la réponse');
+        show(anwser);
+    });
 </script>
+
+

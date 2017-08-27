@@ -197,3 +197,8 @@ body {
     text-align: center;
 }
 /* Fin page dashboard */
+
+/* Pour les modules */
+.hide {
+    display: none;
+}
