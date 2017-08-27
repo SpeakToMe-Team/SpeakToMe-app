@@ -6,6 +6,24 @@
            <div id="sidebar-wrapper" class="col-sm-12">
                <article class="help col-md-12 animated zoomInUp">
                    <h2 class="title">Aide</h2>
+                   <h3 class="title">Pour piloter</h2>
+                       <ul>
+                        <li>effacer recherche</li>
+                        <li>répéter message</li>
+                        <li>ouvrir aide</li>
+                        <li>fermer aide</li>
+                        <li>voir profil</li>
+                        <li>dashboard</li>
+                       </ul>
+                       <h3 class="title">Pour lancer une recherche</h2>
+                       <ul>
+                        <li>effacer recherche</li>
+                        <li>répéter message</li>
+                        <li>ouvrir aide</li>
+                        <li>fermer aide</li>
+                        <li>voir profil</li>
+                        <li>dashboard</li>
+                       </ul>
                </article>
            </div>       
        </div>
@@ -52,8 +70,7 @@
                             <i class="fa fa-thermometer-empty fa-3x" aria-hidden="true"></i> {{ tempWeather.morn }} C° le matin<br />
                             <i class="fa fa-thermometer-empty fa-3x" aria-hidden="true"></i> {{ tempWeather.eve }} C° le soir<br />
                             <i class="fa fa-thermometer-empty fa-3x" aria-hidden="true"></i> {{ tempWeather.night }} C° la nuit<br />
-                           </p>
-                           
+                           </p>                     
                                                       
 
                            <br />
@@ -64,6 +81,7 @@
 
                    <article class="recommandation col-sm-12 col-lg-4 animated zoomInUp">
                        <h2 class="title">Suggestions</h2>
+                       
                    </article>
                </div>
            </section>
@@ -155,17 +173,30 @@
         $("#wrapper").toggleClass("toggled");
     });
 
+  /*  var attente = function(string){
+        annyang.pause();
+
+        var synth = window.speechSynthesis;
+        var utterThis = new SpeechSynthesisUtterance(string);
+        utterThis.lang = 'fr-FR';
+        utterThis.pitch = 1;
+        utterThis.rate = 1;
+        synth.speak(utterThis);          
+
+        annyang.resume();
+    }*/
+
     var emitQuestion = function(question){
         console.log('question ? ' + question);
         socket.emit('question', question);
+        
+        parler('Je viens de lancer la recherche, merci de patienter !');
     }
 
     var show = function(anwser) {
                
         // Réinitialisation
-        dashboard.init();
-
-        
+        dashboard.init();        
 
         /* Traitement pour le weather */
         let  weather = new WeatherModule(anwser);
@@ -192,16 +223,6 @@
         var stringVoiceMsg = 'La météo de ' + stringJour + ' à ' + stringLocation + ', la journée sera ' + stringDescription + ' avec des températures de ' + Math.floor(temperatureDescription.morn) + ' degré le matin, ' + Math.floor(temperatureDescription.eve) + ' degré le soir et ' + Math.floor(temperatureDescription.night) + ' degré la nuit.';
         console.log('msg vocal ' + stringVoiceMsg);
 
-        // On fait une pause pendant la lecture de la météo
-        annyang.pause();
-
-        var synth = window.speechSynthesis;
-
-        var utterThis = new SpeechSynthesisUtterance(stringVoiceMsg);
-        utterThis.lang = 'fr-FR';
-        utterThis.pitch = 1;
-        utterThis.rate = 1;
-
         //Vue js
         var content = {
             location: stringLocation,
@@ -219,12 +240,7 @@
         dashboard.contentWeather = content;
         dashboard.tempWeather = temp;
 
-        synth.speak(utterThis);          
-
-        // Une fois la diction terminée
-        annyang.resume();
-
-        
+        parler(stringVoiceMsg);
     }
 
     var activerModule = function(module) {
@@ -247,6 +263,11 @@
             var stringVoiceMsg = "Désolé, je n'ai pas message à vous dire !";
         }
 
+        parler(stringVoiceMsg);
+
+    }
+
+    var parler = function (stringVoiceMsg){
         annyang.pause();
 
         var synth = window.speechSynthesis;
@@ -259,7 +280,6 @@
         synth.speak(utterThis);          
 
         annyang.resume();
-
     }
 
    if (annyang) {
