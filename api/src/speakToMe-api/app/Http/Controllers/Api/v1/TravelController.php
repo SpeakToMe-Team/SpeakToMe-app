@@ -28,8 +28,11 @@ class TravelController extends ApiController
         if (isset($intent['entities']['travel_category'][0]['value']))
             $this->category = $intent['entities']['travel_category'][0]['value'];
 
+        if (isset($intent['entities']['search_query'][0]['value']))
+            $this->searchQuery = $intent['entities']['search_query'][0]['value'];
+
         if (isset($intent['entities']['travel_term'][0]['value']))
-            $this->searchQuery = $intent['entities']['travel_term'][0]['value'];
+            $this->searchQuery .= ' ' . $intent['entities']['travel_term'][0]['value'];
 
         if (isset($intent['entities']['datetime'][0]['value'])) {
             $datetime = new \DateTime($intent['entities']['datetime'][0]['value'], new \DateTimeZone('GMT'));
