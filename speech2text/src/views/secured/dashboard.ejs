@@ -1,134 +1,202 @@
 <% layout('../layout') %>
 
-<div class="dashboard-page" id="dashboard">
-   <div id="wrapper">
-       <div id="sidebar-wrapper">
-           <div id="sidebar-wrapper" class="col-sm-12">
-               <article class="help col-md-12 animated zoomInUp">
-                   <h2 class="title">Aide</h2>
-                   <h3 class="title">Pour piloter</h2>
-                       <ul>
-                        <li>effacer recherche</li>
-                        <li>répéter message</li>
-                        <li>ouvrir aide</li>
-                        <li>fermer aide</li>
-                        <li>voir profil</li>
-                        <li>dashboard</li>
-                       </ul>
-                       <h3 class="title">Pour lancer une recherche</h2>
-                       <ul>
-                        <li>effacer recherche</li>
-                        <li>répéter message</li>
-                        <li>ouvrir aide</li>
-                        <li>fermer aide</li>
-                        <li>voir profil</li>
-                        <li>dashboard</li>
-                       </ul>
-               </article>
-           </div>       
-       </div>
-       <div id="page-content-wrapper">
-            <a href="#menu-toggle" class="dicta" id="menu-toggle">Aide</a>
-            <nav class="container-fluid">
-                <a href="/">
-                    <div class="logo animated bounceInLeft">
-                        <img src="/speech2text/images/microphone.png" alt="logo">
-                        <p>{{ title }}</p>
-                    </div>
-                </a>
-                <div class="perso animated bounceInRight">       
-                     <div class="settings">
-                        <a href="#" data-toggle="modal" data-target="#settings">
-                            <i class="fa fa-cogs fa-spin"></i>
-                        </a>
-                    </div>
-                    <div class="myAccount">
-                        <a href="#" data-toggle="modal" data-target="#user">
-                            <% if (user.google.token){ %>
-                            <img class="" src="<%= user.google.picture %>" alt="Photo de <%= user.google.name %>"/>
-                            <% } else if (user.facebook.token){ %>
-                            <img class="" src="<%= user.facebook.picture %>" alt="Photo de <%= user.google.name %>"/>
-                            <% } else { %>
-                            <i class="fa fa-user"></i>
-                            <% } %>  
-                        </a>
-                    </div>
-                </div>
-            </nav>
-            <!-- Modal -->
-            <div class="modal fade" id="settings" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        </div>
-                        <div class="modal-body">
-                        ...
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
+    <div class="dashboard-page" id="dashboard">
+        <div id="wrapper">
+            <div id="sidebar-wrapper">
+                <div id="sidebar-wrapper" class="col-sm-12">
+                    <article class="help col-md-12 animated zoomInUp">
+                        <h2 class="title">Aide</h2>
+                        <h3 class="title">Pour piloter</h3>
+                        <ul>
+                            <li>effacer recherche</li>
+                            <li>répéter message</li>
+                            <li>ouvrir aide</li>
+                            <li>fermer aide</li>
+                            <li>voir profil</li>
+                            <li>dashboard</li>
+                        </ul>
+                        <h3 class="title">Pour lancer une recherche</h3>
+                        <ul>
+                            <li>effacer recherche</li>
+                            <li>répéter message</li>
+                            <li>ouvrir aide</li>
+                            <li>fermer aide</li>
+                            <li>voir profil</li>
+                            <li>dashboard</li>
+                        </ul>
+                    </article>
                 </div>
             </div>
-            <!-- Modal profil-->
-            <div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                <div class="modal-content frame">
-                    <div class="page-header text-center">
-                        <h2 class="title"><span class="fa fa-user"></span> Profile page</h2>
+            <div id="page-content-wrapper">
+                <a href="#menu-toggle" class="dicta" id="menu-toggle">Aide</a>
+                <nav class="container-fluid">
+                    <a href="/">
+                        <div class="logo animated bounceInLeft">
+                            <img src="/speech2text/images/microphone.png" alt="logo">
+                            <p>{{ title }}</p>
+                        </div>
+                    </a>
+                    <div class="perso animated bounceInRight">
+                        <div class="settings">
+                            <a href="#" data-toggle="modal" data-target="#settings">
+                            <i class="fa fa-cogs fa-spin"></i>
+                        </a>
+                        </div>
+                        <div class="myAccount">
+                            <a href="#" data-toggle="modal" data-target="#user">
+                                <% if (user.google.token){ %>
+                                    <img class="" src="<%= user.google.picture %>" alt="Photo de <%= user.google.name %>" />
+                                    <% } else if (user.facebook.token){ %>
+                                        <img class="" src="<%= user.facebook.picture %>" alt="Photo de <%= user.google.name %>" />
+                                        <% } else { %>
+                                            <i class="fa fa-user"></i>
+                                            <% } %>
+                            </a>
+                        </div>
                     </div>
-                    <div class="content">
-                        <% if (user.local.email){ %>    
-                        
-                                <h3><span class="fa fa-user"></span> Local</h3>
-                            
-                                <ul>
-                                    <li><strong>ID :</strong> <%= user._id %></li>
-                                    <li><strong>Email :</strong> <%= user.local.email %></li>
-                                    <li><strong>Password :</strong> <%= user.local.password %></li>
-                                </ul>
-                           
-                        <% } %>
-                        <% if (user.facebook.token){ %>
-                        
-                                <h3><span class="fa fa-facebook"></span> Facebook</h3>
-                                <div class="avatar"> 
-                                        <img class="" src="<%= user.facebook.picture %>" alt="Photo de <%= user.facebook.name %>"/>
+                </nav>
+                <!-- Modal -->
+                <div class="modal fade" id="settings" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content frame">
+                            <div class="page-header text-center">
+                                <h2 class="title">
+                                    <span class="fa fa-cog"></span> Settings <button type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </h2>
+                            </div>
+                            <div class="content">
+                                <div>
+                                    <p>test</p>
                                 </div>
-                                
-                                        <ul>
-                                            <li><strong>Facebook ID :</strong> <%= user.facebook.id %></li>
-                                            <li><strong>Token :</strong> <%= user.facebook.token %></li>
-                                            <li><strong>Email :</strong> <%= user.facebook.email %></li>
-                                            <li><strong>Name :</strong> <%= user.facebook.name %></li>
-                                        </ul>
-                                   
-                            
-                        <% } %>
-                        <% if (user.google.token){ %>
-                        
-                                <h3><span class="fa fa-google-plus"></span> Google+</h3>
-                                <div class="avatar"> 
-                                    <img class="" src="<%= user.google.picture %>" alt="Photo de <%= user.google.name %>"/>
-                                </div>
-                                
-                                        <ul>
-                                            <li><strong>Google ID :</strong> <%= user.google.id %></li>
-                                            <li><strong>Token :</strong> <%= user.google.token %></li>
-                                            <li><strong>Email :</strong> <%= user.google.email %></li>
-                                            <li><strong>Name :</strong> <%= user.google.name %></li>
-                                        </ul>
-                                
-                        <% } %>
-                        <a href="/speech2text/auth/logout" class="btn btn-danger btn-sm">Logout</a>
+                                <button type="button" class="save">Enregistrer</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <!-- Modal profil-->
+                <div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content frame">
+                            <div class="page-header text-center">
+                                <h2 class="title">
+                                    <span class="fa fa-user"></span> Profile page <button type="button" data-dismiss="modal"
+                                        aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                                </h2>
+                            </div>
+                            <div class="content">
+                                <% if (user.local.email){ %>
+                                    <h3><span class="fa fa-user"></span> Local</h3>
+
+                                    <ul>
+                                        <li><strong>ID :</strong>
+                                            <%= user._id %>
+                                        </li>
+                                        <li><strong>Email :</strong>
+                                            <%= user.local.email %>
+                                        </li>
+                                        <li><strong>Password :</strong>
+                                            <%= user.local.password %>
+                                        </li>
+                                    </ul>
+
+                                    <% } %>
+                                        <% if (user.facebook.token){ %>
+                                            <h3><span class="fa fa-facebook"></span> Facebook</h3>
+                                            <div class="avatar">
+                                                <img class="" src="<%= user.facebook.picture %>" alt="Photo de <%= user.facebook.name %>" />
+                                            </div>
+                                            <ul>
+                                                <li><strong>Name :</strong>
+                                                    <%= user.facebook.name %>
+                                                </li>
+                                                <li><strong>Email :</strong>
+                                                    <%= user.facebook.email %>
+                                                </li>
+                                                <li><strong>Facebook ID :</strong>
+                                                    <%= user.facebook.id %>
+                                                </li>
+                                                <li><strong>Token :</strong>
+                                                    <%= user.facebook.token %>
+                                                </li>
+                                            </ul>
+                                            <% } %>
+                                                <% if (user.google.token){ %>
+
+                                                    <h3><span class="fa fa-google-plus"></span> Google+</h3>
+                                                    <div class="avatar">
+                                                        <img class="" src="<%= user.google.picture %>" alt="Photo de <%= user.google.name %>" />
+                                                    </div>
+
+                                                    <ul>
+                                                        <li><strong>Name :</strong>
+                                                            <%= user.google.name %>
+                                                        </li>
+                                                        <li><strong>Email :</strong>
+                                                            <%= user.google.email %>
+                                                        </li>
+                                                        <li><strong>Google ID :</strong>
+                                                            <%= user.google.id %>
+                                                        </li>
+                                                        <li><strong>Token :</strong>
+                                                            <%= user.google.token %>
+                                                        </li>
+                                                    </ul>
+
+                                                    <% } %>
+                                                        <a href="/speech2text/auth/logout" class="logout">Logout</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <!-- fin Modal profil-->
+                <section class="container-fluid" id="main">
+                    <div class="row">
+                        <article class="search col-sm-12 animated zoomInUp">
+                            <i class="fa fa-microphone" aria-hidden="true"></i>
+                            <input v-bind:value="phrase" type="text" name="request" placeholder="Dictez ou écrivez votre recherche ...">
+                        </article>
+
+                        <article class="result col-sm-12 col-lg-10 animated zoomInUp">
+                            <h2 class="title">Resultats</h2>
+                            
+                            <div class="module-weather" :class="{ hide: !isActiveWeatherModule }">
+                                <h3>recherche de la météo</h3>
+                                <iframe id="gmap_canvas" src="" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                                
+                                <p id="msgVocal">{{ contentWeather.msgVocal }}</p><br />
+                                <p>
+                                    <i class="fa fa-map-marker fa-3x" aria-hidden="true"></i> {{ contentWeather.location
+                                    }}
+                                    <br />
+                                    <i class="fa fa-calendar fa-3x" aria-hidden="true"></i> {{ contentWeather.date }}<br
+                                    />
+                                    <i class="fa fa-thermometer-empty fa-3x" aria-hidden="true"></i> {{ tempWeather.day }}
+                                    C° la journée<br />
+                                    <i class="fa fa-thermometer-empty fa-3x" aria-hidden="true"></i> {{ tempWeather.morn
+                                    }} C° le matin<br />
+                                    <i class="fa fa-thermometer-empty fa-3x" aria-hidden="true"></i> {{ tempWeather.eve }}
+                                    C° le soir<br />
+                                    <i class="fa fa-thermometer-empty fa-3x" aria-hidden="true"></i> {{ tempWeather.night
+                                    }} C° la nuit<br />
+                                </p>
+
+
+                                <br />
+                                <p><i>info raw : {{ contentWeather }}</i></p>
+                            </div>
+
+                        </article>
+
+                        <article class="recommandation col-sm-12 col-lg-2 animated zoomInUp">
+                            <h2 class="title">Suggestions</h2>
+
+                        </article>
+                    </div>
+                </section>
             </div>
             <!-- fin Modal profil-->
             <section class="container-fluid" id="main">
@@ -427,5 +495,9 @@
         show(anwser);
     });
 </script>
-
-
+<script>
+    var srcStart = "ttps://maps.google.com/maps?q=";
+    var srcLoc = contentWeather.location;
+    var srcEnd = "%2C%20FR&t=&z=14&ie=UTF8&iwloc=&output=embed";
+    var src = srcStart + srcLoc + srcEnd;
+</script>
