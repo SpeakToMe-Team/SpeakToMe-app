@@ -168,7 +168,8 @@
                                 <iframe id="gmap_canvas" src="" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
                                 
                                 <p id="msgVocal">{{ contentWeather.msgVocal }}</p><br />
-                                <p>
+                                <img v-bind:src="contentWeather.picture" v-bind:alt="contentWeather.description"></img>
+                                <p>                                    
                                     <i class="fa fa-map-marker fa-3x" aria-hidden="true"></i> {{ contentWeather.location
                                     }}
                                     <br />
@@ -231,10 +232,29 @@
 
 <script>
 
+    class Module {
+        constructor (json) {
+            this._json = json;
+        }
+
+        get json() {
+            return this._json;
+        }
+
+        set jsonr(newJson){
+            this._json = newJson;
+        }
+
+        checkIntent () {
+            return this._json.intent;
+        }
+
+    }
+
     class WeatherModule {
 
         constructor (json) {
-            this._jsonWeather = JSON.parse(json);
+            this._jsonWeather = json;
             this._jour = false;
         }
 
@@ -243,7 +263,7 @@
         }
 
         set jsonWeather(newJson){
-            this._jsonWeather = JSON.parse(newJson);
+            this._jsonWeather = newJson;
         }
 
         getIntent () {
@@ -330,40 +350,50 @@
         console.log('ville : ' + stringLocation);
         console.log('nombre : ' + weather.getNumberList());
 
-        dashboard.isActiveWeatherModule = true;
+        if( weather.getNumberList() !== false){
+
+            console.log('jour ? ' + weather.getElementDisplay());
+            let jourAfficher = weather.getElementDisplay();
+            let jourAfficherContent = weather.jsonWeather.response['list'][jourAfficher];
+            let dateJourAfficher = jourAfficherContent.dt * 1000;
+            console.log('time : ' + dateJourAfficher);
+            var stringJour = moment(dateJourAfficher).format("dddd D MMMM YYYY");
+            var stringDescription = jourAfficherContent.weather['0']['description'];
+            var iconDescription = 'http://openweathermap.org/img/w/' + jourAfficherContent.weather['0'].icon + '.png';
+            console.log('icone : ' + iconDescription);
+            var temperatureDescription = jourAfficherContent.temp;
+
+            console.log('moment js : ' + stringJour);
+
+            var stringVoiceMsg = 'La météo de ' + stringJour + ' à ' + stringLocation + ', ' + stringDescription + ' avec des températures de ' + Math.floor(temperatureDescription.morn) + ' degré le matin, ' + Math.floor(temperatureDescription.eve) + ' degré le soir et ' + Math.floor(temperatureDescription.night) + ' degré la nuit.';
+            console.log('msg vocal ' + stringVoiceMsg);
+
+            //Vue js
+            var content = {
+                location: stringLocation,
+                date: stringJour,
+                msgVocal: stringVoiceMsg,
+                picture: iconDescription,
+                description: stringDescription
+            }
+
+            var temp = {
+                day: temperatureDescription.day,
+                morn: temperatureDescription.morn,
+                eve: temperatureDescription.eve,
+                night: temperatureDescription.night
+            }
             
-        console.log('jour ? ' + weather.getElementDisplay());
-        let jourAfficher = weather.getElementDisplay();
-        let jourAfficherContent = weather.jsonWeather.response['list'][jourAfficher];
-        let dateJourAfficher = jourAfficherContent.dt * 1000;
-        console.log('time : ' + dateJourAfficher);
-        var stringJour = moment(dateJourAfficher).format("dddd D MMMM YYYY");
-        var stringDescription = jourAfficherContent.weather['0']['description'];
-        var temperatureDescription = jourAfficherContent.temp;
+            dashboard.contentWeather = content;
+            dashboard.tempWeather = temp;
+            dashboard.isActiveWeatherModule = true;
 
-        console.log('moment js : ' + stringJour);
+            parler(stringVoiceMsg);
 
-        var stringVoiceMsg = 'La météo de ' + stringJour + ' à ' + stringLocation + ', la journée sera ' + stringDescription + ' avec des températures de ' + Math.floor(temperatureDescription.morn) + ' degré le matin, ' + Math.floor(temperatureDescription.eve) + ' degré le soir et ' + Math.floor(temperatureDescription.night) + ' degré la nuit.';
-        console.log('msg vocal ' + stringVoiceMsg);
-
-        //Vue js
-        var content = {
-            location: stringLocation,
-            date: stringJour,
-            msgVocal: stringVoiceMsg
+        }else{
+            dashboard.isActiveWeatherModule = false;
+            parler("Désolé ! Je n'ai pas trouvé de réponse à votre question.");
         }
-
-        var temp = {
-            day: temperatureDescription.day,
-            morn: temperatureDescription.morn,
-            eve: temperatureDescription.eve,
-            night: temperatureDescription.night
-        }
-        
-        dashboard.contentWeather = content;
-        dashboard.tempWeather = temp;
-
-        parler(stringVoiceMsg);
     }
 
     var activerModule = function(module) {
@@ -400,8 +430,9 @@
         utterThis.pitch = 1;
         utterThis.rate = 1;
 
-        synth.speak(utterThis);          
+        synth.speak(utterThis);
 
+        annyang.resume();
         annyang.resume();
     }
 
@@ -412,7 +443,7 @@
                dashboard.content = '';
                dashboard.init();
            },
-           'répéter message': repeterModule,
+           "je n'ai pas bien entendu": repeterModule,
            'ouvrir panneau': function() {
                $('#settings').modal('show');
            },
@@ -457,6 +488,8 @@
 
     socket.on('anwser', function(anwser) {
         console.log('réception de la réponse');
+        console.log(anwser);
+
         show(anwser);
     });
 </script>
