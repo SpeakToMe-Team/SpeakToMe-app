@@ -19,7 +19,7 @@ class IntentAnalyserController extends ApiController
         $response = $client->request('GET', 'message', $this->getQueryParams());
         $body = $response->getBody();
         $objResponse = json_decode($body, true);
-//        dd($objResponse);
+        //dd($objResponse);
         return $objResponse;
     }
     
