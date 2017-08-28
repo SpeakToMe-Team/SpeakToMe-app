@@ -75,7 +75,7 @@ app.use(function(req, res, next){
     next();
 });*/
 
-app.use(express.static(path.join(__dirname, 'assets')));
+app.use('/speech2text', express.static(path.join(__dirname, 'assets')));
 app.engine('ejs', require('ejs-locals'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
@@ -96,7 +96,7 @@ app.use('/speech2text', secure);
 var server = app.listen(port);
 
 /* Partie Socket.Io */
-var io = require('socket.io').listen(server);
+var io = require('socket.io')(server, { path: '/speech2text/socket.io'}).listen(server);
 io.on('connection', function (socket) {
     console.log("un client vient de se connecter.");
     /* setInterval(function () { }, 1000); */
@@ -108,12 +108,25 @@ io.on('connection', function (socket) {
 
     socket.on('question', function (question) {
 
-        client.get("https://swapi.co/api/people/4", function (data, response) {
+        var args = {
+            path: { "query": question },	
+            headers: { "test-header": "client-api" }
+        };
+
+        client.get("http://127.0.0.1.nip.io/api/speech?query=${query}", args,
+        function (data, response) {
+            // parsed response body as js object 
+            console.log(data);
+            // raw response 
+            console.log(response);
+        });
+
+        /*client.get("https://swapi.co/api/people/4", function (data, response) {
             // parsed response body as js object 
             console.log(data);
             // raw response 
             //console.log(response);
-        });
+        });*/
 
         /* En attendant que l'adresse 127.0.01.nip.io soit dispo : on charge des données récupérées depuis le navigateur */
         /* Quand l'adresse 127.0.01.nip.io sera disponible
@@ -159,3 +172,42 @@ io.on('connection', function (socket) {
 });
 
 console.log('Server running on port: ' + port);
+
+
+/*
+var args = {
+    path: { "id": 120, "arg1": "hello", "arg2": "world" },	
+    headers: { "test-header": "client-api" }
+};
+ 
+client.get("http://remote.site/rest/json/${id}/method?arg1=${arg1}&arg2=${arg2}", args,
+    function (data, response) {
+        // parsed response body as js object 
+        console.log(data);
+        // raw response 
+        console.log(response);
+    });
+ */
+
+
+/*
+client.get("https://swapi.co/api/people/4", function (data, response) {
+            // parsed response body as js object 
+            console.log(data);
+            // raw response 
+            //console.log(response);
+        });
+*/
+/*
+var args = {
+    path: { "query": "quel%20temps%20fera%20t%27il%20demain" }
+};
+
+client.get("http://127.0.0.1.nip.io/api/speech?query=${query}", args,
+function (data, response) {
+    // parsed response body as js object 
+    console.log(data);
+    // raw response 
+    console.log(response);
+});
+*/

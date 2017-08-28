@@ -8,7 +8,7 @@ module.exports = function(router, passport){
             return next();
         }
 
-        res.redirect('/auth');
+        res.redirect('/speech2text/auth');
     });
 
     router.get('/profile', function(req, res){
@@ -28,7 +28,7 @@ module.exports = function(router, passport){
             if(user.token == null)
                 user.generateToken();
             req.user = user;    
-            res.redirect('/profile');
+            res.redirect('/speech2text/profile');
         });
     });
 
@@ -41,7 +41,7 @@ module.exports = function(router, passport){
 
     router.get('/*', function(req, res){
 
-        res.redirect('/dashboard');
+        res.redirect('/speech2text/dashboard');
     });
         
 
