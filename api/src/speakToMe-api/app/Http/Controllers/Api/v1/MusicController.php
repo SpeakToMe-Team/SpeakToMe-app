@@ -9,9 +9,7 @@ class MusicController extends ApiController
 
     protected $query;
     protected $regenerate;
-    protected $i = 0;
     protected $prep= array (' de ','%20de%20',' des ','%20des%20',' par ','%20par%20');
-
 
     public function __construct($intent) {
         //dd($intent);
@@ -30,9 +28,15 @@ class MusicController extends ApiController
             'http_errors' => false
         ]);
 
+        $params = [
+            'query' => [
+                'query' => $this->query,
+                'type' => 'track',
+                'limit' => $this->limit,
+            ]
+        ];
 
-
-        $response = $client->request('GET','search?query='.$this->filterPrep($this->query).'&type=track,album,artist&limit=10');
+        $response = $client->request('GET','search', $params);
 
         if ($response->getStatusCode() == 401) {
 
@@ -42,7 +46,6 @@ class MusicController extends ApiController
         $body = $response->getBody();
         $objResponse = json_decode($body, true);
 
-        //dd($objResponse);
         return $objResponse;
     }
 

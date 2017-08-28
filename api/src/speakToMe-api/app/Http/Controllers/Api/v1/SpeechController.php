@@ -26,7 +26,7 @@ class SpeechController extends Controller
 
         if (empty($query)) {
 
-            return "Query is empty.";
+            return ['error' => true, 'message' => "Query is empty."];
         }
 
         $intentAnalyser = new IntentAnalyserController($query);
@@ -45,7 +45,7 @@ class SpeechController extends Controller
             $intent = $this->intent['entities']['intent'][0]['value'];
             if (array_key_exists($intent, config('external_api.keywords'))) {
                 $className = 'App\Http\Controllers\Api\v1\\' . ucfirst($intent) . 'Controller';
-                return new $className($this->intent,$this->geo=null);
+                return new $className($this->intent, $this->geo=null);
             }
             return ['error' => true, 'message' => "La requete n'a pu aboutir."];
         }
