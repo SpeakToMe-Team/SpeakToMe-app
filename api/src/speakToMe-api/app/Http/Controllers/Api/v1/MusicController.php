@@ -6,15 +6,44 @@ use GuzzleHttp\Client;
 class MusicController extends ApiController
 {
     protected $name = 'music';
+    private $query = [];
+    private $regenerate;
+    private $prep= array (' de ','%20de%20',' des ','%20des%20',' par ','%20par%20');
+    private $track;
+    private $artist;
+    private $album;
+    private $limit = 10;
+    private $searchType = [];
 
-    protected $query;
-    protected $regenerate;
-    protected $prep= array (' de ','%20de%20',' des ','%20des%20',' par ','%20par%20');
 
     public function __construct($intent) {
-        //dd($intent);
-        if (isset($intent['entities']['search_query'][0]['value'])) {
-            $this->query = $intent['entities']['search_query'][0]['value'];
+        $client = new Client([
+            'base_uri' => 'https://api.wit.ai/',
+            'headers' => [
+                'Authorization' => 'Bearer ' . env('WIT_MUSIC_TOKEN'),
+            ],
+            'http_errors' => false
+        ]);
+        $params = [
+            'query' => [
+                'q' => $intent['_text'],
+            ]
+        ];
+        $response = $client->request('GET', 'message', $params);
+        $body = $response->getBody();
+        $intent = json_decode($body, true);
+
+        if (isset($intent['entities']['music_track'][0]['value'])) {
+            $this->searchType[] = 'track';
+            $this->query[] = $intent['entities']['music_track'][0]['value'];
+        }
+        if (isset($intent['entities']['music_artist'][0]['value'])) {
+            $this->searchType[] = 'artist';
+            $this->query[] = $intent['entities']['music_artist'][0]['value'];
+        }
+        if (isset($intent['entities']['music_album'][0]['value'])) {
+            $this->searchType[] = 'album';
+            $this->query[] = $intent['entities']['music_album'][0]['value'];
         }
     }
 
@@ -30,11 +59,12 @@ class MusicController extends ApiController
 
         $params = [
             'query' => [
-                'query' => $this->query,
-                'type' => 'track',
+                'query' => implode(' ', $this->query),
+                'type' => implode(',', $this->searchType),
                 'limit' => $this->limit,
             ]
         ];
+
 
         $response = $client->request('GET','search', $params);
 
