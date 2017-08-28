@@ -17,7 +17,7 @@ class WeatherController extends ApiController
 
     public function __construct($intent)
     {
-
+        //dd($intent);
         if (isset($intent['entities']['location'][0]['value'])) {
             $this->city = $intent['entities']['location'][0]['value'];
         } else {
@@ -45,7 +45,7 @@ class WeatherController extends ApiController
                 $weather['verbose'] = date('d-m-y', $weather['dt']);
                 $objResponse['list'][$key] = $weather;
             }
-            /*Si le datetime correspond à un intervale, on affiche tous les résultats*/
+            /*Si le datetime correspond à un intervale*/
             if (isset($this->time[0]['type']) && $this->time[0]['type'] == 'interval') {
                 $stop=date('d-m-y',strtotime($this->time[0]['to']['value']));
                 $start=date('d-m-y',strtotime($this->time[0]['from']['value']));
@@ -85,11 +85,10 @@ class WeatherController extends ApiController
                 foreach ($this->time as $key=>$datetime){
                         $index=$this->getNearestWeatherDate($datetime['value'],$objResponse['list']);
                         $objResponse['list'][$index]['display']=true;
-
                     }
                 }
             }
-            dd($objResponse, $this->time);
+            //dd($objResponse, $this->time);
             return $this->addIntent($objResponse);
         }
 
@@ -109,19 +108,6 @@ class WeatherController extends ApiController
                 return $key;
             }
         }
-
-       /* $start = strtotime($requestDate);
-        $tmp = array();
-
-        foreach ($arrayWeatherList as $key => $weather) {
-
-            $ecart = $weather['dt'] - $start;
-            if ($ecart > 0) {
-                $tmp[$ecart] = $key;
-            }
-        }
-        ksort($tmp, SORT_NUMERIC);
-        return array_shift($tmp);*/
     }
 
     /*CASCADE: Renvoie la qualité de l'air en fonction du jeu de resultat de la requete meteo
@@ -152,7 +138,7 @@ class WeatherController extends ApiController
         $value = $aqi['data']['aqi']['index'];
         // AQI Level: Good
         if ($value >= 0 && $value <= 50) {
-            $msg = 'bon: c\'est comme si Scarlett Johansson été assise sur ton visage';
+            $msg = 'bon';
         }
         // AQI Level: Moderate
         if ($value >= 51 && $value <= 100) {

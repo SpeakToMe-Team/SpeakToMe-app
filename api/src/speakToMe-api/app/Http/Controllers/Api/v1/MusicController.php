@@ -9,8 +9,10 @@ class MusicController extends ApiController
     protected $query;
     protected $regenerate;
     protected $i = 0;
+    protected $prep= array (' de ','%20de%20',' des ','%20des%20',' par ','%20par%20');
 
     public function __construct($intent) {
+        //dd($intent);
         if (isset($intent['entities']['search_query'][0]['value'])) {
             $this->query = $intent['entities']['search_query'][0]['value'];
         }
@@ -25,8 +27,7 @@ class MusicController extends ApiController
             ],
             'http_errors' => false
         ]);
-        $response = $client->request('GET','search?query=' . $this->query . '&type=track&limit=1&offset=1');
-
+        $response = $client->request('GET','search?query='.$this->filterPrep($this->query).'&type=track,album,artist&limit=10');
         if ($response->getStatusCode() == 401) {
 
             if ($this->regenerate != true) {
@@ -42,8 +43,17 @@ class MusicController extends ApiController
         }
         $body = $response->getBody();
         $objResponse = json_decode($body, true);
+        //dd($objResponse,$this->query);
         return $objResponse;
     }
+
+    /* Supprime les prépositions de la query*/
+    public function filterPrep($query){
+        $filtered=str_replace($this->prep,' ',$query);
+        return $filtered;
+
+    }
+
     public function generateToken() {
         
         $client = new Client([

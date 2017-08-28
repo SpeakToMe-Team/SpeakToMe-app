@@ -18,6 +18,7 @@ class SpeechController extends Controller
 
     public function index(Request $request)
     {
+
         $this->request = $request;
         $query = $request->query('query');
 
