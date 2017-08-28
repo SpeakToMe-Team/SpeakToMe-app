@@ -1,419 +1,453 @@
 <% layout('../layout') %>
 
-<div class="dashboard-page" id="dashboard">
-   <div id="wrapper">
-       <div id="sidebar-wrapper">
-           <div id="sidebar-wrapper" class="col-sm-12">
-               <article class="help col-md-12 animated zoomInUp">
-                   <h2 class="title">Aide</h2>
-                   <h3 class="title">Pour piloter</h2>
-                       <ul>
-                        <li>effacer recherche</li>
-                        <li>répéter message</li>
-                        <li>ouvrir aide</li>
-                        <li>fermer aide</li>
-                        <li>voir profil</li>
-                        <li>dashboard</li>
-                       </ul>
-                       <h3 class="title">Pour lancer une recherche</h2>
-                       <ul>
-                        <li>effacer recherche</li>
-                        <li>répéter message</li>
-                        <li>ouvrir aide</li>
-                        <li>fermer aide</li>
-                        <li>voir profil</li>
-                        <li>dashboard</li>
-                       </ul>
-               </article>
-           </div>       
-       </div>
-       <div id="page-content-wrapper">
-            <a href="#menu-toggle" class="dicta" id="menu-toggle">Aide</a>
-            <nav class="container-fluid">
-                <a href="/">
-                    <div class="logo animated bounceInLeft">
-                        <img src="/images/microphone.png" alt="logo">
-                        <p>{{ title }}</p>
-                    </div>
-                </a>
-                <div class="perso animated bounceInRight">       
-                     <div class="settings">
-                        <a href="#" data-toggle="modal" data-target="#settings">
+    <div class="dashboard-page" id="dashboard">
+        <div id="wrapper">
+            <div id="sidebar-wrapper">
+                <div id="sidebar-wrapper" class="col-sm-12">
+                    <article class="help col-md-12 animated zoomInUp">
+                        <h2 class="title">Aide</h2>
+                        <h3 class="title">Pour piloter</h3>
+                        <ul>
+                            <li>effacer recherche</li>
+                            <li>répéter message</li>
+                            <li>ouvrir aide</li>
+                            <li>fermer aide</li>
+                            <li>voir profil</li>
+                            <li>dashboard</li>
+                        </ul>
+                        <h3 class="title">Pour lancer une recherche</h3>
+                        <ul>
+                            <li>effacer recherche</li>
+                            <li>répéter message</li>
+                            <li>ouvrir aide</li>
+                            <li>fermer aide</li>
+                            <li>voir profil</li>
+                            <li>dashboard</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+            <div id="page-content-wrapper">
+                <a href="#menu-toggle" class="dicta" id="menu-toggle">Aide</a>
+                <nav class="container-fluid">
+                    <a href="/">
+                        <div class="logo animated bounceInLeft">
+                            <img src="/images/microphone.png" alt="logo">
+                            <p>{{ title }}</p>
+                        </div>
+                    </a>
+                    <div class="perso animated bounceInRight">
+                        <div class="settings">
+                            <a href="#" data-toggle="modal" data-target="#settings">
                             <i class="fa fa-cogs fa-spin"></i>
                         </a>
+                        </div>
+                        <div class="myAccount">
+                            <a href="#" data-toggle="modal" data-target="#user">
+                                <% if (user.google.token){ %>
+                                    <img class="" src="<%= user.google.picture %>" alt="Photo de <%= user.google.name %>" />
+                                    <% } else if (user.facebook.token){ %>
+                                        <img class="" src="<%= user.facebook.picture %>" alt="Photo de <%= user.google.name %>" />
+                                        <% } else { %>
+                                            <i class="fa fa-user"></i>
+                                            <% } %>
+                            </a>
+                        </div>
                     </div>
-                    <div class="myAccount">
-                        <a href="#" data-toggle="modal" data-target="#user">
-                            <% if (user.google.token){ %>
-                            <img class="" src="<%= user.google.picture %>" alt="Photo de <%= user.google.name %>"/>
-                            <% } else if (user.facebook.token){ %>
-                            <img class="" src="<%= user.facebook.picture %>" alt="Photo de <%= user.google.name %>"/>
-                            <% } else { %>
-                            <i class="fa fa-user"></i>
-                            <% } %>  
-                        </a>
+                </nav>
+                <!-- Modal -->
+                <div class="modal fade" id="settings" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content frame">
+                            <div class="page-header text-center">
+                                <h2 class="title">
+                                    <span class="fa fa-cog"></span> Settings <button type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </h2>
+                            </div>
+                            <div class="content">
+                                <div>
+                                    <p>test</p>
+                                </div>
+                                <button type="button" class="save">Enregistrer</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </nav>
-            <!-- Modal -->
-            <div class="modal fade" id="settings" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <!-- Modal profil-->
+                <div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content frame">
+                            <div class="page-header text-center">
+                                <h2 class="title">
+                                    <span class="fa fa-user"></span> Profile page <button type="button" data-dismiss="modal"
+                                        aria-label="Close">
                             <span aria-hidden="true">&times;</span>
-                        </button>
-                        </div>
-                        <div class="modal-body">
-                        ...
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                            </button>
+                                </h2>
+                            </div>
+                            <div class="content">
+                                <% if (user.local.email){ %>
+                                    <h3><span class="fa fa-user"></span> Local</h3>
+
+                                    <ul>
+                                        <li><strong>ID :</strong>
+                                            <%= user._id %>
+                                        </li>
+                                        <li><strong>Email :</strong>
+                                            <%= user.local.email %>
+                                        </li>
+                                        <li><strong>Password :</strong>
+                                            <%= user.local.password %>
+                                        </li>
+                                    </ul>
+
+                                    <% } %>
+                                        <% if (user.facebook.token){ %>
+                                            <h3><span class="fa fa-facebook"></span> Facebook</h3>
+                                            <div class="avatar">
+                                                <img class="" src="<%= user.facebook.picture %>" alt="Photo de <%= user.facebook.name %>" />
+                                            </div>
+                                            <ul>
+                                                <li><strong>Name :</strong>
+                                                    <%= user.facebook.name %>
+                                                </li>
+                                                <li><strong>Email :</strong>
+                                                    <%= user.facebook.email %>
+                                                </li>
+                                                <li><strong>Facebook ID :</strong>
+                                                    <%= user.facebook.id %>
+                                                </li>
+                                                <li><strong>Token :</strong>
+                                                    <%= user.facebook.token %>
+                                                </li>
+                                            </ul>
+                                            <% } %>
+                                                <% if (user.google.token){ %>
+
+                                                    <h3><span class="fa fa-google-plus"></span> Google+</h3>
+                                                    <div class="avatar">
+                                                        <img class="" src="<%= user.google.picture %>" alt="Photo de <%= user.google.name %>" />
+                                                    </div>
+
+                                                    <ul>
+                                                        <li><strong>Name :</strong>
+                                                            <%= user.google.name %>
+                                                        </li>
+                                                        <li><strong>Email :</strong>
+                                                            <%= user.google.email %>
+                                                        </li>
+                                                        <li><strong>Google ID :</strong>
+                                                            <%= user.google.id %>
+                                                        </li>
+                                                        <li><strong>Token :</strong>
+                                                            <%= user.google.token %>
+                                                        </li>
+                                                    </ul>
+
+                                                    <% } %>
+                                                        <a href="/auth/logout" class="logout">Logout</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Modal profil-->
-            <div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                <div class="modal-content frame">
-                    <div class="page-header text-center">
-                        <h2 class="title"><span class="fa fa-user"></span> Profile page</h2>
-                    </div>
-                    <div class="content">
-                        <% if (user.local.email){ %>    
-                        
-                                <h3><span class="fa fa-user"></span> Local</h3>
+                <!-- fin Modal profil-->
+                <section class="container-fluid" id="main">
+                    <div class="row">
+                        <article class="search col-sm-12 animated zoomInUp">
+                            <i class="fa fa-microphone" aria-hidden="true"></i>
+                            <input v-bind:value="phrase" type="text" name="request" placeholder="Dictez ou écrivez votre recherche ...">
+                        </article>
+
+                        <article class="result col-sm-12 col-lg-10 animated zoomInUp">
+                            <h2 class="title">Resultats</h2>
                             
-                                <ul>
-                                    <li><strong>ID :</strong> <%= user._id %></li>
-                                    <li><strong>Email :</strong> <%= user.local.email %></li>
-                                    <li><strong>Password :</strong> <%= user.local.password %></li>
-                                </ul>
-                           
-                        <% } %>
-                        <% if (user.facebook.token){ %>
-                        
-                                <h3><span class="fa fa-facebook"></span> Facebook</h3>
-                                <div class="avatar"> 
-                                        <img class="" src="<%= user.facebook.picture %>" alt="Photo de <%= user.facebook.name %>"/>
-                                </div>
+                            <div class="module-weather" :class="{ hide: !isActiveWeatherModule }">
+                                <h3>recherche de la météo</h3>
+                                <iframe id="gmap_canvas" src="" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
                                 
-                                        <ul>
-                                            <li><strong>Facebook ID :</strong> <%= user.facebook.id %></li>
-                                            <li><strong>Token :</strong> <%= user.facebook.token %></li>
-                                            <li><strong>Email :</strong> <%= user.facebook.email %></li>
-                                            <li><strong>Name :</strong> <%= user.facebook.name %></li>
-                                        </ul>
-                                   
-                            
-                        <% } %>
-                        <% if (user.google.token){ %>
-                        
-                                <h3><span class="fa fa-google-plus"></span> Google+</h3>
-                                <div class="avatar"> 
-                                    <img class="" src="<%= user.google.picture %>" alt="Photo de <%= user.google.name %>"/>
-                                </div>
-                                
-                                        <ul>
-                                            <li><strong>Google ID :</strong> <%= user.google.id %></li>
-                                            <li><strong>Token :</strong> <%= user.google.token %></li>
-                                            <li><strong>Email :</strong> <%= user.google.email %></li>
-                                            <li><strong>Name :</strong> <%= user.google.name %></li>
-                                        </ul>
-                                
-                        <% } %>
-                        <a href="/auth/logout" class="btn btn-danger btn-sm">Logout</a>
+                                <p id="msgVocal">{{ contentWeather.msgVocal }}</p><br />
+                                <p>
+                                    <i class="fa fa-map-marker fa-3x" aria-hidden="true"></i> {{ contentWeather.location
+                                    }}
+                                    <br />
+                                    <i class="fa fa-calendar fa-3x" aria-hidden="true"></i> {{ contentWeather.date }}<br
+                                    />
+                                    <i class="fa fa-thermometer-empty fa-3x" aria-hidden="true"></i> {{ tempWeather.day }}
+                                    C° la journée<br />
+                                    <i class="fa fa-thermometer-empty fa-3x" aria-hidden="true"></i> {{ tempWeather.morn
+                                    }} C° le matin<br />
+                                    <i class="fa fa-thermometer-empty fa-3x" aria-hidden="true"></i> {{ tempWeather.eve }}
+                                    C° le soir<br />
+                                    <i class="fa fa-thermometer-empty fa-3x" aria-hidden="true"></i> {{ tempWeather.night
+                                    }} C° la nuit<br />
+                                </p>
+
+
+                                <br />
+                                <p><i>info raw : {{ contentWeather }}</i></p>
+                            </div>
+
+                        </article>
+
+                        <article class="recommandation col-sm-12 col-lg-2 animated zoomInUp">
+                            <h2 class="title">Suggestions</h2>
+
+                        </article>
                     </div>
-                </div>
-                </div>
+                </section>
             </div>
-            <!-- fin Modal profil-->
-            <section class="container-fluid" id="main">
-               <div class="row">                   
-                   <article class="search col-sm-12 animated zoomInUp">
-                       <i class="fa fa-microphone" aria-hidden="true"></i>
-                       <input v-bind:value="phrase" type="text" name="request" placeholder="Dictez ou écrivez votre recherche ...">
-                   </article>
+        </div>
+    </div>
 
-                   <article class="result col-sm-12 col-lg-8 animated zoomInUp">
-                       <h2 class="title">Resultats</h2>
-                     
-                       <div class="module-weather" :class="{ hide: !isActiveWeatherModule }">
-                           <h2>recherche de la météo</h2><br />
-                           <p id="msgVocal">{{ contentWeather.msgVocal }}</p><br />
-                           <p>
-                            <i class="fa fa-map-marker fa-3x" aria-hidden="true"></i> {{ contentWeather.location }}<br />
-                            <i class="fa fa-calendar fa-3x" aria-hidden="true"></i> {{ contentWeather.date }}<br />
-                            <i class="fa fa-thermometer-empty fa-3x" aria-hidden="true"></i> {{ tempWeather.day }} C° la journée<br />
-                            <i class="fa fa-thermometer-empty fa-3x" aria-hidden="true"></i> {{ tempWeather.morn }} C° le matin<br />
-                            <i class="fa fa-thermometer-empty fa-3x" aria-hidden="true"></i> {{ tempWeather.eve }} C° le soir<br />
-                            <i class="fa fa-thermometer-empty fa-3x" aria-hidden="true"></i> {{ tempWeather.night }} C° la nuit<br />
-                           </p>                     
-                                                      
-
-                           <br />
-                           <p><i>info raw : {{ contentWeather }}</i></p>
-                       </div>
-
-                   </article>
-
-                   <article class="recommandation col-sm-12 col-lg-4 animated zoomInUp">
-                       <h2 class="title">Suggestions</h2>
-                       
-                   </article>
-               </div>
-           </section>
-       </div>
-   </div>
-</div>
-
-<script>
-    var dashboard = new Vue({
-        el: "#dashboard",
-        data: {
-            title: "SpeakToMe",
-            phrase: '',
-            isActiveMovieModule: false,
-            isActiveMusicModule: false,
-            isActiveTravelModule: false,
-            isActiveWeatherModule: false,
-            contentWeather: '',
-            tempWeather: ''
-        },
-        methods: {
-            init: function () {
-                this.isActiveMovieModule = false
-                this.isActiveMusicModule = false
-                this.isActiveTravelModule = false
-                this.isActiveWeatherModule = false
-                this.contentWeather = ''
+    <script>
+        var dashboard = new Vue({
+            el: "#dashboard",
+            data: {
+                title: "SpeakToMe",
+                phrase: '',
+                isActiveMovieModule: false,
+                isActiveMusicModule: false,
+                isActiveTravelModule: false,
+                isActiveWeatherModule: false,
+                contentWeather: '',
+                tempWeather: ''
+            },
+            methods: {
+                init: function () {
+                    this.isActiveMovieModule = false
+                    this.isActiveMusicModule = false
+                    this.isActiveTravelModule = false
+                    this.isActiveWeatherModule = false
+                    this.contentWeather = ''
+                }
             }
-        }
-    });
-</script>
+        });
+    </script>
 
-<script>
+    <script>
+        class WeatherModule {
 
-    class WeatherModule {
-
-        constructor (json) {
-            this._jsonWeather = JSON.parse(json);
-            this._jour = false;
-        }
-
-        get jsonWeather() {
-            return this._jsonWeather;
-        }
-
-        set jsonWeather(newJson){
-            this._jsonWeather = JSON.parse(newJson);
-        }
-
-        getIntent () {
-            return this._jsonWeather.intent;
-        }
-
-        getLocation () {
-            return this._jsonWeather.response.city.name;
-        }
-
-        getNumberList() {
-            if(this._jsonWeather.response['list'].length > 0){
-                return this._jsonWeather.response['list'].length;
-            }else{
-                return false;
+            constructor(json) {
+                this._jsonWeather = JSON.parse(json);
+                this._jour = false;
             }
-        }
 
-        getElementDisplay () {
-            let number = this.getNumberList();
-            if(number > 0 ){
-                let list = this._jsonWeather.response['list'];        
+            get jsonWeather() {
+                return this._jsonWeather;
+            }
 
-                    list.forEach(function(element, index) {
-                        if(element.display === true){
+            set jsonWeather(newJson) {
+                this._jsonWeather = JSON.parse(newJson);
+            }
+
+            getIntent() {
+                return this._jsonWeather.intent;
+            }
+
+            getLocation() {
+                return this._jsonWeather.response.city.name;
+            }
+
+            getNumberList() {
+                if (this._jsonWeather.response['list'].length > 0) {
+                    return this._jsonWeather.response['list'].length;
+                } else {
+                    return false;
+                }
+            }
+
+            getElementDisplay() {
+                let number = this.getNumberList();
+                if (number > 0) {
+                    let list = this._jsonWeather.response['list'];
+
+                    list.forEach(function (element, index) {
+                        if (element.display === true) {
                             console.log(index + ' => ' + element.temp.min);
                             this._jour = index;
                         }
                     }, this);
-                    
+
                     console.log('jour ? : ' + this._jour);
 
-                return this._jour;
-            }else{
-                return "Pas d'informations !";
-            }          
-        }        
-    }
-
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-
-  /*  var attente = function(string){
-        annyang.pause();
-
-        var synth = window.speechSynthesis;
-        var utterThis = new SpeechSynthesisUtterance(string);
-        utterThis.lang = 'fr-FR';
-        utterThis.pitch = 1;
-        utterThis.rate = 1;
-        synth.speak(utterThis);          
-
-        annyang.resume();
-    }*/
-
-    var emitQuestion = function(question){
-        console.log('question ? ' + question);
-        socket.emit('question', question);
-        
-        parler('Je viens de lancer la recherche, merci de patienter !');
-    }
-
-    var show = function(anwser) {
-               
-        // Réinitialisation
-        dashboard.init();        
-
-        /* Traitement pour le weather */
-        let  weather = new WeatherModule(anwser);
-
-        let stringIntent = weather.getIntent();
-        console.log('intent : ' + stringIntent);
-        let stringLocation = weather.getLocation();
-        console.log('ville : ' + stringLocation);
-        console.log('nombre : ' + weather.getNumberList());
-
-        dashboard.isActiveWeatherModule = true;
-            
-        console.log('jour ? ' + weather.getElementDisplay());
-        let jourAfficher = weather.getElementDisplay();
-        let jourAfficherContent = weather.jsonWeather.response['list'][jourAfficher];
-        let dateJourAfficher = jourAfficherContent.dt * 1000;
-        console.log('time : ' + dateJourAfficher);
-        var stringJour = moment(dateJourAfficher).format("dddd D MMMM YYYY");
-        var stringDescription = jourAfficherContent.weather['0']['description'];
-        var temperatureDescription = jourAfficherContent.temp;
-
-        console.log('moment js : ' + stringJour);
-
-        var stringVoiceMsg = 'La météo de ' + stringJour + ' à ' + stringLocation + ', la journée sera ' + stringDescription + ' avec des températures de ' + Math.floor(temperatureDescription.morn) + ' degré le matin, ' + Math.floor(temperatureDescription.eve) + ' degré le soir et ' + Math.floor(temperatureDescription.night) + ' degré la nuit.';
-        console.log('msg vocal ' + stringVoiceMsg);
-
-        //Vue js
-        var content = {
-            location: stringLocation,
-            date: stringJour,
-            msgVocal: stringVoiceMsg
+                    return this._jour;
+                } else {
+                    return "Pas d'informations !";
+                }
+            }
         }
 
-        var temp = {
-            day: temperatureDescription.day,
-            morn: temperatureDescription.morn,
-            eve: temperatureDescription.eve,
-            night: temperatureDescription.night
-        }
-        
-        dashboard.contentWeather = content;
-        dashboard.tempWeather = temp;
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
 
-        parler(stringVoiceMsg);
-    }
-
-    var activerModule = function(module) {
-        console.log('activation : ' + module);
-        // afficher avec Vue
-        dashboard.module_weather = true;
-    }
-
-    var desactiverModule = function(module) {
-        console.log('désactivation : ' + module);
-        dashboard.module_weather = false;
-        // cacher avec Vue
-    }
-
-    var repeterModule = function() {
-        var text = $('#msgVocal').text();
-        if(text.length > 0){
-            var stringVoiceMsg = text;
-        }else{
-            var stringVoiceMsg = "Désolé, je n'ai pas message à vous dire !";
-        }
-
-        parler(stringVoiceMsg);
-
-    }
-
-    var parler = function (stringVoiceMsg){
-        annyang.pause();
-
-        var synth = window.speechSynthesis;
-
-        var utterThis = new SpeechSynthesisUtterance(stringVoiceMsg);
-        utterThis.lang = 'fr-FR';
-        utterThis.pitch = 1;
-        utterThis.rate = 1;
-
-        synth.speak(utterThis);          
-
-        annyang.resume();
-    }
-
-   if (annyang) {
-       var commands = {
-           'effacer recherche': function() {
-               dashboard.phrase = '';
-               dashboard.content = '';
-               dashboard.init();
-           },
-           'répéter message': repeterModule,
-           'ouvrir panneau': function() {
-               $('#myModal').modal('show');
-           },
-           'fermer panneau': function() {
-               $('#myModal').modal('hide');
-           },
-           'ouvrir aide': function() {
-               $("#wrapper").toggleClass("toggled");
-           },
-           'fermer aide': function() {
-               $("#wrapper").toggleClass("toggled");
-           },
-           'voir profil': function() {
-               window.location.href = "/profile";
-           },
-           'activer *module': activerModule,
-           'désactiver *module': desactiverModule,
-          
-           'écouter musique': function() { // Ne marche pas
-               //$('#play-button').click();
-               console.log('lancer la musique');
-               $('#test-button').trigger('submit');
-              
-           },
-           // Pour toutes les recherches avec l'API : définir un mot clé 'ok google'...
-           'ok google *question': emitQuestion
-       };
-       annyang.addCommands(commands);
-       annyang.setLanguage('fr-FR');
+        /*  var attente = function(string){
+              annyang.pause();
       
-       annyang.addCallback('result', function(phrases) {
-           console.log("I think the user said: ", phrases[0]);
-           dashboard.phrase = phrases[0];
-           console.log("But then again, it could be any of the following: ", phrases);
-       });
+              var synth = window.speechSynthesis;
+              var utterThis = new SpeechSynthesisUtterance(string);
+              utterThis.lang = 'fr-FR';
+              utterThis.pitch = 1;
+              utterThis.rate = 1;
+              synth.speak(utterThis);          
+      
+              annyang.resume();
+          }*/
 
-       annyang.start();
-    }
+        var emitQuestion = function (question) {
+            console.log('question ? ' + question);
+            socket.emit('question', question);
 
-    socket.on('anwser', function(anwser) {
-        console.log('réception de la réponse');
-        show(anwser);
-    });
-</script>
+            parler('Je viens de lancer la recherche, merci de patienter !');
+        }
 
+        var show = function (anwser) {
 
+            // Réinitialisation
+            dashboard.init();
+
+            /* Traitement pour le weather */
+            let weather = new WeatherModule(anwser);
+
+            let stringIntent = weather.getIntent();
+            console.log('intent : ' + stringIntent);
+            let stringLocation = weather.getLocation();
+            console.log('ville : ' + stringLocation);
+            console.log('nombre : ' + weather.getNumberList());
+
+            dashboard.isActiveWeatherModule = true;
+
+            console.log('jour ? ' + weather.getElementDisplay());
+            let jourAfficher = weather.getElementDisplay();
+            let jourAfficherContent = weather.jsonWeather.response['list'][jourAfficher];
+            let dateJourAfficher = jourAfficherContent.dt * 1000;
+            console.log('time : ' + dateJourAfficher);
+            var stringJour = moment(dateJourAfficher).format("dddd D MMMM YYYY");
+            var stringDescription = jourAfficherContent.weather['0']['description'];
+            var temperatureDescription = jourAfficherContent.temp;
+
+            console.log('moment js : ' + stringJour);
+
+            var stringVoiceMsg = 'La météo de ' + stringJour + ' à ' + stringLocation + ', la journée sera ' + stringDescription + ' avec des températures de ' + Math.floor(temperatureDescription.morn) + ' degré le matin, ' + Math.floor(temperatureDescription.eve) + ' degré le soir et ' + Math.floor(temperatureDescription.night) + ' degré la nuit.';
+            console.log('msg vocal ' + stringVoiceMsg);
+
+            //Vue js
+            var content = {
+                location: stringLocation,
+                date: stringJour,
+                msgVocal: stringVoiceMsg
+            }
+
+            var temp = {
+                day: temperatureDescription.day,
+                morn: temperatureDescription.morn,
+                eve: temperatureDescription.eve,
+                night: temperatureDescription.night
+            }
+
+            dashboard.contentWeather = content;
+            dashboard.tempWeather = temp;
+
+            parler(stringVoiceMsg);
+        }
+
+        var activerModule = function (module) {
+            console.log('activation : ' + module);
+            // afficher avec Vue
+            dashboard.module_weather = true;
+        }
+
+        var desactiverModule = function (module) {
+            console.log('désactivation : ' + module);
+            dashboard.module_weather = false;
+            // cacher avec Vue
+        }
+
+        var repeterModule = function () {
+            var text = $('#msgVocal').text();
+            if (text.length > 0) {
+                var stringVoiceMsg = text;
+            } else {
+                var stringVoiceMsg = "Désolé, je n'ai pas message à vous dire !";
+            }
+
+            parler(stringVoiceMsg);
+
+        }
+
+        var parler = function (stringVoiceMsg) {
+            annyang.pause();
+
+            var synth = window.speechSynthesis;
+
+            var utterThis = new SpeechSynthesisUtterance(stringVoiceMsg);
+            utterThis.lang = 'fr-FR';
+            utterThis.pitch = 1;
+            utterThis.rate = 1;
+
+            synth.speak(utterThis);
+
+            annyang.resume();
+        }
+
+        if (annyang) {
+            var commands = {
+                'effacer recherche': function () {
+                    dashboard.phrase = '';
+                    dashboard.content = '';
+                    dashboard.init();
+                },
+                'répéter message': repeterModule,
+                'ouvrir panneau': function () {
+                    $('#myModal').modal('show');
+                },
+                'fermer panneau': function () {
+                    $('#myModal').modal('hide');
+                },
+                'ouvrir aide': function () {
+                    $("#wrapper").toggleClass("toggled");
+                },
+                'fermer aide': function () {
+                    $("#wrapper").toggleClass("toggled");
+                },
+                'voir profil': function () {
+                    window.location.href = "/profile";
+                },
+                'activer *module': activerModule,
+                'désactiver *module': desactiverModule,
+
+                'écouter musique': function () { // Ne marche pas
+                    //$('#play-button').click();
+                    console.log('lancer la musique');
+                    $('#test-button').trigger('submit');
+
+                },
+                // Pour toutes les recherches avec l'API : définir un mot clé 'ok google'...
+                'ok google *question': emitQuestion
+            };
+            annyang.addCommands(commands);
+            annyang.setLanguage('fr-FR');
+
+            annyang.addCallback('result', function (phrases) {
+                console.log("I think the user said: ", phrases[0]);
+                dashboard.phrase = phrases[0];
+                console.log("But then again, it could be any of the following: ", phrases);
+            });
+
+            annyang.start();
+        }
+
+        socket.on('anwser', function (anwser) {
+            console.log('réception de la réponse');
+            show(anwser);
+        });
+    </script>
+    <script>
+        var srcStart = "ttps://maps.google.com/maps?q=";
+        var srcLoc = contentWeather.location;
+        var srcEnd = "%2C%20FR&t=&z=14&ie=UTF8&iwloc=&output=embed";
+        var src = srcStart + srcLoc + srcEnd;
+    </script>

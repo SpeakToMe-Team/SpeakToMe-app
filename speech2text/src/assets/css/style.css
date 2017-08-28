@@ -102,16 +102,22 @@ body {
 /* Fin page welcome */
 
 /* Modal */
-    
 .modal .content{
     padding: 30px 20px;
+    text-align: center;
+}
+.modal .frame .title button{
+    background: none;
+    border: none;
+    color: white;
+    font-weight: bold;
+    float: right;
+    cursor: pointer;
 }
 .modal .content h3,.avatar{
-    text-align: center;
     margin-bottom: 30px;
 }
 .modal .content .avatar{
-    text-align: center;
     width: 50%;
     margin: auto;
     margin-bottom: 30px;
@@ -121,7 +127,53 @@ body {
     border: 3px solid black;
     border-radius: 50%;
 }
-
+.modal .content ul{
+    list-style: none;
+    margin-bottom: 30px;
+}
+.modal .content ul li{
+    margin-bottom: 15px;
+}
+.modal .content ul li strong{
+    display: block;
+}
+.modal .content .logout{
+    background-color: #ff6969;
+    color: white;
+    font-size: 1.2em;
+    font-family: 'Tinos', serif;
+    padding: 8px 35px;
+    font-weight: bold;
+    text-decoration: none;
+    border: 3px solid #ff6969;
+    cursor: pointer;
+}
+.modal .content .logout:hover{
+    background-color: white;
+    border: 3px solid #ff6969;
+    color: #ff6969;
+    font-size: 1.2em;
+    font-family: 'Tinos', serif;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.modal .content .save{
+    width: 40%;
+    border: 3px solid black;
+    font-family: 'Tinos', serif;
+    padding: 5px;
+    font-size: 1.2em;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+.modal .content .save:hover{
+background-color: black;
+color: white;
+transition: 0.5s;
+}
 /* Fin Modal */
 
 /* Page dashboard */
@@ -243,14 +295,21 @@ border-radius: 20px;
     outline:  none;
 }
 .dashboard-page .result{
-    height: 500px;
+    min-height: 500px;
     -webkit-animation-duration: 0.8s;
     -webkit-animation-delay: 2s;
     background-color:#d9f4ff;
 }
 .dashboard-page .result h2{
     background-color: #00b8ff;
+    margin: 0px;
 }
+
+#gmap_canvas{
+    width: 100%;
+    height: 100%;
+}
+
 .dashboard-page .recommandation{
     background-color:#ffeded;
     height: 500px;
@@ -269,6 +328,16 @@ border-radius: 20px;
     border-right: none;
     -webkit-animation-duration: 0.8s;
     -webkit-animation-delay: 3s;
+}
+.dashboard-page .help ul{
+    padding: 15px;
+    list-style: none;
+}
+.dashboard-page .help ul:first-of-type li{ 
+    color: #ff6c6c;
+}
+.dashboard-page .help ul:last-of-type li{ 
+    color: #3CD2CE;
 }
 .dashboard-page .help h2{
     background-color:#2B322B;
