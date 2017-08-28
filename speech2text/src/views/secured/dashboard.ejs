@@ -198,42 +198,7 @@
                     </div>
                 </section>
             </div>
-            <!-- fin Modal profil-->
-            <section class="container-fluid" id="main">
-               <div class="row">                   
-                   <article class="search col-sm-12 animated zoomInUp">
-                       <i class="fa fa-microphone" aria-hidden="true"></i>
-                       <input v-bind:value="phrase" type="text" name="request" placeholder="Dictez ou écrivez votre recherche ...">
-                   </article>
-
-                   <article class="result col-sm-12 col-lg-8 animated zoomInUp">
-                       <h2 class="title">Resultats</h2>
-                     
-                       <div class="module-weather" :class="{ hide: !isActiveWeatherModule }">
-                           <h2>recherche de la météo</h2><br />
-                           <p id="msgVocal">{{ contentWeather.msgVocal }}</p><br />
-                           <p>
-                            <i class="fa fa-map-marker fa-3x" aria-hidden="true"></i> {{ contentWeather.location }}<br />
-                            <i class="fa fa-calendar fa-3x" aria-hidden="true"></i> {{ contentWeather.date }}<br />
-                            <i class="fa fa-thermometer-empty fa-3x" aria-hidden="true"></i> {{ tempWeather.day }} C° la journée<br />
-                            <i class="fa fa-thermometer-empty fa-3x" aria-hidden="true"></i> {{ tempWeather.morn }} C° le matin<br />
-                            <i class="fa fa-thermometer-empty fa-3x" aria-hidden="true"></i> {{ tempWeather.eve }} C° le soir<br />
-                            <i class="fa fa-thermometer-empty fa-3x" aria-hidden="true"></i> {{ tempWeather.night }} C° la nuit<br />
-                           </p>                     
-                                                      
-
-                           <br />
-                           <p><i>info raw : {{ contentWeather }}</i></p>
-                       </div>
-
-                   </article>
-
-                   <article class="recommandation col-sm-12 col-lg-4 animated zoomInUp">
-                       <h2 class="title">Suggestions</h2>
-                       
-                   </article>
-               </div>
-           </section>
+            
             <p><input type="button" value="Embêter le serveur" id="poke" /></p>
        </div>
    </div>
