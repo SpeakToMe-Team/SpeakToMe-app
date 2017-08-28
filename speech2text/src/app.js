@@ -108,7 +108,20 @@ io.on('connection', function (socket) {
 
     socket.on('question', function (question) {
 
+
         var args = {
+            path: { "query": question }
+        };
+
+        client.get("http://frontend/api/speech?query=${query}", args,
+        function (data, response) {
+            // parsed response body as js object 
+            console.log(data);
+            // raw response 
+            //console.log(response);
+        });
+
+        /*var args = {
             path: { "query": question },	
             headers: { "test-header": "client-api" }
         };
@@ -119,7 +132,7 @@ io.on('connection', function (socket) {
             console.log(data);
             // raw response 
             console.log(response);
-        });
+        });*/
 
         /*client.get("https://swapi.co/api/people/4", function (data, response) {
             // parsed response body as js object 
@@ -188,26 +201,18 @@ client.get("http://remote.site/rest/json/${id}/method?arg1=${arg1}&arg2=${arg2}"
         console.log(response);
     });
  */
-
-
 /*
-client.get("https://swapi.co/api/people/4", function (data, response) {
+var args = {
+    path: { "query": "4" }
+};
+
+client.get("https://swapi.co/api/people/${query}", args, function (data, response) {
             // parsed response body as js object 
             console.log(data);
             // raw response 
             //console.log(response);
         });
 */
-/*
-var args = {
-    path: { "query": "quel%20temps%20fera%20t%27il%20demain" }
-};
 
-client.get("http://127.0.0.1.nip.io/api/speech?query=${query}", args,
-function (data, response) {
-    // parsed response body as js object 
-    console.log(data);
-    // raw response 
-    console.log(response);
-});
-*/
+
+
