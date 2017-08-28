@@ -28,22 +28,22 @@
            </div>       
        </div>
        <div id="page-content-wrapper">
-           <a href="#menu-toggle" class="dicta" id="menu-toggle">Dictatiel</a>
-           <nav class="container-fluid">
-               <a href="/">
-                   <div class="logo animated bounceInLeft">
-                       <img src="/images/microphone.png" alt="logo">
-                       <p>{{ title }}</p>
-                   </div>
-               </a>
-               <div class="perso animated bounceInRight">       
-                   <div class="settings">
-                       <a href="#" data-toggle="modal" data-target="#myModal">
-                           <i class="fa fa-cogs fa-spin"></i>
-                       </a>
-                   </div>
-                   <div class="myAccount">
-                       <a href="/profile">
+            <a href="#menu-toggle" class="dicta" id="menu-toggle">Aide</a>
+            <nav class="container-fluid">
+                <a href="/">
+                    <div class="logo animated bounceInLeft">
+                        <img src="/images/microphone.png" alt="logo">
+                        <p>{{ title }}</p>
+                    </div>
+                </a>
+                <div class="perso animated bounceInRight">       
+                     <div class="settings">
+                        <a href="#" data-toggle="modal" data-target="#settings">
+                            <i class="fa fa-cogs fa-spin"></i>
+                        </a>
+                    </div>
+                    <div class="myAccount">
+                        <a href="#" data-toggle="modal" data-target="#user">
                             <% if (user.google.token){ %>
                             <img class="" src="<%= user.google.picture %>" alt="Photo de <%= user.google.name %>"/>
                             <% } else if (user.facebook.token){ %>
@@ -52,11 +52,86 @@
                             <i class="fa fa-user"></i>
                             <% } %>  
                         </a>
-                   </div>
-               </div>
-           </nav>
-      
-           <section class="container-fluid" id="main">
+                    </div>
+                </div>
+            </nav>
+            <!-- Modal -->
+            <div class="modal fade" id="settings" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                        ...
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal profil-->
+            <div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content frame">
+                    <div class="page-header text-center">
+                        <h2 class="title"><span class="fa fa-user"></span> Profile page</h2>
+                    </div>
+                    <div class="content">
+                        <% if (user.local.email){ %>    
+                        
+                                <h3><span class="fa fa-user"></span> Local</h3>
+                            
+                                <ul>
+                                    <li><strong>ID :</strong> <%= user._id %></li>
+                                    <li><strong>Email :</strong> <%= user.local.email %></li>
+                                    <li><strong>Password :</strong> <%= user.local.password %></li>
+                                </ul>
+                           
+                        <% } %>
+                        <% if (user.facebook.token){ %>
+                        
+                                <h3><span class="fa fa-facebook"></span> Facebook</h3>
+                                <div class="avatar"> 
+                                        <img class="" src="<%= user.facebook.picture %>" alt="Photo de <%= user.facebook.name %>"/>
+                                </div>
+                                
+                                        <ul>
+                                            <li><strong>Facebook ID :</strong> <%= user.facebook.id %></li>
+                                            <li><strong>Token :</strong> <%= user.facebook.token %></li>
+                                            <li><strong>Email :</strong> <%= user.facebook.email %></li>
+                                            <li><strong>Name :</strong> <%= user.facebook.name %></li>
+                                        </ul>
+                                   
+                            
+                        <% } %>
+                        <% if (user.google.token){ %>
+                        
+                                <h3><span class="fa fa-google-plus"></span> Google+</h3>
+                                <div class="avatar"> 
+                                    <img class="" src="<%= user.google.picture %>" alt="Photo de <%= user.google.name %>"/>
+                                </div>
+                                
+                                        <ul>
+                                            <li><strong>Google ID :</strong> <%= user.google.id %></li>
+                                            <li><strong>Token :</strong> <%= user.google.token %></li>
+                                            <li><strong>Email :</strong> <%= user.google.email %></li>
+                                            <li><strong>Name :</strong> <%= user.google.name %></li>
+                                        </ul>
+                                
+                        <% } %>
+                        <a href="/auth/logout" class="btn btn-danger btn-sm">Logout</a>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <!-- fin Modal profil-->
+            <section class="container-fluid" id="main">
                <div class="row">                   
                    <article class="search col-sm-12 animated zoomInUp">
                        <i class="fa fa-microphone" aria-hidden="true"></i>
@@ -289,7 +364,6 @@
     }
 
    if (annyang) {
-       var i = false;
        var commands = {
            'effacer recherche': function() {
                dashboard.phrase = '';
@@ -327,7 +401,6 @@
        annyang.addCommands(commands);
        annyang.setLanguage('fr-FR');
       
-       console.log(i);
        annyang.addCallback('result', function(phrases) {
            console.log("I think the user said: ", phrases[0]);
            dashboard.phrase = phrases[0];

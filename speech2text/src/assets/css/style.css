@@ -20,24 +20,26 @@ body {
     margin: auto;
     height: 70%;
 }
-.sign .frame { 
+.frame { 
     border: 3px solid #f4f4f4;
     height: 80%;
+    border-radius: 0px;
+    word-wrap: break-word;
 }
-.sign .frame .form { 
+.frame .form { 
     height: 90%;
     display: flex;
 }
-.sign .frame form { 
+.frame form { 
     padding: 20px 30px; 
     text-align: center;
     width: 80%;
     margin: auto;
 }
-.sign .frame form input{ 
+.frame form input{ 
     margin-bottom: 20px; 
 }
-.sign .frame form button{ 
+.frame form button{ 
     width: 70%;
     border: 3px solid black;
     font-family: 'Tinos', serif;
@@ -47,12 +49,12 @@ body {
     color: black;
     cursor: pointer;
 }
-.sign .frame form button:hover{ 
+.frame form button:hover{ 
     background-color: black;
     color: white;
     transition: 0.5s;
 }
-.sign .frame .title{ 
+.frame .title{ 
     font-family: 'Oswald', sans-serif;
     padding: 8px 20px;
     border-bottom: 3px solid #f4f4f4;
@@ -99,7 +101,28 @@ body {
 }
 /* Fin page welcome */
 
+/* Modal */
+    
+.modal .content{
+    padding: 30px 20px;
+}
+.modal .content h3,.avatar{
+    text-align: center;
+    margin-bottom: 30px;
+}
+.modal .content .avatar{
+    text-align: center;
+    width: 50%;
+    margin: auto;
+    margin-bottom: 30px;
+}
+.modal .content .avatar img{
+    width: 100%;
+    border: 3px solid black;
+    border-radius: 50%;
+}
 
+/* Fin Modal */
 
 /* Page dashboard */
 .dashboard-page *{
@@ -107,13 +130,11 @@ body {
 }
 .dashboard-page .dicta{
     position: fixed;
-    padding-top: 6px;
-    padding-left: 18px;
+    padding: 10px;
+    border: 3px solid #f4f4f4;
     bottom: 20px;
     right: 20px;
     z-index: 2000;
-    width: 90px;
-    height: 40px;
     background-color: black;
     color: white;
     border-radius: 28px;
