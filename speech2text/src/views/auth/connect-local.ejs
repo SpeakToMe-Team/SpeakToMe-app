@@ -7,7 +7,7 @@
         <div class="alert alert-danger"><%= error_msg %></div>
         <% } %>
 
-        <form class="form-signin" action="/auth/connect/local" method="post">
+        <form class="form-signin" action="/speech2text/auth/connect/local" method="post">
             <h2 class="form-signin-heading"><span class="fa fa-user-plus"></span> Add Local Account</h2>
             <label for="inputEmail" class="sr-only">Email address</label>
             <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
@@ -17,7 +17,7 @@
             <button class="btn btn-lg btn-warning" type="submit">Add Local</button>
         </form>
         <br />
-        <a href="/profile"><span class="fa fa-user"></span> Go back to profile</a>
+        <a href="/speech2text/profile"><span class="fa fa-user"></span> Go back to profile</a>
 
 
     </div>

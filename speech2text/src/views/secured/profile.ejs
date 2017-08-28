@@ -2,8 +2,8 @@
 
 <div class="page-header text-center">
     <h2><span class="fa fa-anchor"></span> Profile page</h2>
-    <a href="/dashboard" class="btn btn-primary btn-sm" >Dashboard</a>
-    <a href="/auth/logout" class="btn btn-danger btn-sm">Logout</a>
+    <a href="/speech2text/dashboard" class="btn btn-primary btn-sm" >Dashboard</a>
+    <a href="/speech2text/auth/logout" class="btn btn-danger btn-sm">Logout</a>
 </div>
 
 <div class="row">
@@ -18,7 +18,7 @@
                     <li><strong>Password :</strong> <%= user.local.password %></li>
                 </ul>
 
-                <a href="/auth/unlink/local" class="btn btn-default">Unlink</a>
+                <a href="/speech2text/auth/unlink/local" class="btn btn-default">Unlink</a>
             
         </div>
     </div>
@@ -41,7 +41,7 @@
                         <img class="" src="<%= user.facebook.picture %>" alt="Photo de <%= user.facebook.name %>"/>
                     </div>
                 </div>
-                <a href="/auth/unlink/facebook" class="btn btn-primary">Unlink</a>
+                <a href="/speech2text/auth/unlink/facebook" class="btn btn-primary">Unlink</a>
              
         </div>
     </div>
@@ -49,23 +49,21 @@
     <% if (user.google.token){ %>
     <div class="col-sm-6 col-sm-offset-3">
         <div class="well">
-            <h3><span class="fa fa-google-plus"></span> Google+</h3>
-            
-                <div class="row">
-                    <div class="col-sm-6 overText">
-                        <ul>
-                            <li><strong>Google ID :</strong> <%= user.google.id %></li>
-                            <li><strong>Token :</strong> <%= user.google.token %></li>
-                            <li><strong>Email :</strong> <%= user.google.email %></li>
-                            <li><strong>Name :</strong> <%= user.google.name %></li>
-                        </ul>
-                    </div>    
-                    <div class="col-sm-6 text-right">
-                        <img class="" src="<%= user.google.picture %>" alt="Photo de <%= user.google.name %>"/>
-                    </div>
+            <h3><span class="fa fa-google-plus"></span> Google+</h3>            
+            <div class="row">
+                <div class="col-sm-6 overText">
+                    <ul>
+                        <li><strong>Google ID :</strong> <%= user.google.id %></li>
+                        <li><strong>Token :</strong> <%= user.google.token %></li>
+                        <li><strong>Email :</strong> <%= user.google.email %></li>
+                        <li><strong>Name :</strong> <%= user.google.name %></li>
+                    </ul>
+                </div>    
+                <div class="col-sm-6 text-right">
+                    <img class="" src="<%= user.google.picture %>" alt="Photo de <%= user.google.name %>"/>
                 </div>
-                <a href="/auth/unlink/google" class="btn btn-danger">Unlink</a>
-             
+            </div>
+            <a href="/speech2text/auth/unlink/google" class="btn btn-danger">Unlink</a>             
         </div>
     </div>
     <% } %>
@@ -75,7 +73,7 @@
     if (annyang) {
         var commands = {
             'dashboard': function() {
-                window.location.href = "/dashboard";
+                window.location.href = "/speech2text/dashboard";
             }
         };        
         annyang.addCommands(commands);

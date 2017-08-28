@@ -9,26 +9,26 @@
     <title>Smart Speech Assistant</title>
 
     <!--<link href="https://fonts.googleapis.com/css?family=Covered+By+Your+Grace|Reenie+Beanie|Oswald" rel="stylesheet">-->
-    <link href="/css/fonts.css" rel="stylesheet">
+    <link href="/speech2text/css/fonts.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Tinos:400i" rel="stylesheet">
-    <link rel="stylesheet" href="/css/animate.min.css">
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/speech2text/css/animate.min.css">
+    <link rel="stylesheet" href="/speech2text/css/bootstrap.min.css">
 
-    <script src="/js/popper.js"></script>
-    <script src="/js/jquery-3.2.1.min.js"></script>
-    <script src="/js/tether.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/fontawesome.js"></script>
+    <script src="/speech2text/js/popper.js"></script>
+    <script src="/speech2text/js/jquery-3.2.1.min.js"></script>
+    <script src="/speech2text/js/tether.min.js"></script>
+    <script src="/speech2text/js/bootstrap.min.js"></script>
+    <script src="/speech2text/js/fontawesome.js"></script>
     <!--<script src="https://use.fontawesome.com/5bfddbc387.js"></script>-->
 
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/speech2text/css/style.css">
 
-    <link href="/css/simple-sidebar.css" rel="stylesheet">
+    <link href="/speech2text/css/simple-sidebar.css" rel="stylesheet">
 
     <!-- Moment JS -->
-    <script src="/js/moment.min.js"></script>
-    <script src="/js/moment-with-locales.min.js"></script>
+    <script src="/speech2text/js/moment.min.js"></script>
+    <script src="/speech2text/js/moment-with-locales.min.js"></script>
     <script>
         moment.locale('fr', {
             months : 'janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre'.split('_'),
@@ -94,12 +94,12 @@
     </script>
 
     <!-- Vue Js -->
-    <script src="/js/vue.js"></script>
+    <script src="/speech2text/js/vue.js"></script>
 
 
-    <script src="/socket.io/socket.io.js"></script>
+    <script src="/speech2text/socket.io/socket.io.js"></script>
     <script>
-        var socket = io.connect();
+        var socket = io.connect('http://127.0.0.1.nip.io', { path: '/speech2text/socket.io'});
 
         /*socket.on('message', function(message) {
             $('#title').html(message.title);
@@ -113,7 +113,7 @@
     </script>
 
     <!-- Annyang -->
-    <script src="/js/annyang.js"></script>
+    <script src="/speech2text/js/annyang.js"></script>
 
 </head>
 
