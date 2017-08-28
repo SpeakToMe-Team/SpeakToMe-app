@@ -90,8 +90,7 @@
                 doy : 4  // The week that contains Jan 4th is the first week of the year.
             }
         });
-        moment.locale('fr');
-        console.log(moment(1316116057189).fromNow()); // il y a une heure
+        moment.locale('fr');        
     </script>
 
     <!-- Vue Js -->
@@ -100,7 +99,7 @@
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
-        var socket = io.connect('http://127.0.0.1.nip.io');
+        var socket = io.connect();
 
         /*socket.on('message', function(message) {
             $('#title').html(message.title);

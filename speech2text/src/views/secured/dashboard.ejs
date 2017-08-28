@@ -166,6 +166,7 @@
                    </article>
                </div>
            </section>
+            <p><input type="button" value="Embêter le serveur" id="poke" /></p>
        </div>
    </div>
 </div>
@@ -253,6 +254,14 @@
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
+
+    socket.on('message', function(message) {
+        alert('Le serveur a un message pour vous : ' + message.title);
+    })
+
+    $('#poke').click(function () {
+        socket.emit('message', 'Salut serveur, ça va ?');
+    })
 
   /*  var attente = function(string){
         annyang.pause();
@@ -372,10 +381,10 @@
            },
            'répéter message': repeterModule,
            'ouvrir panneau': function() {
-               $('#myModal').modal('show');
+               $('#settings').modal('show');
            },
            'fermer panneau': function() {
-               $('#myModal').modal('hide');
+               $('#settings').modal('hide');
            },
            'ouvrir aide': function() {
                $("#wrapper").toggleClass("toggled");
@@ -383,8 +392,11 @@
            'fermer aide': function() {
                $("#wrapper").toggleClass("toggled");
            },
-           'voir profil': function() {
-               window.location.href = "/profile";
+           'ouvrir profil': function() {
+               $('#user').modal('show');
+           },
+           'fermer profil': function() {
+               $('#user').modal('hide');
            },
            'activer *module': activerModule,
            'désactiver *module': desactiverModule,

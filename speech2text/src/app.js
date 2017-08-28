@@ -1,3 +1,5 @@
+var Client = require('node-rest-client').Client;
+var client = new Client();
 var express = require('express');
 var path = require('path');
 var app = express();
@@ -84,11 +86,11 @@ app.use('/api', api);
 
 var auth = express.Router();
 require('./app/routes/auth')(auth, passport);
-app.use('/auth', auth);
+app.use('/speech2text/auth', auth);
 
 var secure = express.Router();
 require('./app/routes/secure')(secure, passport);
-app.use('/', secure);
+app.use('/speech2text', secure);
 
 
 var server = app.listen(port);
@@ -105,6 +107,13 @@ io.on('connection', function (socket) {
     });	
 
     socket.on('question', function (question) {
+
+        client.get("https://swapi.co/api/people/4", function (data, response) {
+            // parsed response body as js object 
+            console.log(data);
+            // raw response 
+            //console.log(response);
+        });
 
         /* En attendant que l'adresse 127.0.01.nip.io soit dispo : on charge des données récupérées depuis le navigateur */
         /* Quand l'adresse 127.0.01.nip.io sera disponible
