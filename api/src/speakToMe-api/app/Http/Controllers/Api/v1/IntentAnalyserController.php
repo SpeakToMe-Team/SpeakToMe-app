@@ -25,7 +25,7 @@ class IntentAnalyserController extends ApiController
     
     public function getQueryParams() {
 
-        $params = [
+        return [
             'query' => [
                 'q' => $this->message,
             ],
@@ -34,7 +34,6 @@ class IntentAnalyserController extends ApiController
             ],
             'http_errors' => false
         ];
-        return $params;
     }
 
     public function generateToken() {}

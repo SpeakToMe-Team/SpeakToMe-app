@@ -42,6 +42,7 @@ class MusicController extends ApiController
             $this->searchType[] = 'album';
             $this->query[] = $intent['entities']['music_album'][0]['value'];
         }
+
     }
 
     public function run()
