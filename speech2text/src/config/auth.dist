@@ -2,12 +2,12 @@ module.exports = {
     'facebookAuth' : {
         'clientID' : '',
         'clientSecret' : '',
-        'callbackURL' : 'http://127.0.0.1.nip.io/speech2text/auth/facebook/callback'
+        'callbackURL' : 'http://127.0.0.1:8000/auth/facebook/callback'
     },
     'googleAuth' : {
         'clientID' : '',
         'clientSecret' : '',
-        'callbackURL' : 'http://127.0.0.1.nip.io/speech2text/auth/google/callback'
+        'callbackURL' : 'http://127.0.0.1:8000/auth/google/callback'
     }
 }
 

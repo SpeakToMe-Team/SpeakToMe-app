@@ -32,7 +32,7 @@
                 <nav class="container-fluid">
                     <a href="/">
                         <div class="logo animated bounceInLeft">
-                            <img src="/speech2text/images/microphone.png" alt="logo">
+                            <img src="/images/microphone.png" alt="logo">
                             <p>{{ title }}</p>
                         </div>
                     </a>
@@ -147,7 +147,7 @@
                                                     </ul>
 
                                                     <% } %>
-                                                        <a href="/speech2text/auth/logout" class="logout">Logout</a>
+                                                        <a href="/auth/logout" class="logout">Logout</a>
                             </div>
                         </div>
                     </div>
@@ -315,20 +315,7 @@
     $('#poke').click(function () {
         socket.emit('message', 'Salut serveur, ça va ?');
     })
-
-  /*  var attente = function(string){
-        annyang.pause();
-
-        var synth = window.speechSynthesis;
-        var utterThis = new SpeechSynthesisUtterance(string);
-        utterThis.lang = 'fr-FR';
-        utterThis.pitch = 1;
-        utterThis.rate = 1;
-        synth.speak(utterThis);          
-
-        annyang.resume();
-    }*/
-
+  
     var emitQuestion = function(question){
         console.log('question ? ' + question);
         socket.emit('question', question);
@@ -337,13 +324,13 @@
     }
 
     var show = function(answer) {
-               
+        console.log(answer);
+
         // Réinitialisation
         dashboard.init();        
 
         /* Traitement pour le weather */
         let  weather = new WeatherModule(answer);
-console.log(answer);
         let stringIntent = weather.getIntent();
         console.log('intent : ' + stringIntent);
         let stringLocation = weather.getLocation();
@@ -494,7 +481,7 @@ console.log(answer);
     });
 </script>
 <script>
-    var srcStart = "ttps://maps.google.com/maps?q=";
+    var srcStart = "https://maps.google.com/maps?q=";
     var srcLoc = contentWeather.location;
     var srcEnd = "%2C%20FR&t=&z=14&ie=UTF8&iwloc=&output=embed";
     var src = srcStart + srcLoc + srcEnd;
