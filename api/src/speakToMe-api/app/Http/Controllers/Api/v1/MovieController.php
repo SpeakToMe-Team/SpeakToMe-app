@@ -237,7 +237,7 @@ class MovieController extends ApiController
         $json = json_decode($body, true);
         
         // Retour de la réponse
-        return $json;
+        return $this->addIntent($json);
     }
     
     public function getQueryParams() 
