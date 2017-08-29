@@ -16,7 +16,7 @@ class MovieController extends ApiController
     private $recherche;
     private $cinema;
 
-    public function __construct($intent) 
+    public function __construct($intent, $geolocation) 
     {
         // On prépare le token
         $this->token = $this->getToken();
@@ -144,17 +144,13 @@ class MovieController extends ApiController
 
             // Si on n'a pas trouvé de ville, on prend les coordonnées GPS transmises
             } else {
-                $this->latitude = '45.770297';
-                $this->longitude = '4.863703';
+                if (!empty($geolocation['longitude']) && !empty($geolocation['latitude'])) {
+                    $this->latitude  = $geolocation['latitude'];
+                    $this->longitude = $geolocation['longitude'];
+                }
             }
             
         }
-
-        // echo '<pre>';
-        //     print_r($this);
-        // echo '</pre>';
-        // die;
-        
     }
 
     public function run() 
@@ -173,8 +169,8 @@ class MovieController extends ApiController
             // Si on a des résultats (normalement toujours, mais bon on sait jamais hein)
             if (array_key_exists('feed', $listeSalles) && array_key_exists('theater', $listeSalles['feed'])) {
                 // On a petit tableau avec les codes des différentes salles
-                $correspondanceCodeChaineCinema = array();
-                $correspondanceCodeChaineCinema['ugc'] = '81001';
+                $correspondanceCodeChaineCinema          = array();
+                $correspondanceCodeChaineCinema['ugc']   = '81001';
                 $correspondanceCodeChaineCinema['pathé'] = '81003';
                 $correspondanceCodeChaineCinema['pathe'] = '81003';
 
@@ -205,9 +201,9 @@ class MovieController extends ApiController
         // Si nous avons une search_query, c'est problablement un film
         if ($this->recherche) {
             // On veut trouver le code du film, comme ça on récupèrera les séances de ce film uniquement
-            $parametres['query']['q'] = $this->recherche;
+            $parametres['query']['q']      = $this->recherche;
             $parametres['query']['filter'] = 'movie';
-            $parametres['query']['count'] = '10';
+            $parametres['query']['count']  = '10';
 
             $informationsFilm = $this->getInformationsFilm($client, $parametres);
             $informationsFilm = json_decode($informationsFilm->getBody(), true);
@@ -243,7 +239,7 @@ class MovieController extends ApiController
         $json = json_decode($body, true);
         
         // Retour de la réponse
-        return $json;
+        return $this->addIntent($json);
     }
     
     public function getQueryParams() 
@@ -251,11 +247,11 @@ class MovieController extends ApiController
         $parametres = [
             'query' => [
                 'partner' => env('ALLOCINE_TOKEN'),
-                'format' => 'json',
+                'format'  => 'json',
             ],
             'headers' => [
                 'Authorization' => 'Bearer ' . env('ALLOCINE_TOKEN'),
-                'User-Agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'
+                'User-Agent'    => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'
             ]
         ];
 
