@@ -29,9 +29,13 @@
                             <input v-bind:value="phrase" type="text" name="request" placeholder="Dictez ou écrivez votre recherche ...">
                         </article>
 
-                        <article class="result col-sm-12 col-lg-10 animated zoomInUp">
+                        <article class=" col-sm-12 col-lg-10 animated zoomInUp">
+                                <div class="result col-md-12">
                             <h2 class="title">Resultats</h2>
 
+                            <div class="module-weather" :class="{ hide: isActiveWeatherModule}">
+                                    <%-partial('../modules/nomodule')%>
+                            </div>
                             <div class="module-weather" :class="{ hide: !isActiveWeatherModule }">
                                 <%-partial('../modules/meteo')%>
                             </div>
@@ -44,11 +48,13 @@
                             <div class="module-travel" :class="{ hide: !isActiveTravelModule }">
                                 <%-partial('../modules/yelp')%>
                             </div>
+                                </div>
                         </article>
 
-                        <article class="recommandation col-sm-12 col-lg-2 animated zoomInUp">
+                        <article class="col-sm-12 col-lg-2 animated zoomInUp">
+                                <div class="recommandation col-md-12">
                             <h2 class="title">Suggestions</h2>
-
+                                </div>
                         </article>
                     </div>
                 </section>
@@ -232,7 +238,12 @@
                     var iconDescription = 'http://openweathermap.org/img/w/' + jourAfficherContent.weather['0'].icon + '.png';
                     console.log('icone : ' + iconDescription);
                     var temperatureDescription = jourAfficherContent.temp;
-
+                    var srcStart = "https://maps.google.com/maps?q=";
+                    var srcLoc = stringLocation;
+                    var srcEnd = "%2C%20FR&t=&z=14&ie=UTF8&iwloc=&output=embed";
+                    var src = srcStart + srcLoc + srcEnd;
+                    $("#iframeMeteo")[0].setAttribute("src", src);
+                    
                     console.log('moment js : ' + stringJour);
 
                     var stringVoiceMsg = 'La météo de ' + stringJour + ' à ' + stringLocation + ', ' + stringDescription + ' avec des températures de ' + Math.floor(temperatureDescription.morn) + ' degré le matin, ' + Math.floor(temperatureDescription.eve) + ' degré le soir et ' + Math.floor(temperatureDescription.night) + ' degré la nuit.';
@@ -244,7 +255,8 @@
                         date: stringJour,
                         msgVocal: stringVoiceMsg,
                         picture: iconDescription,
-                        description: stringDescription
+                        description: stringDescription,
+                        map: src
                     }
 
                     var temp = {
@@ -366,8 +378,5 @@
     });
 </script>
 <script>
-    var srcStart = "https://maps.google.com/maps?q=";
-    var srcLoc = contentWeather.location;
-    var srcEnd = "%2C%20FR&t=&z=14&ie=UTF8&iwloc=&output=embed";
-    var src = srcStart + srcLoc + srcEnd;
+    
 </script>

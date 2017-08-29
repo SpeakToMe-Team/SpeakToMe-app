@@ -199,8 +199,9 @@ transition: 0.5s;
     font-family: 'Oswald', sans-serif;
     color: white;
     padding: 8px 20px;
-    border-bottom: 3px solid #f4f4f4;
-    font-size: 25px;
+    border-bottom: 2px solid #f4f4f4;
+    text-align: center;
+    font-size: 1.7em;
 }
 .dashboard-page nav{
     height: 65px;
@@ -257,7 +258,7 @@ border-radius: 20px;
 #main{
     margin: 0px 50px;
 }
-.dashboard-page article{
+.dashboard-page .result,.recommandation,.search{
     margin-bottom: 20px;
     border: 3px solid #f4f4f4;
 }
@@ -295,13 +296,15 @@ border-radius: 20px;
     outline:  none;
 }
 .dashboard-page .result{
-    min-height: 500px;
     -webkit-animation-duration: 0.8s;
     -webkit-animation-delay: 2s;
-    background-color:#d9f4ff;
+    background-color: rgba(157, 177, 185, 0.77);
+}
+.dashboard-page article:nth-child(2n){
+    padding-right: 20px;
 }
 .dashboard-page .result h2{
-    background-color: #00b8ff;
+    background-color: #9fadb2;
     margin: 0px;
 }
 
@@ -312,7 +315,6 @@ border-radius: 20px;
 
 .dashboard-page .recommandation{
     background-color:#ffeded;
-    height: 500px;
     -webkit-animation-duration: 0.8s;
     -webkit-animation-delay: 2.5s;
 }
@@ -355,3 +357,51 @@ border-radius: 20px;
       #map {
         height: 100%;
       }
+/* Module default */
+.start{
+    font-family: 'Reenie Beanie', cursive;
+    text-align: center;
+    margin: auto;
+    padding: 60px;
+    color: white;
+}
+.start p{
+    font-size: 3.5em;
+    padding: 40px;
+    font-weight: bold;
+}
+.start i{
+    font-size: 1.5em;
+}
+/* fin Module default */
+
+/* Module Meteo */
+#meteo{
+    width: 100%;
+    margin: 0px;
+}
+#meteo iframe{
+    height: 100%;
+    opacity: 0.7;
+}
+#meteo .details{
+    padding: 30px;
+    color: white;
+    text-align: center;
+}
+#meteo h3{
+    font-size: 1.5em;
+    font-family: 'Oswald', sans-serif;
+    font-weight: bold;
+}
+#meteo .details #msgVocal{
+    padding-top: 15px;
+}
+#meteo .details i{
+    font-size: 7em;
+    padding: 25px;
+}
+#meteo .details ul{
+    list-style: none;
+    font-weight: bold;
+}
