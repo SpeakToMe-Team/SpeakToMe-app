@@ -40,7 +40,6 @@
                         <div class="settings">
                             <a href="#" data-toggle="modal" data-target="#settings">
                             <i class="fa fa-cogs fa-spin"></i>
-                            <i class="owf owf-210"></i>
                         </a>
                         </div>
                         <div class="myAccount">
@@ -163,34 +162,11 @@
 
                         <article class="result col-sm-12 col-lg-10 animated zoomInUp">
                             <h2 class="title">Resultats</h2>
-                            
+
                             <div class="module-weather" :class="{ hide: !isActiveWeatherModule }">
-                                <h3>recherche de la météo</h3>
-                                <iframe id="gmap_canvas" src="" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
-                                
-                                <p id="msgVocal">{{ contentWeather.msgVocal }}</p><br />
-                                <img v-bind:src="contentWeather.picture" v-bind:alt="contentWeather.description"></img>
-                                <p>                                    
-                                    <i class="fa fa-map-marker fa-3x" aria-hidden="true"></i> {{ contentWeather.location
-                                    }}
-                                    <br />
-                                    <i class="fa fa-calendar fa-3x" aria-hidden="true"></i> {{ contentWeather.date }}<br
-                                    />
-                                    <i class="fa fa-thermometer-empty fa-3x" aria-hidden="true"></i> {{ tempWeather.day }}
-                                    C° la journée<br />
-                                    <i class="fa fa-thermometer-empty fa-3x" aria-hidden="true"></i> {{ tempWeather.morn
-                                    }} C° le matin<br />
-                                    <i class="fa fa-thermometer-empty fa-3x" aria-hidden="true"></i> {{ tempWeather.eve }}
-                                    C° le soir<br />
-                                    <i class="fa fa-thermometer-empty fa-3x" aria-hidden="true"></i> {{ tempWeather.night
-                                    }} C° la nuit<br />
-                                </p>
-
-
-                                <br />
-                                <p><i>info raw : {{ contentWeather }}</i></p>
+                                <%-partial('../partials/meteo')%>
                             </div>
-
+                        
                         </article>
 
                         <article class="recommandation col-sm-12 col-lg-2 animated zoomInUp">
@@ -251,24 +227,6 @@
         }
 
     }
-
-    class CinemaModule {        
-        constructor (json) {
-            this._json = json;
-            this._jour = false;
-        }
-
-        get json() {
-            return this._json;
-        }
-
-        set json(newJson){
-            this._json = newJson;
-        }
-
-
-
-    }  
 
     class WeatherModule {
 

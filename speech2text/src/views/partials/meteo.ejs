@@ -1,0 +1,23 @@
+<h3>recherche de la météo</h3>
+
+<p id="msgVocal">{{ contentWeather.msgVocal }}</p><br />
+<img v-bind:src="contentWeather.picture" v-bind:alt="contentWeather.description"></img>
+<p>                                    
+    <i class="fa fa-map-marker fa-3x" aria-hidden="true"></i> {{ contentWeather.location
+    }}
+    <br />
+    <i class="fa fa-calendar fa-3x" aria-hidden="true"></i> {{ contentWeather.date }}<br
+    />
+    <i class="fa fa-thermometer-empty fa-3x" aria-hidden="true"></i> {{ tempWeather.day }}
+    C° la journée<br />
+    <i class="fa fa-thermometer-empty fa-3x" aria-hidden="true"></i> {{ tempWeather.morn
+    }} C° le matin<br />
+    <i class="fa fa-thermometer-empty fa-3x" aria-hidden="true"></i> {{ tempWeather.eve }}
+    C° le soir<br />
+    <i class="fa fa-thermometer-empty fa-3x" aria-hidden="true"></i> {{ tempWeather.night
+    }} C° la nuit<br />
+</p>
+
+
+<br />
+<p><i>info raw : {{ contentWeather }}</i></p>
