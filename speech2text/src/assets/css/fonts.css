@@ -3,16 +3,24 @@
   font-family: "Oswald";
   src: url("/fonts/oswald-regular-webfont.woff2") format("woff2"),
          url("/fonts/oswald-regular-webfont.woff") format("woff");
- }
+}
 
 @font-face {
   font-family: "Reenie Beanie";
   src: url("/fonts/reeniebeanie-webfont.woff2") format("woff2"),
          url("/fonts/reeniebeanie-webfont.woff") format("woff");
- }
+}
 
 @font-face {
   font-family: "Tinos";
   src: url("/fonts/tinos-italic-webfont.woff2") format("woff2"),
          url("/fonts/tinos-italic-webfont.woff") format("woff");
- }
+}
+
+@font-face {
+  font-family: "owfont";
+  src: url("/fonts/owfont-regular.woff") format("woff"),
+  url("/fonts/owfont-regular.eot") format("eot"),
+  url("/fonts/owfont-regular.ttf") format("ttf"),
+  url("/fonts/owfont-regular.otf") format("otf");
+}
