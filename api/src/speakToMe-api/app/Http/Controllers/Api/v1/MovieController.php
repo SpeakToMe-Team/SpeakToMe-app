@@ -16,7 +16,7 @@ class MovieController extends ApiController
     private $recherche;
     private $cinema;
 
-    public function __construct($intent) 
+    public function __construct($intent, $geolocation) 
     {
         // On prépare le token
         $this->token = $this->getToken();
@@ -144,8 +144,10 @@ class MovieController extends ApiController
 
             // Si on n'a pas trouvé de ville, on prend les coordonnées GPS transmises
             } else {
-                $this->latitude = '45.770297';
-                $this->longitude = '4.863703';
+                if (!empty($geolocation['longitude']) && !empty($geolocation['latitude'])) {
+                    $this->latitude  = $geolocation['latitude'];
+                    $this->longitude = $geolocation['longitude'];
+                }
             }
             
         }
