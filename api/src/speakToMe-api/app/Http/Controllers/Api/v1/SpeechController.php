@@ -43,7 +43,7 @@ class SpeechController extends Controller
 
         if (isset($this->intent['entities']['intent'][0])) {
             $intent = $this->intent['entities']['intent'][0]['value'];
-            if (array_key_exists($intent, config('external_api.keywords'))) {
+            if (in_array($intent, config('external_api.keywords'))) {
                 $className = 'App\Http\Controllers\Api\v1\\' . ucfirst($intent) . 'Controller';
                 return new $className($this->intent, $this->geo=null);
             }

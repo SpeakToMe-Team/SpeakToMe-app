@@ -1,10 +1,10 @@
 <?php
 return [
     'keywords' => [
-        'travel' => ['voyage', 'voyager', 'vacances'],
-        'movie' => ['film', 'séance', 'cinéma', 'movie'],
-        'music' => ['chanson', 'musique', 'écouter'],
-        'weather' => ['météo'],
+        'travel',
+        'movie',
+        'music',
+        'weather',
     ],
     'params' => [
         'weather' => [
