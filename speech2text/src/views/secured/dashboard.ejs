@@ -168,6 +168,8 @@
                                 <iframe id="gmap_canvas" src="" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
                                 
                                 <p id="msgVocal">{{ contentWeather.msgVocal }}</p><br />
+
+
                                 <img v-bind:src="contentWeather.picture" v-bind:alt="contentWeather.description"></img>
                                 <p>                                    
                                     <i class="fa fa-map-marker fa-3x" aria-hidden="true"></i> {{ contentWeather.location
@@ -241,36 +243,38 @@
             return this._json;
         }
 
-        set jsonr(newJson){
+        set json(newJson){
             this._json = newJson;
         }
 
-        checkIntent () {
+        getIntent () {
             return this._json.intent;
         }
 
     }
 
-    class CinemaModule {        
+    class MovieModule {
         constructor (json) {
-            this._json = json;
+            this._jsonMovie = json;
             this._jour = false;
         }
 
-        get json() {
-            return this._json;
+        get jsonMovie() {
+            return this._jsonMovie;
         }
 
-        set json(newJson){
-            this._json = newJson;
+        set jsonMovie(newJson){
+            this._jsonMovie = newJson;
         }
 
+        getIntent () {
+            return this._jsonMovie.intent;
+        }
 
-
+        
     }  
 
     class WeatherModule {
-
         constructor (json) {
             this._jsonWeather = json;
             this._jour = false;
@@ -330,7 +334,9 @@
         alert('Le serveur a un message pour vous : ' + message.title);
     })
 
-    $('#poke').click(function () {
+    $('#poke').click(function (event) {
+        event.preventDefault();
+        console.log('poke');
         socket.emit('message', 'Salut serveur, ça va ?');
     })
   
@@ -347,71 +353,83 @@
         // Réinitialisation
         dashboard.init();        
 
-        /* Traitement pour le weather */
-        let  weather = new WeatherModule(answer);
-        let stringIntent = weather.getIntent();
-        console.log('intent : ' + stringIntent);
-        let stringLocation = weather.getLocation();
-        console.log('ville : ' + stringLocation);
-        console.log('nombre : ' + weather.getNumberList());
+        let mainModule = new Module(answer);
+        var intent = mainModule.getIntent();
 
-        if( weather.getNumberList() !== false){
+        console.log('intent : ' + intent);
 
-            console.log('jour ? ' + weather.getElementDisplay());
-            let jourAfficher = weather.getElementDisplay();
-            let jourAfficherContent = weather.jsonWeather.response['list'][jourAfficher];
-            let dateJourAfficher = jourAfficherContent.dt * 1000;
-            console.log('time : ' + dateJourAfficher);
-            var stringJour = moment(dateJourAfficher).format("dddd D MMMM YYYY");
-            var stringDescription = jourAfficherContent.weather['0']['description'];
-            var iconDescription = 'http://openweathermap.org/img/w/' + jourAfficherContent.weather['0'].icon + '.png';
-            console.log('icone : ' + iconDescription);
-            var temperatureDescription = jourAfficherContent.temp;
+        switch (intent) {
+            case "weather":
+                /* Traitement pour le weather */
+                let  weather = new WeatherModule(answer);
+                let stringIntent = weather.getIntent();
+                console.log('intent : ' + stringIntent);
+                let stringLocation = weather.getLocation();
+                console.log('ville : ' + stringLocation);
+                console.log('nombre : ' + weather.getNumberList());
 
-            console.log('moment js : ' + stringJour);
+                if( weather.getNumberList() !== false){
 
-            var stringVoiceMsg = 'La météo de ' + stringJour + ' à ' + stringLocation + ', ' + stringDescription + ' avec des températures de ' + Math.floor(temperatureDescription.morn) + ' degré le matin, ' + Math.floor(temperatureDescription.eve) + ' degré le soir et ' + Math.floor(temperatureDescription.night) + ' degré la nuit.';
-            console.log('msg vocal ' + stringVoiceMsg);
+                    console.log('jour ? ' + weather.getElementDisplay());
+                    let jourAfficher = weather.getElementDisplay();
+                    let jourAfficherContent = weather.jsonWeather.response['list'][jourAfficher];
+                    let dateJourAfficher = jourAfficherContent.dt * 1000;
+                    console.log('time : ' + dateJourAfficher);
+                    var stringJour = moment(dateJourAfficher).format("dddd D MMMM YYYY");
+                    var stringDescription = jourAfficherContent.weather['0']['description'];
+                    var iconDescription = 'http://openweathermap.org/img/w/' + jourAfficherContent.weather['0'].icon + '.png';
+                    console.log('icone : ' + iconDescription);
+                    var temperatureDescription = jourAfficherContent.temp;
 
-            //Vue js
-            var content = {
-                location: stringLocation,
-                date: stringJour,
-                msgVocal: stringVoiceMsg,
-                picture: iconDescription,
-                description: stringDescription
-            }
+                    console.log('moment js : ' + stringJour);
 
-            var temp = {
-                day: temperatureDescription.day,
-                morn: temperatureDescription.morn,
-                eve: temperatureDescription.eve,
-                night: temperatureDescription.night
-            }
-            
-            dashboard.contentWeather = content;
-            dashboard.tempWeather = temp;
-            dashboard.isActiveWeatherModule = true;
+                    var stringVoiceMsg = 'La météo de ' + stringJour + ' à ' + stringLocation + ', ' + stringDescription + ' avec des températures de ' + Math.floor(temperatureDescription.morn) + ' degré le matin, ' + Math.floor(temperatureDescription.eve) + ' degré le soir et ' + Math.floor(temperatureDescription.night) + ' degré la nuit.';
+                    console.log('msg vocal ' + stringVoiceMsg);
 
-            parler(stringVoiceMsg);
+                    //Vue js
+                    var content = {
+                        location: stringLocation,
+                        date: stringJour,
+                        msgVocal: stringVoiceMsg,
+                        picture: iconDescription,
+                        description: stringDescription
+                    }
 
-        }else{
-            dashboard.isActiveWeatherModule = false;
-            parler("Désolé ! Je n'ai pas trouvé de réponse à votre question.");
-        }
-    }
+                    var temp = {
+                        day: temperatureDescription.day,
+                        morn: temperatureDescription.morn,
+                        eve: temperatureDescription.eve,
+                        night: temperatureDescription.night
+                    }
+                    
+                    dashboard.contentWeather = content;
+                    dashboard.tempWeather = temp;
+                    dashboard.isActiveWeatherModule = true;
 
-    var activerModule = function(module) {
-        console.log('activation : ' + module);
-        // afficher avec Vue
-        dashboard.module_weather = true;
-    }
+                    parler(stringVoiceMsg);
 
-    var desactiverModule = function(module) {
-        console.log('désactivation : ' + module);
-        dashboard.module_weather = false;
-        // cacher avec Vue
-    }
+                }else{
+                    dashboard.isActiveWeatherModule = false;
+                    parler("Désolé ! Je n'ai pas trouvé de réponse à votre question.");
+                }
+
+                break;
+            case "movie":
+                console.log('movie');
+                dashboard.contentMovie = answer;                
+                dashboard.isActiveMovieModule = true;
+                break;
+            case "travel":
+
+                break;
+            case "travel":
+
+                break;
+            default:
+                
+                break;        
+        }        
+    }   
 
     var repeterModule = function() {
         var text = $('#msgVocal').text();
@@ -466,10 +484,7 @@
            },
            'fermer profil': function() {
                $('#user').modal('hide');
-           },
-           'activer *module': activerModule,
-           'désactiver *module': desactiverModule,
-          
+           },          
            'écouter musique': function() { // Ne marche pas
                //$('#play-button').click();
                console.log('lancer la musique');
@@ -493,7 +508,7 @@
 
     socket.on('answer', function(answer) {
         console.log('réception de la réponse');
-        console.log(answer);
+        //console.log(answer);
 
         show(answer);
     });
