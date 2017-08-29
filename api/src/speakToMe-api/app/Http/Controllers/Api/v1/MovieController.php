@@ -18,6 +18,9 @@ class MovieController extends ApiController
 
     public function __construct($intent) 
     {
+        // On prépare le token
+        $this->token = $this->getToken();
+
         // On initialise toutes les variables
         $this->recherche  = '';
         $this->demande    = '';
@@ -58,6 +61,20 @@ class MovieController extends ApiController
 
                 $this->recherche = trim($this->recherche);
             }
+
+            // Si la search_query est vide, peut-être que le nom de film a été compris comme une ville
+            if (empty($this->recherche)) {
+                if (array_key_exists('location', $intent['entities'])) {
+                    foreach ($intent['entities']['location'] as $location) {
+                        $this->recherche .= ' ' . $location['value'];                             
+                    }
+                }
+            }
+
+            // Si à ce stade, la recherche est toujours vide, on passe la demande générale pour avoir quelquechose
+            if (empty($this->recherche)) {
+                $this->demande = '';
+            }
         }
 
         // On regarde si on trouve une 'wit/location'
@@ -86,28 +103,36 @@ class MovieController extends ApiController
                 }    
             }
         }
+        // Si on nous a pas préciser de wit/location, mais qu'on a une search_query
+        else if (array_key_exists('search_query', $intent["entities"]) && $this->demande != 'seance') {
+            // On parcourt les search_query
+            foreach ($intent['entities']['search_query'] as $search_query) {
+                $this->recherche .= ' ' . $search_query['value'];                             
+            }
 
-        // Sinon on prend les coordonnées GPS par défaut
-        else {
-            $this->latitude = '45.770297';
-            $this->longitude = '4.863703';
+            // On a notre recherche
+            $this->recherche = trim($this->recherche);
+
+            // On passe la demande à informations
+            $this->demande = 'informations';
         }
-
-        // On prépare le token
-        $this->token = $this->getToken();
         
         // Si à ce stade on n'a pas trouvé de coordonnées, ni de codePostal, ni de ville
-        if (empty($this->ville) && empty($this->codePostal) && array_key_exists('search_query', $intent["entities"])) {
-            // On parcourt tous les search_query pour vérifier si on n'a pas trouvé un code postal par hasard
-            foreach ($intent["entities"]['search_query'] as $search_query => $informations_search_query) {
-                if (is_numeric($informations_search_query['value']) && strlen($informations_search_query['value']) == 5) {
-                    // Code Postal
-                    $this->codePostal = $informations_search_query['value'];
-                    // Ville
-                    $this->ville = $this->getCoordinatesCP($this->codePostal);
-                }
-            }    
+        if (empty($this->ville) && empty($this->codePostal) && $this->demande == 'seance') {
 
+            // Si on a une search_query on va chercher dedans si on trouve pas un code postal
+            if (array_key_exists('search_query', $intent["entities"])) {
+                // On parcourt tous les search_query pour vérifier si on n'a pas trouvé un code postal par hasard
+                foreach ($intent["entities"]['search_query'] as $search_query => $informations_search_query) {
+                    if (is_numeric($informations_search_query['value']) && strlen($informations_search_query['value']) == 5) {
+                        // Code Postal
+                        $this->codePostal = $informations_search_query['value'];
+                        // Ville
+                        $this->ville = $this->getCoordinatesCP($this->codePostal);
+                    }
+                }    
+            }
+            
             // Si on a bien une ville
             if (!empty($this->ville)) {
                 // On récupère les coordonnées GPS
@@ -117,13 +142,18 @@ class MovieController extends ApiController
                     $this->longitude = $coord[1];
                 }
 
-            // Si on n'a pas trouvé de ville, c'est la merde
+            // Si on n'a pas trouvé de ville, on prend les coordonnées GPS transmises
             } else {
                 $this->latitude = '45.770297';
                 $this->longitude = '4.863703';
             }
             
         }
+
+        // echo '<pre>';
+        //     print_r($this);
+        // echo '</pre>';
+        // die;
         
     }
 
