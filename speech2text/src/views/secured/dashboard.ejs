@@ -235,6 +235,7 @@
                     console.log('time : ' + dateJourAfficher);
                     var stringJour = moment(dateJourAfficher).format("dddd D MMMM YYYY");
                     var stringDescription = jourAfficherContent.weather['0']['description'];
+                    var stringDescriptionId = "owf owf-" + jourAfficherContent.weather['0']['id'];
                     var iconDescription = 'http://openweathermap.org/img/w/' + jourAfficherContent.weather['0'].icon + '.png';
                     console.log('icone : ' + iconDescription);
                     var temperatureDescription = jourAfficherContent.temp;
@@ -243,6 +244,7 @@
                     var srcEnd = "%2C%20FR&t=&z=14&ie=UTF8&iwloc=&output=embed";
                     var src = srcStart + srcLoc + srcEnd;
                     $("#iframeMeteo")[0].setAttribute("src", src);
+                    $(".details i")[0].setAttribute("class", stringDescriptionId);
                     
                     console.log('moment js : ' + stringJour);
 
@@ -256,6 +258,7 @@
                         msgVocal: stringVoiceMsg,
                         picture: iconDescription,
                         description: stringDescription,
+                        icon: stringDescriptionId,
                         map: src
                     }
 
