@@ -251,6 +251,24 @@
 
     }
 
+    class CinemaModule {        
+        constructor (json) {
+            this._json = json;
+            this._jour = false;
+        }
+
+        get json() {
+            return this._json;
+        }
+
+        set json(newJson){
+            this._json = newJson;
+        }
+
+
+
+    }  
+
     class WeatherModule {
 
         constructor (json) {
