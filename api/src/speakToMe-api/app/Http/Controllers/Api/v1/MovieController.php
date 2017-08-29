@@ -149,12 +149,6 @@ class MovieController extends ApiController
             }
             
         }
-
-        // echo '<pre>';
-        //     print_r($this);
-        // echo '</pre>';
-        // die;
-        
     }
 
     public function run() 
@@ -173,8 +167,8 @@ class MovieController extends ApiController
             // Si on a des résultats (normalement toujours, mais bon on sait jamais hein)
             if (array_key_exists('feed', $listeSalles) && array_key_exists('theater', $listeSalles['feed'])) {
                 // On a petit tableau avec les codes des différentes salles
-                $correspondanceCodeChaineCinema = array();
-                $correspondanceCodeChaineCinema['ugc'] = '81001';
+                $correspondanceCodeChaineCinema          = array();
+                $correspondanceCodeChaineCinema['ugc']   = '81001';
                 $correspondanceCodeChaineCinema['pathé'] = '81003';
                 $correspondanceCodeChaineCinema['pathe'] = '81003';
 
@@ -205,9 +199,9 @@ class MovieController extends ApiController
         // Si nous avons une search_query, c'est problablement un film
         if ($this->recherche) {
             // On veut trouver le code du film, comme ça on récupèrera les séances de ce film uniquement
-            $parametres['query']['q'] = $this->recherche;
+            $parametres['query']['q']      = $this->recherche;
             $parametres['query']['filter'] = 'movie';
-            $parametres['query']['count'] = '10';
+            $parametres['query']['count']  = '10';
 
             $informationsFilm = $this->getInformationsFilm($client, $parametres);
             $informationsFilm = json_decode($informationsFilm->getBody(), true);
@@ -251,11 +245,11 @@ class MovieController extends ApiController
         $parametres = [
             'query' => [
                 'partner' => env('ALLOCINE_TOKEN'),
-                'format' => 'json',
+                'format'  => 'json',
             ],
             'headers' => [
                 'Authorization' => 'Bearer ' . env('ALLOCINE_TOKEN'),
-                'User-Agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'
+                'User-Agent'    => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'
             ]
         ];
 
