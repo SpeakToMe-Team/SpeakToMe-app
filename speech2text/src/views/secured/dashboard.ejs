@@ -336,14 +336,14 @@
         parler('Je viens de lancer la recherche, merci de patienter !');
     }
 
-    var show = function(anwser) {
+    var show = function(answer) {
                
         // Réinitialisation
         dashboard.init();        
 
         /* Traitement pour le weather */
-        let  weather = new WeatherModule(anwser);
-
+        let  weather = new WeatherModule(answer);
+console.log(answer);
         let stringIntent = weather.getIntent();
         console.log('intent : ' + stringIntent);
         let stringLocation = weather.getLocation();
@@ -486,11 +486,11 @@
        annyang.start();
     }
 
-    socket.on('anwser', function(anwser) {
+    socket.on('answer', function(answer) {
         console.log('réception de la réponse');
-        console.log(anwser);
+        console.log(answer);
 
-        show(anwser);
+        show(answer);
     });
 </script>
 <script>
