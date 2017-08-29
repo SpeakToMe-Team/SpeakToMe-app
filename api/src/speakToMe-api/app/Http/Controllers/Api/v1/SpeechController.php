@@ -14,7 +14,7 @@ class SpeechController extends Controller
 
     private $intent;
     private $targetApi;
-    private $geo;
+    private $geolocation = [];
 
     public function index(Request $request)
     {
@@ -22,7 +22,10 @@ class SpeechController extends Controller
         $this->request = $request;
         $query = $request->query('query');
 
-        //$this->geo=$request->headers('geo');
+        if (!empty($request->header('latitude')) && !empty($request->header('longitude'))) {
+            $this->geolocation['latitude'] = $request->header('latitude');
+            $this->geolocation['longitude'] = $request->header('longitude');
+        }
 
         if (empty($query)) {
 
@@ -44,7 +47,7 @@ class SpeechController extends Controller
             $intent = $this->intent['entities']['intent'][0]['value'];
             if (in_array($intent, config('external_api.keywords'))) {
                 $className = 'App\Http\Controllers\Api\v1\\' . ucfirst($intent) . 'Controller';
-                return new $className($this->intent, $this->geo=null);
+                return new $className($this->intent, $this->geolocation);
             }
             return ['error' => true, 'message' => "La requete n'a pu aboutir."];
         }
