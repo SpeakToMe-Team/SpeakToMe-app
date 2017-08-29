@@ -6,6 +6,11 @@ module.exports = function(router, passport){
         res.render('welcome.ejs');
     });
 
+    router.get('/test', function(req, res){
+
+        res.render('test.ejs');
+    });
+
     router.get('/signup', function(req, res){
 
         res.render('auth/signup.ejs');
