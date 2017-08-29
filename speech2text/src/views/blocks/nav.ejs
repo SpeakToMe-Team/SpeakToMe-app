@@ -1,0 +1,26 @@
+<nav class="container-fluid">
+        <a href="/">
+            <div class="logo animated bounceInLeft">
+                <img src="/images/microphone.png" alt="logo">
+                <p>{{ title }}</p>
+            </div>
+        </a>
+        <div class="perso animated bounceInRight">
+            <div class="settings">
+                <a href="#" data-toggle="modal" data-target="#settings">
+                <i class="fa fa-cogs fa-spin"></i>
+            </a>
+            </div>
+            <div class="myAccount">
+                <a href="#" data-toggle="modal" data-target="#user">
+                    <% if (user.google.token){ %>
+                        <img class="" src="<%= user.google.picture %>" alt="Photo de <%= user.google.name %>" />
+                        <% } else if (user.facebook.token){ %>
+                            <img class="" src="<%= user.facebook.picture %>" alt="Photo de <%= user.google.name %>" />
+                            <% } else { %>
+                                <i class="fa fa-user"></i>
+                                <% } %>
+                </a>
+            </div>
+        </div>
+    </nav>
