@@ -65,7 +65,7 @@ class TravelController extends ApiController
         $body = $response->getBody();
         $objResponse = json_decode($body);
 
-        return $objResponse->businesses;
+        return $this->addIntent($objResponse->businesses);
     }
 
     public function generateToken() {

@@ -33,7 +33,7 @@ class MusicController extends ApiController
 
         $body = $response->getBody();
         $objResponse = json_decode($body, true);
-        return $objResponse;
+        return $this->addIntent($objResponse);
     }
 
     public function generateToken() {
