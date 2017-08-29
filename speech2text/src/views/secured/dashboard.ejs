@@ -336,13 +336,13 @@
         parler('Je viens de lancer la recherche, merci de patienter !');
     }
 
-    var show = function(anwser) {
+    var show = function(answer) {
                
         // Réinitialisation
         dashboard.init();        
 
         /* Traitement pour le weather */
-        let  weather = new WeatherModule(anwser);
+        let  weather = new WeatherModule(answer);
 
         let stringIntent = weather.getIntent();
         console.log('intent : ' + stringIntent);
@@ -486,15 +486,15 @@
        annyang.start();
     }
 
-    socket.on('anwser', function(anwser) {
+    socket.on('answer', function(answer) {
         console.log('réception de la réponse');
-        console.log(anwser);
+        console.log(answer);
 
-        show(anwser);
+        show(answer);
     });
 </script>
 <script>
-    var srcStart = "ttps://maps.google.com/maps?q=";
+    var srcStart = "https://maps.google.com/maps?q=";
     var srcLoc = contentWeather.location;
     var srcEnd = "%2C%20FR&t=&z=14&ie=UTF8&iwloc=&output=embed";
     var src = srcStart + srcLoc + srcEnd;
