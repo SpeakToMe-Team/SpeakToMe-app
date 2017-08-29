@@ -17,8 +17,8 @@ module.exports = function(router, passport){
     });
 
     router.post('/signup', passport.authenticate('local-signup', {
-        successRedirect: '/speech2text',
-        failureRedirect: '/speech2text/signup',
+        successRedirect: '/',
+        failureRedirect: '/signup',
         failureFlash: true
     }));
 
@@ -28,16 +28,16 @@ module.exports = function(router, passport){
     });
 
     router.post('/login', passport.authenticate('local-login', {
-        successRedirect: '/speech2text/dashboard',
-        failureRedirect: '/speech2text/auth/login',
+        successRedirect: '/dashboard',
+        failureRedirect: '/auth/login',
         failureFlash: true
     }));
 
     router.get('/facebook', passport.authenticate('facebook', {authType: 'rerequest', scope: ['email']}));
 
     router.get('/facebook/callback', passport.authenticate('facebook', {
-        successRedirect: '/speech2text/dashboard',
-        failureRedirect: '/speech2text'
+        successRedirect: '/dashboard',
+        failureRedirect: '/'
     }));
 
     router.get('/connect/facebook', passport.authorize('facebook', {authType: 'rerequest', scope: ['email']}));
@@ -48,8 +48,8 @@ module.exports = function(router, passport){
     });
 
     router.post('/connect/local', passport.authenticate('local-signup', {
-        successRedirect: '/speech2text/dashboard',
-        failureRedirect: '/speech2text/connect/local',
+        successRedirect: '/dashboard',
+        failureRedirect: '/connect/local',
         failureFlash: true
     }));
 
@@ -57,8 +57,8 @@ module.exports = function(router, passport){
     router.get('/google', passport.authenticate('google', {authType: 'rerequest', scope: ['https://www.googleapis.com/auth/plus.login', 'email']}));
 
     router.get('/google/callback', passport.authenticate('google', {
-        successRedirect: '/speech2text/dashboard',
-        failureRedirect: '/speech2text'
+        successRedirect: '/dashboard',
+        failureRedirect: '/'
     }));
 
 
@@ -66,7 +66,7 @@ module.exports = function(router, passport){
         req.logout();
         req.flash('success_msg', 'You are logged out !');
 
-        res.redirect('/speech2text');
+        res.redirect('/');
     });
 
     router.get('/unlink/facebook', function(req, res){
@@ -91,7 +91,7 @@ module.exports = function(router, passport){
             if(err)
                 throw err;
 
-            res.redirect('/speech2text/profile');
+            res.redirect('/profile');
         });
     });
 
@@ -102,7 +102,7 @@ module.exports = function(router, passport){
         user.save(function(err){
             if(err)
                 throw err;
-            res.redirect('/speech2text/profile');
+            res.redirect('/profile');
         });
     });
 }

@@ -75,7 +75,7 @@ app.use(function(req, res, next){
     next();
 });*/
 
-app.use('/speech2text', express.static(path.join(__dirname, 'assets')));
+app.use(express.static(path.join(__dirname, 'assets')));
 app.engine('ejs', require('ejs-locals'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
@@ -86,17 +86,17 @@ app.use('/api', api);
 
 var auth = express.Router();
 require('./app/routes/auth')(auth, passport);
-app.use('/speech2text/auth', auth);
+app.use('/auth', auth);
 
 var secure = express.Router();
 require('./app/routes/secure')(secure, passport);
-app.use('/speech2text', secure);
+app.use('/', secure);
 
 
 var server = app.listen(port);
 
 /* Partie Socket.Io */
-var io = require('socket.io')(server, { path: '/speech2text/socket.io'}).listen(server);
+var io = require('socket.io').listen(server);
 io.on('connection', function (socket) {
     console.log("un client vient de se connecter.");
     /* setInterval(function () { }, 1000); */
