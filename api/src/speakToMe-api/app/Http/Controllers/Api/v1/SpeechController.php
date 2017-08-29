@@ -21,12 +21,10 @@ class SpeechController extends Controller
 
         $this->request = $request;
         $query = $request->query('query');
-
         if (!empty($request->header('latitude')) && !empty($request->header('longitude'))) {
             $this->geolocation['latitude'] = $request->header('latitude');
             $this->geolocation['longitude'] = $request->header('longitude');
         }
-
         if (empty($query)) {
 
             return ['error' => true, 'message' => "Query is empty."];

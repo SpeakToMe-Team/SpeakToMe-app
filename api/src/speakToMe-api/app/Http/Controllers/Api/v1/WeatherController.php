@@ -15,14 +15,15 @@ class WeatherController extends ApiController
     private $countryCode;
     private $time;
 
-    public function __construct($intent)
+    public function __construct($intent,$geolocation)
     {
-        //dd($intent);
+
         if (isset($intent['entities']['location'][0]['value'])) {
             $this->city = $intent['entities']['location'][0]['value'];
-        } else {
-            $this->latitude = '45.770297';
-            $this->longitude = '4.863703';
+        } elseif(!empty($geolocation['latitude']) && !empty($geolocation['longitude'])) {
+
+            $this->latitude = $geolocation['latitude'];
+            $this->longitude = $geolocation['longitude'];
         }
         if (isset($intent['entities']['datetime'])) {
             $this->time = $intent['entities']['datetime'];
@@ -33,7 +34,16 @@ class WeatherController extends ApiController
     {
 
         $client = new Client();
-        $response = $client->request('GET', 'api.openweathermap.org/data/2.5/forecast/daily', $this->getQueryParams());
+        $params=$this->getQueryParams();
+
+        if($params==NULL){
+            return [
+                'error'=>TRUE,
+                'message'=>'Aucune ville ou coordonée fournie'
+
+            ];
+        }
+        $response = $client->request('GET', 'api.openweathermap.org/data/2.5/forecast/daily', $params);
         $body = $response->getBody();
         $objResponse = json_decode($body, true);
         /*DEBUG, a enlever si appel des infos complémentaires côté front*/
@@ -185,9 +195,11 @@ class WeatherController extends ApiController
 
         if (!is_null($this->city)) {
             $params['query']['q'] = $this->city . (!is_null($this->countryCode) ? $this->countryCode : null);
-        } else {
+        } elseif(!is_null($this->latitude) && !is_null($this->longitude)) {
             $params['query']['lat'] = $this->latitude;
             $params['query']['lon'] = $this->longitude;
+        }else{
+            return NULL;
         }
         return $params;
     }
