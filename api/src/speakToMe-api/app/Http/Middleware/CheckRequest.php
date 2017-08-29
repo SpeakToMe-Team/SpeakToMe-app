@@ -29,6 +29,8 @@ class CheckRequest
             return ['error' => true, 'message' => "token secret incorrect"];
         }
 
-        return $next($request);
+        return $next($request)
+            ->header('Access-Control-Allow-Origin', '*')
+            ->header('Access-Control-Allow-Methods', 'GET');
     }
 }
