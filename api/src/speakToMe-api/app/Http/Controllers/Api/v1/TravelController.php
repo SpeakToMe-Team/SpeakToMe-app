@@ -20,7 +20,7 @@ class TravelController extends ApiController
             } else {
                 $this->location = $intent['entities']['location'][0]['value'];
             }
-        } elseif (!empty($geolocation)) {
+        } elseif (!empty($geolocation['latitude']) && !empty($geolocation['latitude'])) {
             $this->latitude = $geolocation['latitude'];//'45.770297';
             $this->longitude = $geolocation['longitude'];//'4.863703';
         }
