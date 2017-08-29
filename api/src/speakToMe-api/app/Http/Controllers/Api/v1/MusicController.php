@@ -9,9 +9,6 @@ class MusicController extends ApiController
     private $query = [];
     private $regenerate;
     private $prep= array (' de ','%20de%20',' des ','%20des%20',' par ','%20par%20');
-    private $track;
-    private $artist;
-    private $album;
     private $limit = 10;
     private $searchType = [];
 
