@@ -17,7 +17,7 @@ class WeatherController extends ApiController
 
     public function __construct($intent)
     {
-
+        //dd($intent);
         if (isset($intent['entities']['location'][0]['value'])) {
             $this->city = $intent['entities']['location'][0]['value'];
         } else {
@@ -130,6 +130,7 @@ class WeatherController extends ApiController
         $result['rawdata'] = $aqi;
         return $result;
     }
+
 
     /*Enrichie le contenu de aqi par un message en fonction de l'indice aqi*/
 

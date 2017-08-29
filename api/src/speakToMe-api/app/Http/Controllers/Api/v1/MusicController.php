@@ -11,13 +11,28 @@ class MusicController extends ApiController
     protected $regenerate;
     protected $i = 0;
     protected $prep= array (' de ','%20de%20',' des ','%20des%20',' par ','%20par%20');
+    private $intent;
 
 
     public function __construct($intent) {
-        //dd($intent);
-        if (isset($intent['entities']['search_query'][0]['value'])) {
-            $this->query = $intent['entities']['search_query'][0]['value'];
-        }
+
+        $client = new Client(['base_uri' => 'https://api.wit.ai/']);
+        $params = [
+            'query' => [
+                'q' => $intent['_text'],
+            ],
+            'headers' => [
+                'Authorization' => 'Bearer SJP4RTSTE7GCF7JMOU6OPCOPN52NKOT4',
+            ],
+            'http_errors' => false
+        ];
+        $response = $client->request('GET', 'message', $params);
+        $body = $response->getBody();
+        $objResponse = json_decode($body, true);
+
+        //if (isset($intent['entities']['search_query'][0]['value'])) {
+           // $this->query = $intent['entities']['search_query'][0]['value'];
+       // }
     }
 
     public function run()

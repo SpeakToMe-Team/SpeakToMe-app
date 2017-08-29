@@ -40,7 +40,6 @@ class SpeechController extends Controller
     }
 
     public function getTargetApi() {
-
         if (isset($this->intent['entities']['intent'][0])) {
             $intent = $this->intent['entities']['intent'][0]['value'];
             if (array_key_exists($intent, config('external_api.keywords'))) {

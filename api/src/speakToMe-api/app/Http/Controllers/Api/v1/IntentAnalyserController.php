@@ -19,13 +19,13 @@ class IntentAnalyserController extends ApiController
         $response = $client->request('GET', 'message', $this->getQueryParams());
         $body = $response->getBody();
         $objResponse = json_decode($body, true);
-        //dd($objResponse);
+
         return $objResponse;
     }
     
     public function getQueryParams() {
 
-        $params = [
+        return [
             'query' => [
                 'q' => $this->message,
             ],
@@ -34,7 +34,6 @@ class IntentAnalyserController extends ApiController
             ],
             'http_errors' => false
         ];
-        return $params;
     }
 
     public function generateToken() {}
