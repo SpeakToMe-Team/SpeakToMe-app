@@ -353,10 +353,9 @@ border-radius: 20px;
     display: none;
 }
 
-
-      #map {
-        height: 100%;
-      }
+#map {
+    height: 100%;
+}
 /* Module default */
 .start{
     font-family: 'Reenie Beanie', cursive;
@@ -404,4 +403,19 @@ border-radius: 20px;
 #meteo .details ul{
     list-style: none;
     font-weight: bold;
+}
+
+/* Movies */
+.movie {
+    margin:auto;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.imgMovie {
+   display: inline-block;
+   width: 20%;
+}
+.infoMovie {
+   display: inline-block;
+   width: 70%;
 }
