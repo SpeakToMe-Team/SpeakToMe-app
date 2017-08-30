@@ -1,24 +1,29 @@
-<div id="yelp" class="row">
-    <div class="details col-md-6 col-sm-12">
-        <div class="travel" v-for="(travel, key, index) of contentTravel.list">
+<div class="travel row" v-for="(travel, key, index) of contentTravel.list">
+    <div class="details col-md-12 ">
+        <div class="row">
             <div class="msgVocal hide">
                 {{ travel.msgVocal }}
             </div>
-            <div class="imgTravel">
-                <a v-bind:href="travel.url" target='_blank'>
+            <div class="imgTravel col-md-6 col-sm-12" :style="{ backgroundImage: 'url(' + travel.image_url + ')' }">
+                <!-- <a v-bind:href="travel.url" target='_blank'>
                 <img v-bind:src="travel.image_url" v-bind:alt="travel.name" width='200px'>
-            </a>
+                </a> -->
             </div>
-            <div class="infoTravel">
+            <div class="infoTravel col-md-6 col-sm-12">
+                <h3>{{ travel.name }}</h3>
+                <small>{{ travel.price }}</small>
                 <address v-html="travel.address"></address>
-                Nom : {{ travel.name }}<br /> Note : {{ travel.rating }}<br /> Nombre d'avis : {{ travel.review_count }}<br/>                Catégories : {{ travel.categories }}<br /> {{ travel.address }}<br /> {{ travel.display_phone }}<br />Prix
-                : {{ travel.price }}<br />
-            </div>
-
-            <div class="mapYelp" class=" col-md-6 col-sm-12">
-                <iframe class="iframeYelp" width="100%" height="250" frameborder="0" style="border:0" v-bind:src="travel.addressMap" allowfullscreen>
-                </iframe>
+                <ul>
+                    <li>Note : <strong>{{ travel.rating }}</strong></li>
+                    <li>Nombre d'avis : <strong>{{ travel.review_count }}</strong></li>
+                    <li>Catégories : <strong>{{ travel.categories}}</strong></li>
+                    <li><i class="fa fa-phone" aria-hidden="true"></i><strong>{{ travel.display_phone }}</strong></li>
+                </ul>
             </div>
         </div>
+    </div>
+    <div class="mapYelp col-md-12 ">
+        <iframe class="iframeYelp" width="100%" height="250" frameborder="0" style="border:0" v-bind:src="travel.addressMap" allowfullscreen>
+        </iframe>
     </div>
 </div>

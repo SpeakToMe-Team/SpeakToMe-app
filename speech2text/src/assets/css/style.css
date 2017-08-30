@@ -458,3 +458,53 @@ input {
    display: inline-block;
    width: 70%;
 }
+
+/* Module yelp */
+.module-travel{
+    background-color: #6c6f71;
+}
+.travel, .row{
+    width: 100%;
+    margin: 0px;
+}
+.travel .imgTravel{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.travel .infoTravel{
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+.travel .infoTravel h3{
+    font-family: 'Oswald', sans-serif;
+    font-size: 2em;
+    text-align: center;
+}
+.travel .infoTravel small{
+    color: yellow;
+    font-size: 1em;
+    text-align: center;
+} 
+.travel .infoTravel address{
+    margin-top: 25px;
+}
+.travel .infoTravel ul{
+    list-style: none;
+}
+.travel .mapYelp{
+    opacity: 0.5;
+}
+.travel .mapYelp:hover{
+    transition: 0.5s;
+    opacity: 1;
+}
+.travel iframe{
+    height: 100%;
+}
+
+.travel .imgTravel a, img{
+    width: 100%;
+    opacity: 0.5;
+}
