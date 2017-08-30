@@ -249,7 +249,9 @@ class MovieController extends ApiController
         }
         
         // Retour de la réponse
-        return $this->addIntent($response);
+        $objetReponse                = $this->addIntent($response);
+        $objetReponse['sous-intent'] = $this->demande;
+        return $objetReponse;
     }
     
     public function getQueryParams() 
