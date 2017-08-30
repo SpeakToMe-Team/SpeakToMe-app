@@ -70,9 +70,10 @@ var show = function(answer) {
                 
             break;
         case "travel":
+            traitementTravel(answer);
 
             break;
-        case "travel":
+        case "music":
 
             break;
         default:
