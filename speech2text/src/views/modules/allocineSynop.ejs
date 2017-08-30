@@ -1,0 +1,40 @@
+<p id="msgVocal">{{ contentMovie.msgVocal }}</p><br />
+
+<div class="movie" v-for="(movie, key, index) of contentMovie.listMovies">
+    
+    <div v-if="movie.hasOwnProperty('poster')" class="imgMovie">
+        <img v-bind:src="movie.poster.href" v-bind:alt="movie.originalTitle" width='200px'></img>
+    </div>
+    
+    <!--<div class="imgMovie">
+        <a v-bind:href="movie.link[0].href" target='_blank'>
+            <img v-bind:src="movie.poster.href" v-bind:alt="movie.originalTitle" width='200px'></img>
+        </a>            
+    </div>-->
+    <div class="infoMovie">
+        <div v-html="movie.trailerEmbed"></div>
+        <p>{{ movie.originalTitle }}<br />
+            Date : {{ movie.productionYear }}
+            <span v-if="movie.hasOwnProperty('movieCertificate')">
+                <br />Age : {{ movie.movieCertificate.certificate.$ }}
+            </span>
+            <span v-if="movie.link[0].hasOwnProperty('href')">
+                <a v-bind:href="movie.link[0].href" target='_blank'>En savoir +</a> 
+            </span>
+        </p>
+
+        <br />
+
+        <p>Casting :</p>
+        <ul id="example-2">
+            <li v-for="(character, key, index) of movie.castingShort">
+                {{ key }} : {{ character }}
+            </li>
+        </ul>
+    </div>
+    
+</div>
+
+
+
+<p><i>info raw : {{ contentMovie }}</i></p>
