@@ -91,7 +91,7 @@ var emitQuestion = function(question){
 
 socket.on('answer', function(answer) {
     console.log('réception de la réponse');
-    //console.log(answer);
+    console.log(JSON.stringify(answer));
 
     show(answer);
 });

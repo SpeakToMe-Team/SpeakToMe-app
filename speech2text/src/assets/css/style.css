@@ -403,6 +403,15 @@ border-radius: 20px;
 #meteo .details ul{
     list-style: none;
     font-weight: bold;
+    padding: 15px 0px;
+    margin: auto;
+}
+#meteo .details ul li{
+    margin-bottom: 10px;
+}
+#meteo .details ul li img{
+    margin-right: 15px;
+    width: 20%;
 }
 
 /* Movies */

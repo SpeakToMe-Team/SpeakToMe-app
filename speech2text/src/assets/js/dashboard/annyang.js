@@ -31,7 +31,7 @@ if (annyang) {
             
         },
         // Pour toutes les recherches avec l'API : définir un mot clé 'ok google'...
-        'ok google *question': emitQuestion
+        'dis-moi speechi *question': emitQuestion
     };
     annyang.addCommands(commands);
     annyang.setLanguage('fr-FR');
