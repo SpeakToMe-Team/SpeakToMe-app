@@ -25,23 +25,27 @@ class TravelModule {
 
     getList() {
         let list = this._json.response;
-
         var newList = [];
 
         list.forEach(function(element, index) {
-            console.log(index + ' => ' + element.name);
             let categoriesArr = [];
             element.categories.forEach(function(e,i) {
                 categoriesArr.push(e.title);
             });
-console.log(categoriesArr.join(', '));
             element.categories = categoriesArr.join(', ');
             var srcStart = "https://maps.google.com/maps?q=";
             var srcLoc = element.address1;
             var srcEnd = "%2C%20FR&t=&z=14&ie=UTF8&iwloc=&output=embed";
             element.addressMap =srcStart + element.location.display_address[0] + srcEnd;
+            let categorieMsgVocal = categoriesArr.count > 0 ? 'Catégorie ' + element.categories + ', ' : '';
             element.address = element.location.display_address.join('<br>');
-            element.msgVocal = element.name;
+            element.msgVocal =
+                element.name + ', ' +
+                element.rating.toString().replace('.', ',') + ' étoile sur 5, ' +
+                element.review_count + ' avis, ' +
+                categorieMsgVocal +
+                element.address.replace('<br>', ' ') + ', ' +
+                element.display_phone;
             newList.push(element);
         }, this);
 
@@ -54,23 +58,6 @@ function traitementTravel(answer) {
     let nbrBusiness = travel.getNumberList();
 
     if (nbrBusiness !== false) {
-        // var content = {
-        //     coordinates: stringGeolocation,
-        //     name: stringJour,
-        //     rating: stringJour,
-        //     categories: stringJour,
-        //     review_count: stringJour,
-        //     address: stringJour,
-        //     phone: stringJour,
-        //     msgVocal: stringVoiceMsg,
-        //     picture: iconDescription,
-        // }
-        //
-        // dashboard.contentTravel = content;
-        // dashboard.isActiveTravelModule = true;
-        //
-        // parler('Hello world!');
-
 
         if (nbrBusiness == 0){
             var stringVoiceMsg = "Je n'ai trouvé aucun résultat qui corresponde à votre recherche.";

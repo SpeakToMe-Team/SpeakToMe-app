@@ -100,10 +100,6 @@ var show = function(answer) {
             }
             
             break;
-        case "music":
-
-            break;
-
 
         case "music":
             console.log(answer);
@@ -116,7 +112,6 @@ var show = function(answer) {
 
         default:
             parler("Désolé, je n'ai rien trouvé ! Veuillez recommencer !");
-
             break;
 
     }
@@ -127,6 +122,27 @@ var emitQuestion = function (question) {
     socket.emit('question', question);
 
     parler('Je viens de lancer la recherche, merci de patienter !');
+}
+
+var emitResultRequest = function (number) {
+    // let text = $('.msgVocal[data-result-number="' + number + '"]').text();
+
+    $('.msgVocal').each(function(i,e) {
+        if (i+1 == number) {
+            console.log($(e));
+            let text = $(e).text();
+
+            console.log(text);
+            if (typeof text != 'undefined') {
+                parler(text);
+            } else {
+                parler("Il n'y a pas de résultat " + number + '.');
+            }
+            return false;
+        }
+    });
+
+
 }
 
 socket.on('answer', function (answer) {
