@@ -36,6 +36,10 @@ class TravelModule {
             });
 console.log(categoriesArr.join(', '));
             element.categories = categoriesArr.join(', ');
+            var srcStart = "https://maps.google.com/maps?q=";
+            var srcLoc = element.address1;
+            var srcEnd = "%2C%20FR&t=&z=14&ie=UTF8&iwloc=&output=embed";
+            element.addressMap =srcStart + element.location.display_address[0] + srcEnd;
             element.address = element.location.display_address.join('<br>');
             element.msgVocal = element.name;
             newList.push(element);
@@ -92,4 +96,5 @@ function traitementTravel(answer) {
         dashboard.isActiveTravelModule = false;
         parler("Désolé ! Je n'ai pas trouvé de réponse à votre question.");
     }
+    
 }
