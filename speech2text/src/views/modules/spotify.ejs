@@ -1,12 +1,21 @@
 
-<div class="music" v-for="(artist, key) of contentMusic.artists">
-    <p>{{ artist.name}}</p>
-</div>
-<div class="music" v-for="(album, key) of contentMusic.albums">
-    {{ key }}: {{ album}}
-</div>
-<div class="music" v-for="(track, key) of contentMusic.tracks">
-    {{ key }}: {{track}}
+<!--<div class="music" v-for="(artist, key) of contentMusic.listMusic.artists">-->
+
+<!--</div>-->
+<!--<div class="music" v-for="(album, key) of contentMusic.listMusic.albums">-->
+
+<!--</div>-->
+<div v-if="contentMusic.listMusic">
+    <div v-if="contentMusic.listMusic.tracks">
+        <h3>CHANSONS</h3>
+        <div class="music" v-for="(track, key) of contentMusic.listMusic.tracks">
+            {{ track.name}}
+            {{ track.artists[0].name}}
+            <div><img v-bind:src="track.album.images[1].url" width='200px'></div>
+        </div>
+
+    </div>
+
 </div>
     <!--<div class="imgMusic">-->
         <!--<a v-bind:href="music.link[0].href" target='_blank'>-->
@@ -31,4 +40,3 @@
             <!--</li>-->
         <!--</ul>-->
     <!--</div>-->
-

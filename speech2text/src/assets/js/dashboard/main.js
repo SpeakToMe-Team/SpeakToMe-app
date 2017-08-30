@@ -100,10 +100,6 @@ var show = function(answer) {
             }
             
             break;
-        case "music":
-
-            break;
-
 
         case "music":
             console.log(answer);
