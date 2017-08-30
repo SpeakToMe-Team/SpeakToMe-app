@@ -48,9 +48,8 @@ var parler = function (stringVoiceMsg){
     annyang.resume();
     annyang.resume();
 }
-
 var show = function(answer) {
-    console.log(answer);
+
 
     // Réinitialisation
     dashboard.init();        
@@ -72,7 +71,9 @@ var show = function(answer) {
         case "travel":
 
             break;
-        case "travel":
+        case "music":
+            console.log(answer);
+            traitementMusic(answer);
 
             break;
         default:

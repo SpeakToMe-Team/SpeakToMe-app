@@ -9,7 +9,8 @@ var dashboard = new Vue({
         isActiveWeatherModule: false,
         contentWeather: '',
         tempWeather: '',
-        contentMovie: ''
+        contentMovie: '',
+        contentMusic:'',
     },
     methods: {
         init: function () {
@@ -18,6 +19,7 @@ var dashboard = new Vue({
             this.isActiveTravelModule = false
             this.isActiveWeatherModule = false
             this.contentWeather = ''
+            this.contentMusic = ''
         }
     }
 });
