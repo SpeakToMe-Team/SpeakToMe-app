@@ -16,6 +16,10 @@ class MovieModule {
         return this._jsonMovie.intent;
     }
 
+    getSousIntent() {
+        return this._jsonMovie.sous-intent;
+    }
+
     getNumberMovie() {
         if(this._jsonMovie.response.feed['movie'].length > 0){
             return this._jsonMovie.response.feed['movie'].length;
@@ -76,10 +80,9 @@ function traitementMovieSeance (answer) {
     }
 }
 
-function traitementMovieAffiche(answer) {
-    console.log('movie affiche');
-}
-
 function traitementMovieInformations(answer) {
     console.log('movie informations');
+    console.log(answer);
+    let Movie = new MovieModule(answer);
+
 }

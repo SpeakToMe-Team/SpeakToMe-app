@@ -88,7 +88,7 @@ var show = function(answer) {
 
                     break;
                 case "affiche":
-                    traitementMovieAffichge(answer);
+                    traitementMovieAffiche(answer);
 
                     break;
 

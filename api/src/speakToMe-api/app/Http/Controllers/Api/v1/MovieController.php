@@ -151,6 +151,11 @@ class MovieController extends ApiController
             }
             
         }
+
+        // Si on a une demande d'affiche
+        if (array_key_exists('movie_affiche', $intent["entities"])) {
+            $this->demande = 'affiche';
+        }
     }
 
     public function run() 
@@ -199,7 +204,7 @@ class MovieController extends ApiController
         }
         
         // Si nous avons une search_query, c'est problablement un film
-        if ($this->recherche) {
+        if ($this->recherche && $this->demande != 'affiche') {
             // On veut trouver le code du film, comme ça on récupèrera les séances de ce film uniquement
             $parametres['query']['q']      = $this->recherche;
             $parametres['query']['filter'] = 'movie';
