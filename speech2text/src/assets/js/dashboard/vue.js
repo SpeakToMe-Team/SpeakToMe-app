@@ -19,7 +19,7 @@ var dashboard = new Vue({
     methods: {
         init: function () {
             this.isActiveMovieModule = false
-            this.œisActiveMovieInformationsModule = false
+            this.isActiveMovieInformationsModule = false
             this.isActiveMovieAfficheModule = false
             this.isActiveMovieSeanceModule = false
             this.isActiveMusicModule = false

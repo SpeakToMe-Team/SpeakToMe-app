@@ -78,6 +78,7 @@ var show = function(answer) {
             break;
         case "movie":
             var sousIntent = mainModule.getSousIntent();
+            dashboard.isActiveMovieModule = true;
             switch (sousIntent) {
                 case "informations":
                     traitementMovieInformations(answer);
