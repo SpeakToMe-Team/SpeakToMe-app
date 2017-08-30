@@ -124,6 +124,7 @@ var emitQuestion = function (question) {
 }
 
 var emitResultRequest = function (number) {
+    console.log('number ' + number);
     // let text = $('.msgVocal[data-result-number="' + number + '"]').text();
 
     $('.msgVocal').each(function(i,e) {

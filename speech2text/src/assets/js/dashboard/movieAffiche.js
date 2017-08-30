@@ -55,6 +55,6 @@ function traitementMovieAffiche(answer) {
     console.log(listeMovies);
 
     dashboard.contentMovie = listeMovies;
-    dashboard.isActiveMovieModule = true;
+    dashboard.isActiveMovieAfficheModule = true;
     // dashboard.
 }
