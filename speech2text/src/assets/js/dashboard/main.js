@@ -17,7 +17,19 @@ class Module {
     }
 
     getIntent () {
-        return this._json.intent;
+        if(this._json.hasOwnProperty('intent')){
+            return this._json.intent;
+        }else{
+            return false;
+        }         
+    }
+
+    getSousIntent () {
+        if(this._json.hasOwnProperty('sous-intent')){
+            return this._json.sous-intent;
+        }else{
+            return false;
+        }        
     }
 
 }
@@ -66,9 +78,25 @@ var show = function(answer) {
 
             break;
         case "movie":
-            traitementMovie(answer);
+            var sousIntent = mainModule.getSousIntent();
+            switch (sousIntent) {
+                case "informations":
+                    traitementMovieInformations(answer);
+
+                    break;
+                case "seance":
+                    traitementMovieSeance(answer);
+
+                    break;
+                case "affiche":
+                    traitementMovieAffichge(answer);
+
+                    break;           
                 
-            break;
+                default:
+                    parler("Désolé, je n'ai pas bien compris votre demande de film !");
+                    
+                    break;                            
         case "travel":
 
             break;
@@ -76,7 +104,8 @@ var show = function(answer) {
 
             break;
         default:
-            
+            parler("Désolé, je n'ai rien trouvé ! Veuillez recommencer !");
+
             break;        
     }        
 }

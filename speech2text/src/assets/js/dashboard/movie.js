@@ -40,8 +40,8 @@ class MovieModule {
     }
 }
 
-function traitementMovie (answer) {
-    console.log('movie');
+function traitementMovieSeance (answer) {
+    console.log('movie seance');
             
     let Movie = new MovieModule(answer);
     var nbrMovies = Movie.getNumberMovie();
@@ -74,4 +74,12 @@ function traitementMovie (answer) {
         dashboard.isActiveMovieModule = false;
         parler("Désolé ! Je n'ai pas trouvé de réponse à votre question.");
     }
+}
+
+function traitementMovieAffiche(answer) {
+    console.log('movie affiche');
+}
+
+function traitementMovieInformations(answer) {
+    console.log('movie informations');
 }
