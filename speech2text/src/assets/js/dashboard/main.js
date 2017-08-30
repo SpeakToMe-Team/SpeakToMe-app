@@ -101,6 +101,7 @@ var show = function (answer) {
             
             break;
         case "music":
+
             break;
 
         case "travel":
