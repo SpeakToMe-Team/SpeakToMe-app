@@ -12,19 +12,3 @@ $('#poke').click(function (event) {
     console.log('poke');
     socket.emit('message', 'Salut serveur, ça va ?');
 });
-
-$('#input-emitQuestion').keyup(function(event) {
-	if (event.which == 13) {
-		$('#bouton-emitQuestion').click();
-	};
-});
-
-$('#bouton-emitQuestion').click(function(e) {
-	e.preventDefault();
-	var question = $('#input-emitQuestion').val();
-
-	console.log('bouton question ? ' + question);
-    socket.emit('question', question);
-    
-    parler('Je viens de lancer la recherche avec le bouton !');
-});

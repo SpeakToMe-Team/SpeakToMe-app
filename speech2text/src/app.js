@@ -112,14 +112,16 @@ io.on('connection', function (socket) {
          socket.emit('message', { 'title': "Bienvenue avec socket.io !" });
     });
 
-    socket.on('question', function (question) {
-
+    socket.on('question', function (json) {
         var secret = 'eyJpdiI6ImZ6cHhydUhQSDNUUkFzNjhFb05lekE9PSIsInZhbHVlIjoiMXJlZTZPUlVqSTJJSUN5TFJSSkIwQT09IiwibWFjIjoiMGQ1NjEyNTMxZThlMDMxZWJhNTM2ZTBlNWIxN2I1M2JkNTNiYzI0MjAyYmFlNzZmZGE3ZDRhNGEzZmZhZWVmZiJ9';
-        var latitude = "45.77";
-        var longitude = "4.86";
+        
+        console.log(json);       
+   
+        var latitude = json.position.latitude;
+        var longitude = json.position.longitude;            
 
         var args = {
-            path: { "query": question },
+            path: { "query": json.question },
             headers: { "secret": secret, "latitude": latitude, "longitude": longitude }
         };
 
