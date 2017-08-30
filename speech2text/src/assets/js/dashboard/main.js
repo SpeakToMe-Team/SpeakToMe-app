@@ -95,11 +95,11 @@ var show = function (answer) {
 
                 default:
                     parler("Désolé, je n'ai pas bien compris votre demande de film !");
-
+                    
                     break;
             }
+            
             break;
-
         case "music":
             break;
 
