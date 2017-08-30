@@ -98,9 +98,15 @@ var show = function (answer) {
 
                     break;
             }
-        case "travel":
-            console.log("travel");
             break;
+
+        case "music":
+            break;
+
+        case "travel":
+            traitementTravel(answer);
+            break;
+
         default:
             parler("Désolé, je n'ai rien trouvé ! Veuillez recommencer !");
 
