@@ -297,6 +297,7 @@ input {
     margin-top: 6px;
     display: inline-block;
     border-radius: 30px;
+    cursor: pointer;
 }
 .dashboard-page .search button.btn.btn-search > i{
     font-size: 17px;
