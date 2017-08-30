@@ -7,12 +7,15 @@
         </a>
     </div>
     <div class="infoTravel">
-        Nom : {{ travel.name }}<br />
+        Nom : {{ travel.name }}
         Note : {{ travel.rating }}<br />
         Nombre d'avis : {{ travel.review_count }}<br />
         Catégories : {{ travel.categories }}<br />
-        {{ travel.address }}<br />
+        <address v-html="travel.address"></address>
         {{ travel.display_phone }}<br />
+    </div>
+    <div class="msgVocal hide">
+        {{ travel.msgVocal }}
     </div>
 
 </div>

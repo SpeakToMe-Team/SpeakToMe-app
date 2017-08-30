@@ -30,6 +30,8 @@ if (annyang) {
             $('#test-button').trigger('submit');
             
         },
+        'écouter résultat *number': emitResultRequest,
+
         // Pour toutes les recherches avec l'API : définir un mot clé 'ok google'...
         'dis-moi speechi *question': emitQuestion
     };
