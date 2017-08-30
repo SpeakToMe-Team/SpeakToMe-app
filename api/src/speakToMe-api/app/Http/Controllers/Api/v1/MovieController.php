@@ -246,11 +246,13 @@ class MovieController extends ApiController
         // Sinon on sort la liste des films du moment
         else {
             $response = $this->getFilmsDuMoment($client, $parametres);
+            $this->demande = 'affiche';
         }
         
         // Retour de la réponse
         $objetReponse                = $this->addIntent($response);
         $objetReponse['sous-intent'] = $this->demande;
+
         return $objetReponse;
     }
     
