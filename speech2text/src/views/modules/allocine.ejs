@@ -5,18 +5,25 @@
 
 
 <div class="movie" v-for="(movie, key, index) of contentMovie.listMovies">
-    <div class="imgMovie">
+    
+    <div v-if="movie.hasOwnProperty('poster')" class="imgMovie">
+        <img v-bind:src="movie.poster.href" v-bind:alt="movie.originalTitle" width='200px'></img>
+    </div>
+    
+    <!--<div class="imgMovie">
         <a v-bind:href="movie.link[0].href" target='_blank'>
             <img v-bind:src="movie.poster.href" v-bind:alt="movie.originalTitle" width='200px'></img>
         </a>            
-    </div>
+    </div>-->
     <div class="infoMovie">
         <p>{{ movie.originalTitle }}<br />
             Date : {{ movie.productionYear }}
             <span v-if="movie.hasOwnProperty('movieCertificate')">
                 <br />Age : {{ movie.movieCertificate.certificate.$ }}
             </span>
-
+            <span v-if="movie.link[0].hasOwnProperty('href')">
+                <a v-bind:href="movie.link[0].href" target='_blank'>En savoir +</a> 
+            </span>
         </p>
 
         <br />
