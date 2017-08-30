@@ -164,7 +164,7 @@ class MovieController extends ApiController
         // Si nous avons une demande pour un cinéma en particulier, on effectue un pré-traitement
         if ($this->cinema) {
             $listeSalles = $this->getListeSalles($client, $parametres);
-            $listeSalles = json_decode($listeSalles->getBody(), true);
+            // $listeSalles = json_decode($listeSalles->getBody(), true);
 
             // Si on a des résultats (normalement toujours, mais bon on sait jamais hein)
             if (array_key_exists('feed', $listeSalles) && array_key_exists('theater', $listeSalles['feed'])) {
@@ -206,7 +206,7 @@ class MovieController extends ApiController
             $parametres['query']['count']  = '10';
 
             $informationsFilm = $this->getInformationsFilm($client, $parametres);
-            $informationsFilm = json_decode($informationsFilm->getBody(), true);
+            // $informationsFilm = json_decode($informationsFilm->getBody(), true);
             
             // Si on a des résultats
             if (array_key_exists('feed', $informationsFilm) && array_key_exists('movie', $informationsFilm['feed'])) {
@@ -226,20 +226,30 @@ class MovieController extends ApiController
 
         // Sinon, si la demande est informations
         else if ($this->demande == 'informations') {
-            $response = $this->getInformationsFilm($client, $parametres);
+            // On récupère les informations sur le film
+            $informationsFilm = $this->getInformationsFilm($client, $parametres);
+
+            // Si on a des résultats, on les parcourt pour récupérer + d'informations
+            if (array_key_exists('feed', $informationsFilm) && array_key_exists('movie', $informationsFilm['feed'])) {
+                if (count($informationsFilm['feed']['movie']) > 0) {
+                    foreach ($informationsFilm['feed']['movie'] as &$film) {
+                        $parametres['query']['code'] = $film['code'];
+                        $film              = $this->getDetailsFilm($client, $parametres);
+                    }    
+                }
+            }
+            
+            // On retournera ce jeu de résultat + complet
+            $response = $informationsFilm;
         }
 
         // Sinon on sort la liste des films du moment
         else {
             $response = $this->getFilmsDuMoment($client, $parametres);
         }
-
-        // Récupération de la réponse et encodage en JSON
-        $body = $response->getBody();
-        $json = json_decode($body, true);
         
         // Retour de la réponse
-        return $this->addIntent($json);
+        return $this->addIntent($response);
     }
     
     public function getQueryParams() 
@@ -306,6 +316,10 @@ class MovieController extends ApiController
             $compteurRequete++;
         }
 
+        // On parse la réponse
+        $response = $response->getBody();
+        $response = json_decode($response, true);
+
         // Retour de la réponse
         return $response;
     }
@@ -321,9 +335,33 @@ class MovieController extends ApiController
             $response = $client->request('GET', 'http://api.allocine.fr/rest/v3/search', $parametres);
             $compteurRequete++;
         }
+
+        // On parse la réponse
+        $response = $response->getBody();
+        $response = json_decode($response, true);
         
         // Retour de la réponse
         return $response;
+    }
+
+    public function getDetailsFilm($client, $parametres)
+    {
+        // Envoi de la requête
+        $response = $client->request('GET', 'http://api.allocine.fr/rest/v3/movie', $parametres);
+        $compteurRequete = 0;
+
+        // On insiste jusqu'à obtenir une réponse
+        while ($response->getStatusCode() != '200' && $compteurRequete < 100) {
+            $response = $client->request('GET', 'http://api.allocine.fr/rest/v3/movie', $parametres);
+            $compteurRequete++;
+        }
+        
+        // On parse la réponse
+        $response = $response->getBody();
+        $response = json_decode($response, true);
+
+        // Retour de la réponse
+        return $response;   
     }
 
     public function getSeancesCinema($client, $parametres) 
@@ -338,6 +376,10 @@ class MovieController extends ApiController
             $compteurRequete++;
         }
         
+        // On parse la réponse
+        $response = $response->getBody();
+        $response = json_decode($response, true);
+
         // Retour de la réponse
         return $response;
     }
@@ -358,6 +400,10 @@ class MovieController extends ApiController
             $response = $client->request('GET', 'http://api.allocine.fr/rest/v3/movielist', $parametres);
             $compteurRequete++;
         }
+
+        // On parse la réponse
+        $response = $response->getBody();
+        $response = json_decode($response, true);
 
         // Retour de la réponse
         return $response;   
