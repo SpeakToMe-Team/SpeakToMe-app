@@ -448,17 +448,71 @@ input {
 .movie {
     margin:auto;
     width: 100%;
-    margin-bottom: 10px;
+    background-color: #626669;
 }
-.imgMovie {
-   display: inline-block;
-   width: 20%;
+.movie .infoMovie {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
-.infoMovie {
-   display: inline-block;
-   width: 70%;
+.movie .infoMovie .details {
+    background-color: black;
+    height: 100%;
+    width: 100%;
+    opacity: 0.7;
+    color: white;
+    padding: 25px;
 }
-
+.movie .infoMovie h3 {
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    font-weight: bold;
+    font-size: 2em;
+    margin-bottom: 8%;
+    margin-top: 5%;
+}
+.movie .infoMovie .detailList {
+    padding: 15%;
+}
+.movie .infoMovie h4 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+.movie .infoMovie ul {
+    list-style: none;
+}
+.movie .synop {
+    background: black;
+}
+.movie .synop h4 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+.movie .synop div{
+    margin: 30px;
+    opacity: 0.6;
+}
+.movie .synop div p{
+    font-family: 'Tinos', serif;
+    margin: 5%;
+    color: white;
+}
+.movie .synop div p a{
+    color: white;
+}
+.movie .trailer{
+    margin: auto;
+    text-align: center;
+    padding: 5%;
+}
+.movie .trailer a{
+    display: none;
+}
+.movie .trailer iframe{
+    height: 100%;
+}
 /* Module yelp */
 .module-travel{
     background-color: #6c6f71;
@@ -508,3 +562,4 @@ input {
     width: 100%;
     opacity: 0.5;
 }
+/* Fin Module yelp */
