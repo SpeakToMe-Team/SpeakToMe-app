@@ -29,7 +29,7 @@ class MovieModule {
 
         var newList = [];
 
-        list.forEach(function(element, index) {                
+        list.forEach(function(element, index) {
             console.log(index + ' => ' + element.originalTitle);
             let title = element.originalTitle;
             element.msgVocal = title;                
@@ -38,7 +38,85 @@ class MovieModule {
 
         return newList;
     }
+
+    getListMoviesInformation() {
+        let list = this._jsonMovie.response.feed['movie'];
+
+        var newList = [];
+
+        list.forEach(function(element, index) {
+            console.log(index + ' => ' + element.movie.originalTitle);
+            let title = element.movie.originalTitle;
+            element.msgVocal = title;                
+            newList.push(element);
+        }, this);
+
+        return newList;
+    }
+
+    getNumberMovie() {
+        if(this._jsonMovie.response.feed['movie'].length > 0){
+            return this._jsonMovie.response.feed['movie'].length;
+        }else{
+            return false;
+        }
+    }
 }
+
+class MovieInformationsModule {
+    constructor (json) {
+        this._jsonMovie = json;
+        this._jour = false;
+    }
+
+    get jsonMovie() {
+        return this._jsonMovie;
+    }
+
+    set jsonMovie(newJson){
+        this._jsonMovie = newJson;
+    }
+
+    getIntent () {
+        return this._jsonMovie.intent;
+    }
+
+    getListMovies() {
+        let list = this._jsonMovie.response.feed['movie'];
+
+        var newList = [];
+
+        list.forEach(function(element, index) {
+            console.log(index + ' => ' + element.movie.originalTitle);
+            let title = element.movie.originalTitle;
+            element.msgVocal = title;                
+            newList.push(element);
+        }, this);
+
+        return newList;
+    }
+
+    getNumberMovie() {
+        if(this._jsonMovie.response.feed['movie'].length > 0){
+            return this._jsonMovie.response.feed['movie'].length;
+        }else{
+            return false;
+        }
+    }
+}
+
+function voiceMsg (nbrMovies) {
+    if(nbrMovies == 0 ){
+        var stringVoiceMsg = "Je n'ai trouvé aucun film qui corresponde à votre recherche.";
+    }else if (nbrMovies == 1){
+        var stringVoiceMsg = "Je viens de trouver 1 film qui correspond à votre recherche.";
+    }else{
+        var stringVoiceMsg = "Je viens de trouver " + nbrMovies + " films qui correspondent à votre recherche.";
+    }
+
+    return stringVoiceMsg;
+}   
+
 
 function traitementMovieSeance (answer) {
     console.log('movie seance');
@@ -48,13 +126,7 @@ function traitementMovieSeance (answer) {
     console.log('nombre movie : ' + nbrMovies);
     if( nbrMovies !== false){
 
-        if(nbrMovies == 0 ){
-            var stringVoiceMsg = "Je n'ai trouvé aucun film qui corresponde à votre recherche.";
-        }else if (nbrMovies == 1){
-            var stringVoiceMsg = "Je viens de trouver 1 film qui correspond à votre recherche.";
-        }else{
-            var stringVoiceMsg = "Je viens de trouver " + nbrMovies + " films qui correspondent à votre recherche.";
-        }
+        let stringVoiceMsg = voiceMsg(nbrMovies);
 
         // Pour chaque film, il faut créer une msgVocal personnalisé
         var listMovies = Movie.getListMovies();
@@ -82,4 +154,26 @@ function traitementMovieAffiche(answer) {
 
 function traitementMovieInformations(answer) {
     console.log('movie informations');
+    let Movie = new MovieInformationsModule(answer);
+
+    var nbrMovies = Movie.getNumberMovie();
+    console.log('nombre movie : ' + nbrMovies);
+    if( nbrMovies !== false){
+        let stringVoiceMsg = voiceMsg(nbrMovies);
+        let listMovies = Movie.getListMovies();   
+
+        var content = {
+            msgVocal: stringVoiceMsg,
+            listMovies: listMovies
+        }
+
+        dashboard.contentMovie = content;
+        dashboard.isActiveMovieInformationsModule = true;
+        parler(stringVoiceMsg);
+    }else{
+
+        dashboard.isActiveMovieInformationsModule = false;
+        parler("Désolé ! Je n'ai pas trouvé de réponse à votre question.");
+    }
+
 }
