@@ -209,7 +209,7 @@ class MovieController extends ApiController
             // $informationsFilm = json_decode($informationsFilm->getBody(), true);
             
             // Si on a des résultats
-            if (array_key_exists('feed', $informationsFilm) && array_key_exists('movie', $informationsFilm['feed'])) {
+            if (array_key_exists('movie', $informationsFilm['feed'])) {
                 // On enregistre le code du film
                 $parametres['query']['movie'] = $informationsFilm['feed']['movie'][0]['code'];
             }

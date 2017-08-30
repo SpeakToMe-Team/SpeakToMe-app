@@ -1,5 +1,4 @@
 <% layout('../layout') %>
-
     <div class="dashboard-page" id="dashboard">
         <div id="wrapper">
 
@@ -29,13 +28,13 @@
                             <input v-bind:value="phrase" type="text" name="request" placeholder="Dictez ou écrivez votre recherche ...">
                         </article>
 
-                        <article class=" col-sm-12 col-lg-10 animated zoomInUp">
+                         <article class=" col-sm-12 col-lg-10 animated zoomInUp">
                                 <div class="result col-md-12">
                             <h2 class="title">Resultats</h2>
 
-                            <div class="module-nomodule" :class="{ hide: isActiveWeatherModule || isActiveMusicModule || isActiveMovieModule || isActiveTravelModule }">
-                                <%-partial('../modules/nomodule')%>
-                            </div>
+                            <!-- <div class="module-weather" :class="{ hide: isActiveWeatherModule}">
+                                    <%-partial('../modules/nomodule')%>
+                            </div> -->
                             <div class="module-weather" :class="{ hide: !isActiveWeatherModule }">
                                 <%-partial('../modules/meteo')%>
                             </div>
