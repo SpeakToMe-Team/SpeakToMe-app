@@ -1,27 +1,24 @@
-// Try HTML5 geolocation.
-
-function geo(){
-
-    if (navigator.geolocation) {
-
-        navigator.geolocation.getCurrentPosition(function(position) {
-            _position = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
-           
-
-            return _position;
-        
-        });
-    } else {
-        // Browser doesn't support Geolocation
-        console.log('Erreur, le navigateur ne supporte pas la géolocalisation !');
-        
-        return false;
-    }    
+_position = {
+    latitude: null,
+    longitude: null
 }
 
-_position = geo();
+function getLocation(){
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        _position = {
+            latitude: 45.77,
+            longitude: 4.86              
+        }        
+    }
+}
 
-console.log('pos 2 : ' + _position);
+function showPosition(position) {
+    _position = {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude
+    }     
+}
+
+getLocation();
