@@ -92,7 +92,6 @@ var show = function(answer) {
                     traitementMovieAffiche(answer);
 
                     break;
-
                 default:
                     parler("Désolé, je n'ai pas bien compris votre demande de film !");
                     
@@ -100,26 +99,26 @@ var show = function(answer) {
             }
             
             break;
-
         case "music":
             console.log(answer);
             traitementMusic(answer);
 
-
+            break;
         case "travel":
             traitementTravel(answer);
-            break;
 
+            break;
         default:
             parler("Désolé, je n'ai rien trouvé ! Veuillez recommencer !");
-            break;
 
+            break;
     }
 }
 /* Partie Socket IO pour l'envoi et la réception des questions/réponses */
 var emitQuestion = function (question) {
     console.log('question ? ' + question);
-    socket.emit('question', question);
+    console.log('position ? ' + _position);
+    socket.emit('question', { question: question, position: _position });
 
     parler('Je viens de lancer la recherche, merci de patienter !');
 }
@@ -141,9 +140,24 @@ var emitResultRequest = function (number) {
             return false;
         }
     });
-
-
 }
+
+$('#input-emitQuestion').keyup(function(event) {
+	if (event.which == 13) {
+		$('#bouton-emitQuestion').click();
+	};
+});
+
+$('#bouton-emitQuestion').click(function(e) {
+	e.preventDefault();
+	var question = $('#input-emitQuestion').val();
+
+	console.log('question ? ' + question);
+    console.log('position ? ' + _position);
+    socket.emit('question', { question: question, position: _position });
+        
+    parler('Je viens de lancer la recherche avec le bouton !');
+});
 
 socket.on('answer', function (answer) {
     console.log('réception de la réponse');
