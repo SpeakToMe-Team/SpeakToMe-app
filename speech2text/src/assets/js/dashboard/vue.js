@@ -4,6 +4,9 @@ var dashboard = new Vue({
         title: "SpeakToMe",
         phrase: '',
         isActiveMovieModule: false,
+        isActiveMovieInformationsModule: false,
+        isActiveMovieAfficheModule: false,
+        isActiveMovieSeanceModule: false,
         isActiveMusicModule: false,
         isActiveTravelModule: false,
         isActiveWeatherModule: false,
@@ -16,6 +19,9 @@ var dashboard = new Vue({
     methods: {
         init: function () {
             this.isActiveMovieModule = false
+            this.œisActiveMovieInformationsModule = false
+            this.isActiveMovieAfficheModule = false
+            this.isActiveMovieSeanceModule = false
             this.isActiveMusicModule = false
             this.isActiveTravelModule = false
             this.isActiveWeatherModule = false
