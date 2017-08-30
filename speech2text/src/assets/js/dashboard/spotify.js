@@ -78,34 +78,28 @@ function traitementMusic(answer) {
     console.log('artists=' + artistList);
     console.log('albums=' + albumList);
     console.log('tracks=' + trackList);
-    let display = [];
+    let display = {};
+    var i=0;
     if (typeof (artistList) !== 'undefined') {
         display.artists = artistList;
-        display.length ++
+        i=i+1;
     }
     if (typeof (albumList) !== 'undefined') {
         display.albums = albumList;
-        display.length ++
+        i=i+1;
     }
     if (typeof (trackList) !== 'undefined') {
         display.tracks = trackList;
-        display.length ++
+        i=i+1;
     }
-    console.log(display);
 
-    if (display.length <= 0) {
+    if (i <= 0) {
 
         var stringVoiceMsg = "Je n'ai trouvé aucune musique qui corresponde à votre recherche.";
     }
-    else if (display.length == 1) {
-        var stringVoiceMsg = "Je viens de trouver " + display.length + " résultats qui correspondent à votre recherche.";
-
-    }
-
     else {
-        var stringVoiceMsg = "Je viens de trouver " + display.length + " résultats qui correspondent à votre recherche.";
+        var stringVoiceMsg = "Je viens de trouver " + i + " résultats qui correspondent à votre recherche.";
     }
-    console.log(stringVoiceMsg);
 
     var content = {
         msgVocal: stringVoiceMsg,
