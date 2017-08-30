@@ -26,12 +26,11 @@ class Module {
 
     getSousIntent() {
         if (this._json.hasOwnProperty('sous-intent')) {
-            return this._json.sous-intent;
+            return this._json["sous-intent"];
         } else {
             return false;
         }
     }
-
 }
 
 var repeterModule = function () {
