@@ -4,7 +4,7 @@ class Module {
         this._json = json;
     }*/
     // Ici on parse car c'est une string qu'on envoie un string json
-    constructor (json) {
+    constructor(json) {
         this._json = json;
     }
 
@@ -12,40 +12,40 @@ class Module {
         return this._json;
     }
 
-    set json(newJson){
+    set json(newJson) {
         this._json = newJson;
     }
 
-    getIntent () {
-        if(this._json.hasOwnProperty('intent')){
+    getIntent() {
+        if (this._json.hasOwnProperty('intent')) {
             return this._json.intent;
-        }else{
+        } else {
             return false;
-        }         
+        }
     }
 
-    getSousIntent () {
-        if(this._json.hasOwnProperty('sous-intent')){
-            return this._json.sous-intent;
-        }else{
+    getSousIntent() {
+        if (this._json.hasOwnProperty('sous-intent')) {
+            return this._json.sous - intent;
+        } else {
             return false;
-        }        
+        }
     }
 
 }
 
-var repeterModule = function() {
+var repeterModule = function () {
     var text = $('#msgVocal').text();
-    if(text.length > 0){
+    if (text.length > 0) {
         var stringVoiceMsg = text;
-    }else{
+    } else {
         var stringVoiceMsg = "Désolé, je n'ai pas de message à vous dire !";
     }
 
     parler(stringVoiceMsg);
 }
 
-var parler = function (stringVoiceMsg){
+var parler = function (stringVoiceMsg) {
     annyang.pause();
 
     var synth = window.speechSynthesis;
@@ -61,11 +61,11 @@ var parler = function (stringVoiceMsg){
     annyang.resume();
 }
 
-var show = function(answer) {
+var show = function (answer) {
     console.log(answer);
 
     // Réinitialisation
-    dashboard.init();        
+    dashboard.init();
 
     let mainModule = new Module(answer);
     var intent = mainModule.getIntent();
@@ -91,34 +91,32 @@ var show = function(answer) {
                 case "affiche":
                     traitementMovieAffichge(answer);
 
-                    break;           
-                
+                    break;
+
                 default:
                     parler("Désolé, je n'ai pas bien compris votre demande de film !");
-                    
-                    break;                            
-        case "travel":
 
-            break;
+                    break;
+            }
         case "travel":
-
+            console.log("travel");
             break;
         default:
             parler("Désolé, je n'ai rien trouvé ! Veuillez recommencer !");
 
-            break;        
-    }        
-}
+            break;
 
+    }
+}
 /* Partie Socket IO pour l'envoi et la réception des questions/réponses */
-var emitQuestion = function(question){
+var emitQuestion = function (question) {
     console.log('question ? ' + question);
     socket.emit('question', question);
-    
+
     parler('Je viens de lancer la recherche, merci de patienter !');
 }
 
-socket.on('answer', function(answer) {
+socket.on('answer', function (answer) {
     console.log('réception de la réponse');
     console.log(JSON.stringify(answer));
 
