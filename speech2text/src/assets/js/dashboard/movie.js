@@ -16,6 +16,10 @@ class MovieModule {
         return this._jsonMovie.intent;
     }
 
+    getSousIntent() {
+        return this._jsonMovie.sous-intent;
+    }
+
     getNumberMovie() {
         if(this._jsonMovie.response.feed['movie'].length > 0){
             return this._jsonMovie.response.feed['movie'].length;
@@ -148,12 +152,9 @@ function traitementMovieSeance (answer) {
     }
 }
 
-function traitementMovieAffiche(answer) {
-    console.log('movie affiche');
-}
-
 function traitementMovieInformations(answer) {
     console.log('movie informations');
+
     let Movie = new MovieInformationsModule(answer);
 
     var nbrMovies = Movie.getNumberMovie();
@@ -175,5 +176,4 @@ function traitementMovieInformations(answer) {
         dashboard.isActiveMovieInformationsModule = false;
         parler("Désolé ! Je n'ai pas trouvé de réponse à votre question.");
     }
-
 }
