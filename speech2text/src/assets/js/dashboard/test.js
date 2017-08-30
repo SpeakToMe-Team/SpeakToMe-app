@@ -13,6 +13,12 @@ $('#poke').click(function (event) {
     socket.emit('message', 'Salut serveur, ça va ?');
 });
 
+$('#input-emitQuestion').keyup(function(event) {
+	if (event.which == 13) {
+		$('#bouton-emitQuestion').click();
+	};
+});
+
 $('#bouton-emitQuestion').click(function(e) {
 	e.preventDefault();
 	var question = $('#input-emitQuestion').val();
