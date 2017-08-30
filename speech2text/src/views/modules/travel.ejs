@@ -1,0 +1,18 @@
+<p id="msgVocal">{{ contentTravel.msgVocal }}</p><br />
+
+<div class="travel" v-for="(travel, key, index) of contentTravel.list">
+    <div class="imgTravel">
+        <a v-bind:href="travel.url" target='_blank'>
+            <img v-bind:src="travel.image_url" v-bind:alt="travel.name" width='200px'>
+        </a>
+    </div>
+    <div class="infoTravel">
+        Nom : {{ travel.name }}<br />
+        Note : {{ travel.rating }}<br />
+        Nombre d'avis : {{ travel.review_count }}<br />
+        Catégories : {{ travel.categories }}<br />
+        {{ travel.address }}<br />
+        {{ travel.display_phone }}<br />
+    </div>
+
+</div>
