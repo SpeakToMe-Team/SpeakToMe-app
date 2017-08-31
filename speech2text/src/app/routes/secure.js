@@ -20,35 +20,27 @@ module.exports = function(router, passport){
 
     router.post('/settings', function(req, res){
         User.findOne({ _id: req.user._id }).exec(function(err, user){
-            
-            console.log(req.body);
-
-           /* user.settings.couleur = '';
-            user.settings.ville = 'Aubagne';
-            user.settings.nbrResultatMovie = 7;
-            user.settings.nbrResultatTravel = 7;
-            user.settings.nbrResultatSpotify = 7;
-            user.settings.nbrResultatWeather = 7; 
+            user.settings.nbrResultatMovie = req.body.movieRange;
+            user.settings.nbrResultatTravel = req.body.travelRange;
+            user.settings.nbrResultatSpotify = req.body.spotifyRange;
+            user.settings.nbrResultatWeather = req.body.weatherRange;
             
             user.save(function(err){
                 if(err){
                     throw err;
                 }
+                req.user = user;
 
-                res.redirect('/dashboard', { user : user });
-                //return done(null, newUser, req.flash('success_msg', 'Account created !'));
-            });   */    
-
-            res.redirect('/dashboard', { user : user });     
+                res.redirect('/dashboard');                
+            });       
         });
     });
 
     router.get('/dashboard', function(req, res){
         User.findOne({ _id: req.user._id }).
-        exec(function(err, user){
-            console.log(user);
+        exec(function(err, user){            
             
-            res.render('secured/dashboard.ejs');
+            res.render('secured/dashboard.ejs', { user: user });
         });
 	});
 

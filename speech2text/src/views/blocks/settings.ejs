@@ -10,18 +10,12 @@
                 </div>
                 <div class="content">
                     <div>
-                        <form method="POST" action="/settings">
+                        <form  class="form-signin" method="post" action="/settings">
                             <div class="form-group">
-                                <label for="villeInput">Votre ville par défaut</label>
-                                <input v-model="villeInput" aria-describedby="villeHelpBlock" type="text" class="form-control" id="villeInput " placeholder="Ville" value="<%= user.settings.ville %>">
-                                <p>Le message est : {{ villeInput }}</p>
-                                <p id="villeHelpBlock" class="form-text text-muted">Cela désactive la géolocalisation.</p>
-                            </div>                       
-                            <div class="form-group">
-                                <label for="movieRange">Nombre de résultat Allociné</label>                                
+                                <label for="movieRange">Nombre de résultat Allociné</label>  
+                                <p>De 1 à 20</p>                              
                                 <div class="slider-wrapper">
-                                    <input v-model="movieRange" type="range" list="moviemarks" class="form-control" id="movieRange" min="1" max="20" step="1" value="<%= user.settings.nbrResultatMovie %>"/>
-                                    <p>Nombre de résultat affiché : {{ movieRange }}</p>
+                                    <input name="movieRange" type="range" list="moviemarks" class="form-control" id="movieRange" min="1" max="20" step="1" value="<%= user.settings.nbrResultatMovie %>"/>
                                 </div>
                                 <datalist id="moviemarks">
                                     <option value="1" label="1">
@@ -48,10 +42,10 @@
                             </div>                            
 
                             <div class="form-group">
-                                <label for="weatherRange">Nombre de résultat Météo</label>                                
+                                <label for="weatherRange">Nombre de résultat Météo</label>
+                                <p>De 1 à 20</p>
                                 <div class="slider-wrapper">
-                                    <input v-model="weatherRange" type="range" list="weatherMarks" class="form-control" id="weatherRange" min="1" max="20" step="1" value="<%= user.settings.nbrResultatWeather %>"/>
-                                    <p>Nombre de résultat affiché : {{ weatherRange }}</p>
+                                    <input name="weatherRange" type="range" list="weatherMarks" class="form-control" id="weatherRange" min="1" max="20" step="1" value="<%= user.settings.nbrResultatWeather %>"/>
                                 </div>
                                 <datalist id="weatherMarks">
                                     <option value="1" label="1">
@@ -78,10 +72,10 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="travelRange">Nombre de résultat Yelp</label>                                
+                                <label for="travelRange">Nombre de résultat Yelp</label>
+                                <p>De 1 à 20</p>
                                 <div class="slider-wrapper">
-                                    <input v-model="travelRange" type="range" list="travelMarks" class="form-control" id="travelRange" min="1" max="20" step="1" value="<%= user.settings.nbrResultatTravel %>"/>
-                                    <p>Nombre de résultat affiché : {{ travelRange }}</p>
+                                    <input name="travelRange" type="range" list="travelMarks" class="form-control" id="travelRange" min="1" max="20" step="1" value="<%= user.settings.nbrResultatTravel %>"/>
                                 </div>
                                 <datalist id="travelMarks">
                                     <option value="1" label="1">
@@ -109,9 +103,9 @@
 
                             <div class="form-group">
                                 <label for="spotifyRange">Nombre de résultat Spotify</label>
+                                <p>De 1 à 20</p>
                                 <div class="slider-wrapper">
-                                    <input v-model="spotifyRange" type="range" list="spotifyMarks" class="form-control" id="spotifyRange" min="1" max="20" step="1" value="<%= user.settings.nbrResultatSpotify %>"/>
-                                    <p>Nombre de résultat affiché : {{ spotifyRange }}</p>
+                                    <input name="spotifyRange" type="range" list="spotifyMarks" class="form-control" id="spotifyRange" min="1" max="20" step="1" value="<%= user.settings.nbrResultatSpotify %>"/>
                                 </div>
                                 <datalist id="spotifyMarks">
                                     <option value="1" label="1">
@@ -136,7 +130,7 @@
                                     <option value="20" label="20">                                    
                                 </datalist>
                             </div>
-                            <button type="subtmi" class="save" >Enregistrer</button>
+                            <button type="submit" class="save" >Enregistrer</button>
                         </form>
                     </div>
                     
