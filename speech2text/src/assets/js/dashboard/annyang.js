@@ -5,7 +5,7 @@ if (annyang) {
             dashboard.content = '';
             dashboard.init();
         },
-        "je n'ai pas bien entendu": repeterModule,
+        "Répéter": repeterModule,
         'ouvrir paramètres': function() {
             $('#settings').modal('show');
         },
@@ -25,8 +25,8 @@ if (annyang) {
             $('#user').modal('hide');
         },          
         'Bonne journée michel': function() { 
-            parler('bonne journée à vous aussi maitre');
-            $(location).attr('href', '/auth/logout')
+            parler('bonne journée à vous aussi, et merci à tous pour votre attention');
+            $(".module-nomodule .start p").html('Merci à tous !');
         },
         'déconnexion': function() { 
             parler('bonne journée maitre');
