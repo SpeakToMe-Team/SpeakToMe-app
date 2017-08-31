@@ -1,9 +1,13 @@
+<div id="msgVocal" class="hide">
+    {{ contentMovie.msgVocal }}
+</div>
 <div class="movie row" v-if="item.movie.hasOwnProperty('poster')" v-for="(item, key, index) of contentMovie.listMovies">
+    <div class="msgVocal hide">
+        {{ item.movie.originalTitle }}. {{ item.movie.synopsis }}
+    </div>
     <div class="details col-md-12 ">
         <div class="row">
-            <div class="msgVocal hide">
-                {{ contentMovie.msgVocal }}
-            </div>
+
 
 
             <!--<div class="imgMovie">
