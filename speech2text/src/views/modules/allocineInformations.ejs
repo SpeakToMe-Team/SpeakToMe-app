@@ -37,7 +37,7 @@
             <div class="synop col-sm-6 col-xs-12">
                 <!-- <h4>Synopsis :</h4> -->
                 <div v-if="item.movie.hasOwnProperty('synopsis')">
-                    <p>{{ item.movie.synopsis }}</p>
+                    <p v-html="item.movie.synopsis"></p>
                     <p v-if="item.movie.link[0].hasOwnProperty('href')"><a v-bind:href="item.movie.link[0].href" target='_blank'>En savoir +</a></p>
                 </div>
             </div>
@@ -46,7 +46,7 @@
             </div> -->
         </div>
     </div>
-    <div v-html="item.movie.trailerEmbed" class="trailer hidden-xs">
+    <div v-html="item.movie.trailerEmbed" class="trailer hidden-xs-down">
     </div>
 </div>
 

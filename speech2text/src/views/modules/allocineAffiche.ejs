@@ -1,1 +1,41 @@
-<p>allocine affiche</p>
+<div class="movie row" v-if="movie.hasOwnProperty('poster')" v-for="(movie, key) of contentMovie">
+    <div class="details col-md-12 ">
+        <div class="row">
+
+            <div class="infoMovie col-sm-6 col-xs-12" v-bind:style="{ backgroundImage: 'url(' + movie.poster.href + ')' }">
+            	<div class="details">
+                    <h3>{{ movie.originalTitle }}</h3>
+                    <div class="detailList">
+	                    <ul>
+	                        <li>Date : {{ movie.productionYear }}</li>
+	                        <li v-if="movie.hasOwnProperty('movieCertificate')">Age : {{ movie.movieCertificate.certificate.$ }}</li>
+	                    </ul>
+
+	                    <h4>Casting :</h4>
+	                    <ul>
+	                        <li v-for="(character, key, index) of movie.castingShort">
+	                            {{ key }} : {{ character }}
+	                        </li>
+	                    </ul>
+
+	                </div>
+                </div>
+            </div>
+
+            <div class="synop col-sm-6 col-xs-12">
+                
+                <div v-if="movie.hasOwnProperty('synopsisShort')">
+                    <p>{{ movie.synopsisShort }}</p>
+                    <p v-if="movie.link[0].hasOwnProperty('href')"><a v-bind:href="movie.link[0].href" target='_blank'>En savoir +</a></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div v-html="movie.trailerEmbed" class="trailer hidden-xs">
+    </div>
+</div>
+
+
+
+<!-- <p><i>info raw : {{ contentMovie }}</i></p> -->

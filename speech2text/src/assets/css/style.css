@@ -445,7 +445,7 @@ input {
 .movie {
     margin:auto;
     width: 100%;
-    background-color: #626669;
+    background-color: white;
 }
 .movie .infoMovie {
     background-position: center;
@@ -501,15 +501,22 @@ input {
 }
 .movie .trailer{
     margin: auto;
-    text-align: center;
-    padding: 5%;
+    width: auto;
+    border: 5px solid black;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+@media screen and (maw-width: 640px) {
+    .movie .trailer{
+        display: none;
+    }
 }
 .movie .trailer a{
     display: none;
 }
-.movie .trailer iframe{
-    height: 100%;
-}
+/* .movie .trailer iframe{
+    width: 100% !important;
+} */
 /* Module yelp */
 .module-travel{
     background-color: #6c6f71;
