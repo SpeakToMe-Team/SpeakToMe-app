@@ -33,6 +33,10 @@ class TravelModule {
                 categoriesArr.push(e.title);
             });
             element.categories = categoriesArr.join(', ');
+            var srcStart = "https://maps.google.com/maps?q=";
+            var srcLoc = element.address1;
+            var srcEnd = "%2C%20FR&t=&z=14&ie=UTF8&iwloc=&output=embed";
+            element.addressMap =srcStart + element.location.display_address[0] + srcEnd;
             let categorieMsgVocal = categoriesArr.count > 0 ? 'Catégorie ' + element.categories + ', ' : '';
             element.address = element.location.display_address.join('<br>');
             element.msgVocal =
@@ -79,4 +83,5 @@ function traitementTravel(answer) {
         dashboard.isActiveTravelModule = false;
         parler("Désolé ! Je n'ai pas trouvé de réponse à votre question.");
     }
+    
 }

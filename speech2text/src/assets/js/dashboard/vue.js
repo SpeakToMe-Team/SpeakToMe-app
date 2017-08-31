@@ -11,10 +11,11 @@ var dashboard = new Vue({
         isActiveTravelModule: false,
         isActiveWeatherModule: false,
         contentWeather: '',
-        contentTravel: '',
         tempWeather: '',
+        contentTravel: '',        
         contentMovie: '',
         contentMusic:'',
+        compteur: 0
     },
     methods: {
         init: function () {
@@ -26,11 +27,19 @@ var dashboard = new Vue({
             this.isActiveTravelModule = false
             this.isActiveWeatherModule = false
             this.contentWeather = ''
-
+            this.tempWeather = ''
             this.contentTravel = ''
-
+            this.contentMovie = ''
             this.contentMusic = ''
+            this.compteur = 0
+        },
+        goto: function () {
+            var i = this.compteur + 1
+            var string = 'style-' + i
+            console.log('string : ' + string)
+            this.compteur = this.compteur + 1
 
+            return string
         }
     }
 });

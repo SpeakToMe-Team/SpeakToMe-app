@@ -1,11 +1,10 @@
-<p>Allociné</p>
 
-<div class="module-movie" :class="{ hide: !isActiveMovieAfficheModule }">
+<div class="module-movie-affiche" :class="{ hide: !isActiveMovieAfficheModule }">
     <%-partial('./allocineAffiche')%>
 </div>
-<div class="module-movie" :class="{ hide: !isActiveMovieSeanceModule }">
+<div class="module-movie-seance" :class="{ hide: !isActiveMovieSeanceModule }">
     <%-partial('./allocineSeance')%>
 </div>
-<div class="module-movie" :class="{ hide: !isActiveMovieInformationsModule }">
+<div class="module-movie-info" :class="{ hide: !isActiveMovieInformationsModule }">
     <%-partial('./allocineInformations')%>
 </div>

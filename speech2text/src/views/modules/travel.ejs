@@ -1,22 +1,32 @@
-<p id="msgVocal">{{ contentTravel.msgVocal }}</p><br />
-
-<div class="travel" v-for="(travel, key, index) of contentTravel.list">
-    <div class="imgTravel">
-        <a v-bind:href="travel.url" target='_blank'>
-            <img v-bind:src="travel.image_url" v-bind:alt="travel.name" width='200px'>
-        </a>
+<div id="msgVocal" class="hide">
+    {{ contentMovie.msgVocal }}
+</div>
+<div class="travel row module-item" v-for="(travel, key, index) of contentTravel.list" :class="goto()">
+    <div class="details col-md-12 ">
+        <div class="row">
+            <div class="msgVocal hide">
+                {{ travel.msgVocal }}
+            </div>
+            <div class="imgTravel col-md-6 col-sm-12" :style="{ backgroundImage: 'url(' + travel.image_url + ')' }">
+                <!-- <a v-bind:href="travel.url" target='_blank'>
+                <img v-bind:src="travel.image_url" v-bind:alt="travel.name" width='200px'>
+                </a> -->
+            </div>
+            <div class="infoTravel col-md-6 col-sm-12">
+                <h3>{{ travel.name }}</h3>
+                <small>{{ travel.price }}</small>
+                <address v-html="travel.address"></address>
+                <ul>
+                    <li>Note : <strong>{{ travel.rating }}</strong></li>
+                    <li>Nombre d'avis : <strong>{{ travel.review_count }}</strong></li>
+                    <li>Catégories : <strong>{{ travel.categories}}</strong></li>
+                    <li><i class="fa fa-phone" aria-hidden="true"></i><strong>{{ travel.display_phone }}</strong></li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <div class="infoTravel">
-        Nom : {{ travel.name }}
-        Note : {{ travel.rating }}<br />
-        Nombre d'avis : {{ travel.review_count }}<br />
-        Catégories : {{ travel.categories }}<br />
-        <address v-html="travel.address"></address>
-        {{ travel.display_phone }}<br />
-        Prix : {{ travel.price }}<br />
+    <div class="mapYelp col-md-12 ">
+        <iframe class="iframeYelp" width="100%" height="250" frameborder="0" style="border:0" v-bind:src="travel.addressMap" allowfullscreen>
+        </iframe>
     </div>
-    <div class="msgVocal hide">
-        {{ travel.msgVocal }}
-    </div>
-
 </div>

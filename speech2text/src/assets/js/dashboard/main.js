@@ -92,22 +92,21 @@ var show = function(answer) {
                     traitementMovieAffiche(answer);
 
                     break;
-
                 default:
                     parler("Désolé, je n'ai pas bien compris votre demande de film !");
                     
                     break;
             }
             break;
-
         case "music":
             traitementMusic(answer);
-            break;
 
+
+            break;
         case "travel":
             traitementTravel(answer);
-            break;
 
+            break;
         default:
             parler("Désolé, je n'ai rien trouvé ! Veuillez recommencer !");
             break;
@@ -116,31 +115,48 @@ var show = function(answer) {
 /* Partie Socket IO pour l'envoi et la réception des questions/réponses */
 var emitQuestion = function (question) {
     console.log('question ? ' + question);
-    socket.emit('question', question);
+    console.log('position ? ' + _position);
+    socket.emit('question', { question: question, position: _position });
 
     parler('Je viens de lancer la recherche, merci de patienter !');
 }
 
 var emitResultRequest = function (number) {
-    // let text = $('.msgVocal[data-result-number="' + number + '"]').text();
-
     $('.msgVocal').each(function(i,e) {
         if (i+1 == number) {
-            console.log($(e));
+            let moduleItem = $(e).closest('.module-item');
             let text = $(e).text();
-
-            console.log(text);
             if (typeof text != 'undefined') {
+                $('html, body').animate({
+                    scrollTop: moduleItem.offset().top
+                }, 2000);
                 parler(text);
-            } else {
-                parler("Il n'y a pas de résultat " + number + '.');
             }
             return false;
         }
     });
+};
 
+var emitStopSpeech = function () {
+    speechSynthesis.cancel()
+};
 
-}
+$('#input-emitQuestion').keyup(function(event) {
+	if (event.which == 13) {
+		$('#bouton-emitQuestion').click();
+	};
+});
+
+$('#bouton-emitQuestion').click(function(e) {
+	e.preventDefault();
+	var question = $('#input-emitQuestion').val();
+
+	console.log('question ? ' + question);
+    console.log('position ? ' + _position);
+    socket.emit('question', { question: question, position: _position });
+        
+    parler('Je viens de lancer la recherche avec le bouton !');
+});
 
 socket.on('answer', function (answer) {
     console.log('réception de la réponse');

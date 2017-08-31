@@ -31,41 +31,33 @@
                             </button>
                         </article>
 
-                         <article class=" col-sm-12 col-lg-10 animated zoomInUp">
-                                <div class="result col-md-12">
-                            <h2 class="title">Resultats</h2>
-
-
-                            <!-- <div class="module-weather" :class="{ hide: isActiveWeatherModule}">
+                         <article class=" col-sm-12 animated zoomInUp">
+                            <div class="result col-md-12">
+                                <h2 class="title">Resultats</h2>
+                                <div class="module-nomodule" >
                                     <%-partial('../modules/nomodule')%>
-                            </div> -->
-                            <div class="module-weather" :class="{ hide: !isActiveWeatherModule }">
-                                <%-partial('../modules/meteo')%>
-                            </div>
-                            <div class="module-music" :class="{ hide: !isActiveMusicModule }">
-                                <%-partial('../modules/spotify')%>
-                            </div>
-                            <div class="module-movie" :class="{ hide: !isActiveMovieModule }">
-                                <%-partial('../modules/allocine')%>
-                            </div>
-                            <div class="module-travel" :class="{ hide: !isActiveTravelModule }">
-                                <%-partial('../modules/travel')%>
-                            </div>
                                 </div>
-                        </article>
-
-                        <article class="col-sm-12 col-lg-2 animated zoomInUp">
-                                <div class="recommandation col-md-12">
-                            <h2 class="title">Suggestions</h2>
+                                <div class="module-weather" :class="{ hide: !isActiveWeatherModule }">
+                                    <%-partial('../modules/meteo')%>
                                 </div>
+                                <div class="module-music" :class="{ hide: !isActiveMusicModule }">
+                                    <%-partial('../modules/spotify')%>
+                                </div>
+                                <div class="module-movie" :class="{ hide: !isActiveMovieModule }">
+                                    <%-partial('../modules/allocine')%>
+                                </div>
+                                <div class="module-travel" :class="{ hide: !isActiveTravelModule }">
+                                    <%-partial('../modules/travel')%>
+                                </div>
+                            </div>
                         </article>
                     </div>
                 </section>
-            </div>
-            <p><input type="button" value="Embêter le serveur" id="poke" /></p>
+            </div>            
        </div>
    </div>
 </div>
+<script src="/js/dashboard/geolocalisation.js"></script>
 <script src="/js/dashboard/vue.js"></script>
 <script src="/js/dashboard/main.js"></script>
 <script src="/js/dashboard/weather.js"></script>

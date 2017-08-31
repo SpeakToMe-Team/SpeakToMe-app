@@ -318,9 +318,6 @@ input {
     -webkit-animation-delay: 2s;
     background-color: rgba(157, 177, 185, 0.77);
 }
-.dashboard-page article:nth-child(2n){
-    padding-right: 20px;
-}
 .dashboard-page .result h2{
     background-color: #9fadb2;
     margin: 0px;
@@ -448,13 +445,118 @@ input {
 .movie {
     margin:auto;
     width: 100%;
-    margin-bottom: 10px;
+    background-color: #626669;
 }
-.imgMovie {
-   display: inline-block;
-   width: 20%;
+.movie .infoMovie {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
-.infoMovie {
-   display: inline-block;
-   width: 70%;
+.movie .infoMovie .details {
+    background-color: black;
+    height: 100%;
+    width: 100%;
+    opacity: 0.7;
+    color: white;
+    padding: 25px;
 }
+.movie .infoMovie h3 {
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    font-weight: bold;
+    font-size: 2em;
+    margin-bottom: 8%;
+    margin-top: 5%;
+}
+.movie .infoMovie .detailList {
+    padding: 15%;
+}
+.movie .infoMovie h4 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+.movie .infoMovie ul {
+    list-style: none;
+}
+.movie .synop {
+    background: black;
+}
+.movie .synop h4 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+.movie .synop div{
+    margin: 30px;
+    opacity: 0.6;
+}
+.movie .synop div p{
+    font-family: 'Tinos', serif;
+    margin: 5%;
+    color: white;
+}
+.movie .synop div p a{
+    color: white;
+}
+.movie .trailer{
+    margin: auto;
+    text-align: center;
+    padding: 5%;
+}
+.movie .trailer a{
+    display: none;
+}
+.movie .trailer iframe{
+    height: 100%;
+}
+/* Module yelp */
+.module-travel{
+    background-color: #6c6f71;
+}
+.travel, .row{
+    width: 100%;
+    margin: 0px;
+}
+.travel .imgTravel{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.travel .infoTravel{
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+.travel .infoTravel h3{
+    font-family: 'Oswald', sans-serif;
+    font-size: 2em;
+    text-align: center;
+}
+.travel .infoTravel small{
+    color: yellow;
+    font-size: 1em;
+    text-align: center;
+} 
+.travel .infoTravel address{
+    margin-top: 25px;
+}
+.travel .infoTravel ul{
+    list-style: none;
+}
+.travel .mapYelp{
+    opacity: 0.5;
+}
+.travel .mapYelp:hover{
+    transition: 0.5s;
+    opacity: 1;
+}
+.travel iframe{
+    height: 100%;
+}
+
+.travel .imgTravel a, img{
+    width: 100%;
+    opacity: 0.5;
+}
+/* Fin Module yelp */
