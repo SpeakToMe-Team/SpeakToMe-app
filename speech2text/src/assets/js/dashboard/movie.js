@@ -142,12 +142,14 @@ function traitementMovieSeance (answer) {
 
         dashboard.contentMovie = content;
         dashboard.isActiveMovieModule = true;
+        dashboard.isActiveMovieSeanceModule = true;
         parler(stringVoiceMsg);
 
 
     }else{
 
         dashboard.isActiveMovieModule = false;
+        dashboard.isActiveMovieSeanceModule = false;
         parler("Désolé ! Je n'ai pas trouvé de réponse à votre question.");
     }
 }
@@ -169,10 +171,12 @@ function traitementMovieInformations(answer) {
         }
 
         dashboard.contentMovie = content;
+        dashboard.isActiveMovieModule = true;
         dashboard.isActiveMovieInformationsModule = true;
         parler(stringVoiceMsg);
     }else{
 
+        dashboard.isActiveMovieModule = false;
         dashboard.isActiveMovieInformationsModule = false;
         parler("Désolé ! Je n'ai pas trouvé de réponse à votre question.");
     }

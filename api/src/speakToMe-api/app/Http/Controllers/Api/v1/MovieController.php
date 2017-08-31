@@ -73,7 +73,7 @@ class MovieController extends ApiController
 
             // Si à ce stade, la recherche est toujours vide, on passe la demande générale pour avoir quelquechose
             if (empty($this->recherche)) {
-                $this->demande = '';
+                $this->demande = 'affiche';
             }
         }
 

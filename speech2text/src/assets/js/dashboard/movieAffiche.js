@@ -50,11 +50,25 @@ function traitementMovieAffiche(answer) {
     console.log('movie affiche');
 
     let Movie = new MovieAfficheModule(answer);
-    let listeMovies = Movie.getListMovies();
+    
+    var nbrMovies = Movie.getNumberMovie();
+    
+    if (nbrMovies > 0) {
+        let stringVoiceMsg = 'Voici la liste des films actuellement en salle';
+        let listMovies     = Movie.getListMovies();   
 
-    console.log(listeMovies);
-
-    dashboard.contentMovie = listeMovies;
-    dashboard.isActiveMovieModule = true;
-    // dashboard.
+        var content = {
+            msgVocal: stringVoiceMsg,
+            listMovies: listMovies
+        }
+        console.log(content);
+        dashboard.contentMovie = content;
+        dashboard.isActiveMovieAfficheModule = true;
+        dashboard.isActiveMovieModule = true;
+        parler(stringVoiceMsg);
+    } else {
+        dashboard.isActiveMovieModule = false;
+        dashboard.isActiveMovieAfficheModule = false;
+        parler("Désolé ! Je n'ai pas trouvé de réponse à votre question.");
+    }
 }
