@@ -37,6 +37,13 @@ module.exports = function (passport){
                     newUser.local.email = email;
                     newUser.local.password = newUser.generateHash(password);
 
+                    newUser.settings.couleur = '';
+                    newUser.settings.ville = '';
+                    newUser.settings.nbrResultatMovie = 5;
+                    newUser.settings.nbrResultatTravel = 5;
+                    newUser.settings.nbrResultatSpotify = 5;
+                    newUser.settings.nbrResultatWeather = 5;  
+
                     newUser.save(function(err){
                         if(err){
                             throw err;

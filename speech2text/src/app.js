@@ -91,7 +91,6 @@ var secure = express.Router();
 require('./app/routes/secure')(secure, passport);
 app.use('/', secure);
 
-
 var server = app.listen(port);
 
 /* Partie Socket.Io */
@@ -105,10 +104,14 @@ io.on('connection', function (socket) {
     socket.emit('answer', json);
     // Fin*/
     
+    socket.on('settings', function (settings) {
+        
+        console.log('settings ' + settings);        
+    });
 
     socket.on('message', function (message) {
         console.log('Un client me parle ! Il me dit : ' + message);
-         socket.emit('message', { 'title': "Bienvenue avec socket.io !" });
+        socket.emit('message', { 'title': "Bienvenue avec socket.io !" });
     });
 
     socket.on('question', function (json) {
