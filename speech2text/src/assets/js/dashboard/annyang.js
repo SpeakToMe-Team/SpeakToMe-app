@@ -24,33 +24,28 @@ if (annyang) {
         'fermer profil': function() {
             $('#user').modal('hide');
         },          
-        'écouter musique': function() { // Ne marche pas
-            //$('#play-button').click();
-            console.log('lancer la musique');
-            $('#test-button').trigger('submit'); 
-        },
-        'Bonne journée speechi': function() { // Ne marche pas
+        'Bonne journée michel': function() { 
             parler('bonne journée à vous aussi maitre');
             $(location).attr('href', '/auth/logout')
         },
-        'déconnexion': function() { // Ne marche pas
+        'déconnexion': function() { 
             parler('bonne journée maitre');
             $(location).attr('href', '/auth/logout')
         },
-        'bonjour speechi': function() { // Ne marche pas
+        'bonjour michel': function() { 
             parler('bonjour maitre');
         },
-        'merci speechi': function() { // Ne marche pas
+        'merci michel': function() { 
             parler('mais derien maitre');
         },
-        'que penses-tu de stéphane et morgane': function() { // Ne marche pas
-            parler('je pense qu\'ils sauront reconnaitre que votre équipe à fait un excellent travail, surement même, le meilleur!!');
+        'que penses-tu de stéphane et morgane': function() { 
+            parler('je pense qu\'ils sauront reconnaitre que votre équipe à fait un excellent travail, surmant même, le meilleur!!');
         },
-        'speechi lire résultat *number': emitResultRequest,
-        'speechi stop': emitStopSpeech,
+        'lire résultat *number': emitResultRequest,
+        'stop': emitStopSpeech,
 
         // Pour toutes les recherches avec l'API : définir un mot clé 'ok google'...
-        'speechi *question': emitQuestion
+        'michel *question': emitQuestion
     };
     annyang.addCommands(commands);
     annyang.setLanguage('fr-FR');

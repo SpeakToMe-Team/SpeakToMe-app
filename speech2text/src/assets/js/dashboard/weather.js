@@ -105,7 +105,14 @@ function traitementWeather (answer) {
         dashboard.tempWeather = temp;
         dashboard.isActiveWeatherModule = true;
 
+        
         parler(stringVoiceMsg);
+        if(jourAfficherContent.weather['0']['id']>799){
+            parler("Avec ce beau temps, vous devriez cherchez une terrasse de bar, ou de restaurant pour faire bronzette");
+        }else{
+            parler("Vu ce temps pourri, vous devriez chercher un bon film à aller voir au cinéma, ou écouter un peu de musique");
+        }
+        
 
     }else{
         dashboard.isActiveWeatherModule = false;
