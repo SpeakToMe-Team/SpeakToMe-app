@@ -101,11 +101,13 @@ class MovieInformationsModule {
     }
 
     getNumberMovie() {
-        if(this._jsonMovie.response.feed['movie'].length > 0){
-            return this._jsonMovie.response.feed['movie'].length;
-        }else{
-            return false;
-        }
+        let compteur = 0;
+        $.each(this._jsonMovie.response.feed['movie'], function(index, element) {
+            if (element.movie.poster != undefined)
+                compteur++;
+        })
+
+        return (compteur > 0 ) ? compteur : false;
     }
 }
 
