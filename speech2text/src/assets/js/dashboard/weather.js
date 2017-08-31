@@ -78,7 +78,7 @@ function traitementWeather (answer) {
 
         console.log('moment js : ' + stringJour);
 
-        var stringVoiceMsg = 'La météo de ' + stringJour + ' à ' + stringLocation + ', ' + stringDescription + ' avec des températures de ' + Math.floor(temperatureDescription.morn) + ' degré le matin, ' + Math.floor(temperatureDescription.eve) + ' degré le soir et ' + Math.floor(temperatureDescription.night) + ' degré la nuit.';
+        var stringVoiceMsg = 'La météo de ' + stringJour + ' à ' + stringLocation + ', ' + stringDescription + ' avec des températures de ' + Math.floor(temperatureDescription.morn) + ' degré le matin, ' + Math.floor(temperatureDescription.day) + ' degré l\'après-midi, ' + Math.floor(temperatureDescription.eve) + ' degré le soir et ' + Math.floor(temperatureDescription.night) + ' degré la nuit.';
         console.log('msg vocal ' + stringVoiceMsg);
 
         //Vue js
