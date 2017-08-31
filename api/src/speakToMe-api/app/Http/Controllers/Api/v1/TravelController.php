@@ -50,7 +50,8 @@ class TravelController extends ApiController
                 'term' => $this->searchQuery,
                 'categories' => $this->category,
                 'open_at' => $this->openAt,
-                'locale' => 'fr_FR'
+                'locale' => 'fr_FR',
+                'limit' => 10
             ],
             'headers' => [
                 'Authorization' => 'Bearer ' . $this->getToken(),
