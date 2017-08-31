@@ -1,58 +1,36 @@
-
 <div v-if="contentMusic.listMusic">
     <div v-if="contentMusic.listMusic.tracks">
         <h3>CHANSONS</h3>
-        <h4>Les oreilles de la tête</h4>
-        <iframe v-bind:src="'https://open.spotify.com/embed?uri=' + contentMusic.listMusic.tracks[0].uri"
-                frameborder="0" allowtransparency="true"></iframe>
+        <div class="frame"><iframe v-bind:src="'https://open.spotify.com/embed?uri=' + contentMusic.listMusic.tracks[0].uri" frameborder="0" allowtransparency="true"></iframe></div>
         <h4>A voir sur spotify</h4>
         <div class="music" v-for="(track, key) of contentMusic.listMusic.tracks">
-            {{ track.name}}
-            {{ track.external_urls.spotify}}
-            {{ track.artists[0].name}}
-            <div v-if="track.album.images[1]">
-            <div><img v-bind:src="track.album.images[1].url" width='200px'/></div>
-            </div>
+            <a v-if="track.album.images[1]" v-bind:href="track.external_urls.spotify">
+                <img v-bind:src="track.album.images[1].url"/>
+            </a>
+            
+            <!-- {{ track.name}} {{ track.external_urls.spotify}} {{ track.artists[0].name}} -->
+        </div>
+    </div>
+
+    <div v-if="contentMusic.listMusic.artists">
+        <h3>ARTISTES</h3>
+        <div class="frame"><iframe v-bind:src="'https://open.spotify.com/embed?uri=' + contentMusic.listMusic.artists[0].uri" frameborder="0" allowtransparency="true"></iframe></div>
+        <h4>A voir</h4>
+        <div class="music" v-for="(artist, key) of contentMusic.listMusic.artists">
+            <a v-if="artist.images[1]" v-bind:href="artist.external_urls.spotify">
+                <img v-bind:src="artist.images[1].url" v-bind:alt="artist.name"/>
+            </a>
+        </div>
+    </div>
+
+    <div v-if="contentMusic.listMusic.albums">
+        <h3>ALBUMS</h3>
+        <div class="frame"><iframe v-bind:src="'https://open.spotify.com/embed?uri=' + contentMusic.listMusic.albums[0].uri" frameborder="0" allowtransparency="true"></iframe></div>
+        <h4>A voir</h4>
+        <a class="music" v-for="(album, key) of contentMusic.listMusic.albums">
+            <a v-if="album.images[1]" v-bind:href="album.external_urls.spotify">
+                <img v-bind:src="album.images[1].url" v-bind:alt="album.name"/>
+            </a>
         </div>
     </div>
 </div>
-
-<div v-if="contentMusic.listMusic">
-    <div v-if="contentMusic.listMusic.artists">
-        <h3>ARTISTES</h3>
-
-        <h4>Les oreilles de la tête</h4>
-        <iframe v-bind:src="'https://open.spotify.com/embed?uri=' + contentMusic.listMusic.artists[0].uri"
-                frameborder="0" allowtransparency="true"></iframe>
-        <h4>A voir</h4>
-
-
-        <div class="music" v-for="(artist, key) of contentMusic.listMusic.artists">
-            {{ artist.name }}
-            {{ artist.external_urls.spotify }}
-            <div v-if="artist.images[1]">
-             <div><img v-bind:src="artist.images[1].url" width='200px'/></div>
-            </div>
-         </div>
-     </div>
- </div>
-
- <div v-if="contentMusic.listMusic">
-     <div v-if="contentMusic.listMusic.albums">
-         <h3>ALBUMS</h3>
-         <h4>Les oreilles de la tête</h4>
-         <iframe v-bind:src="'https://open.spotify.com/embed?uri=' + contentMusic.listMusic.albums[0].uri"
-                 frameborder="0" allowtransparency="true"></iframe>
-         <h4>A voir</h4>
-         <div class="music" v-for="(album, key) of contentMusic.listMusic.albums">
-            {{ album.artists[0].name}}
-            {{ album.name}}
-            {{ album.external_urls.spotify}}
-             <div v-if="album.images[1]">
-                 <div><img v-bind:src="album.images[1].url" width='200px'/></div>
-             </div>
-
-
-         </div>
-     </div>
- </div>
