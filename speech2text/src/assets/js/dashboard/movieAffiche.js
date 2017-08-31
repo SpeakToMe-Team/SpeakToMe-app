@@ -47,14 +47,33 @@ class MovieAfficheModule {
 }
 
 function traitementMovieAffiche(answer) {
-    console.log('movie affiche');
 
     let Movie = new MovieAfficheModule(answer);
-    let listeMovies = Movie.getListMovies();
+    
+    var nbrMovies = Movie.getNumberMovie();
+    console.log('nbrMovies : '+ nbrMovies);
 
-    console.log(listeMovies);
 
-    dashboard.contentMovie = listeMovies;
-    dashboard.isActiveMovieAfficheModule = true;
-    // dashboard.
+    if (nbrMovies > 0) {
+        let stringVoiceMsg = 'Voici la liste des films actuellement en salle';
+        let listMovies     = Movie.getListMovies();   
+    
+        // Pour une raison mystérieuse, content ne fonctionne pas
+        // var content = {
+        //     msgVocal: stringVoiceMsg,
+        //     listMovies: listMovies
+        // }
+
+        // On utilise directement listMovies
+        dashboard.contentMovie = listMovies;
+        dashboard.isActiveMovieModule = true;
+        dashboard.isActiveMovieAfficheModule = true;
+       
+        parler(stringVoiceMsg);
+
+    } else {
+        dashboard.isActiveMovieModule = false;
+        dashboard.isActiveMovieAfficheModule = false;
+        parler("Désolé ! Je n'ai pas trouvé de réponse à votre question.");
+    }
 }

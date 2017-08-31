@@ -73,7 +73,7 @@ class MovieController extends ApiController
 
             // Si à ce stade, la recherche est toujours vide, on passe la demande générale pour avoir quelquechose
             if (empty($this->recherche)) {
-                $this->demande = '';
+                $this->demande = 'affiche';
             }
         }
 
@@ -152,9 +152,25 @@ class MovieController extends ApiController
             
         }
 
+        // Si on voulait les séances de cinéma mais qu'on n'a pas de position, on donne les films à l'affiche
+        if (empty($this->latitude) && empty($this->longitude) && $this->demande == 'seance') {
+            $this->demande   = 'affiche';
+            $this->cinema    = '';
+            $this->recherche = '';
+        }
+
+        // Si on voulait des informations sur un film et qu'on n'a pas de recherche, on donne les films à l'affiche
+        else if (empty($this->recherche) && $this->demande == 'informations') {
+            $this->demande   = 'affiche';
+            $this->cinema    = '';
+            $this->recherche = '';
+        }
+
         // Si on a une demande d'affiche
         if (array_key_exists('movie_affiche', $intent["entities"])) {
-            $this->demande = 'affiche';
+            $this->demande   = 'affiche';
+            $this->cinema    = '';
+            $this->recherche = '';
         }
     }
 
