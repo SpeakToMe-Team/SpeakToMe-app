@@ -120,7 +120,7 @@ io.on('connection', function (socket) {
         var longitude = json.position.longitude;            
 
         var args = {
-            path: { "query": json.question },
+            path: { "query": encodeURIComponent(json.question) },
             headers: { "secret": secret, "latitude": latitude, "longitude": longitude }
         };
 
