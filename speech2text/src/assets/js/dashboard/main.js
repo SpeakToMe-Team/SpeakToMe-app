@@ -126,14 +126,22 @@ var emitQuestion = function (question) {
 var emitResultRequest = function (number) {
     $('.msgVocal').each(function(i,e) {
         if (i+1 == number) {
+            let moduleItem = $(e).closest('.module-item');
             let text = $(e).text();
             if (typeof text != 'undefined') {
+                $('html, body').animate({
+                    scrollTop: moduleItem.offset().top
+                }, 2000);
                 parler(text);
             }
             return false;
         }
     });
-}
+};
+
+var emitStopSpeech = function () {
+    speechSynthesis.cancel()
+};
 
 $('#input-emitQuestion').keyup(function(event) {
 	if (event.which == 13) {
