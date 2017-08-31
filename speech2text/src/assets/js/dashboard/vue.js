@@ -31,15 +31,8 @@ var dashboard = new Vue({
             this.contentTravel = ''
             this.contentMovie = ''
             this.contentMusic = ''
-            this.compteur = 0
-        },
-        goto: function () {
-            var i = this.compteur + 1
-            var string = 'style-' + i
-            console.log('string : ' + string)
-            this.compteur = this.compteur + 1
-
-            return string
+            this.compteur = 0            
         }
     }
 });
+
