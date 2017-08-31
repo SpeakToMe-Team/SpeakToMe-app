@@ -309,6 +309,7 @@ input {
     margin-right: 0;
     margin-left: 0;
     padding-right: 20px;
+    padding-left: 10px;
     border: none;
     border-radius: 0px 50px 50px 0px;
     outline:  none;
@@ -319,7 +320,7 @@ input {
     background-color: rgba(157, 177, 185, 0.77);
 }
 .dashboard-page .result h2{
-    background-color: #9fadb2;
+    background-color: black;
     margin: 0px;
 }
 
@@ -389,7 +390,8 @@ input {
     text-align: center;
     margin: auto;
     padding: 60px;
-    color: white;
+    color: black;
+    background-color: white;
 }
 .start p{
     font-size: 3.5em;
@@ -426,6 +428,7 @@ input {
 #meteo .details i{
     font-size: 7em;
     padding: 25px;
+    padding-top: 35px;
 }
 #meteo .details ul{
     list-style: none;
@@ -438,7 +441,7 @@ input {
 }
 #meteo .details ul li img{
     margin-right: 15px;
-    width: 20%;
+    width: 15%;
 }
 
 /* Movies */

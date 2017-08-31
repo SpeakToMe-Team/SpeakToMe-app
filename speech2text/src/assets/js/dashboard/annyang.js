@@ -6,10 +6,10 @@ if (annyang) {
             dashboard.init();
         },
         "je n'ai pas bien entendu": repeterModule,
-        'ouvrir panneau': function() {
+        'ouvrir paramètres': function() {
             $('#settings').modal('show');
         },
-        'fermer panneau': function() {
+        'fermer paramètres': function() {
             $('#settings').modal('hide');
         },
         'ouvrir aide': function() {
@@ -27,8 +27,24 @@ if (annyang) {
         'écouter musique': function() { // Ne marche pas
             //$('#play-button').click();
             console.log('lancer la musique');
-            $('#test-button').trigger('submit');
-            
+            $('#test-button').trigger('submit'); 
+        },
+        'Bonne journée speechi': function() { // Ne marche pas
+            parler('bonne journée à vous aussi maitre');
+            $(location).attr('href', '/auth/logout')
+        },
+        'déconnexion': function() { // Ne marche pas
+            parler('bonne journée maitre');
+            $(location).attr('href', '/auth/logout')
+        },
+        'bonjour speechi': function() { // Ne marche pas
+            parler('bonjour maitre');
+        },
+        'merci speechi': function() { // Ne marche pas
+            parler('mais derien maitre');
+        },
+        'que penses-tu de stéphane et morgane': function() { // Ne marche pas
+            parler('je pense qu\'ils sauront reconnaitre que votre équipe à fait un excellent travail, surement même, le meilleur!!');
         },
         'speechi lire résultat *number': emitResultRequest,
         'speechi stop': emitStopSpeech,
