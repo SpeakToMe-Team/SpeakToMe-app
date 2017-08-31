@@ -18,9 +18,38 @@ module.exports = function(router, passport){
         });
     });
 
-    router.get('/dashboard', function(req, res){
+    router.post('/settings', function(req, res){
+        User.findOne({ _id: req.user._id }).exec(function(err, user){
+            
+            console.log(req.body);
 
-		res.render('secured/dashboard.ejs');
+           /* user.settings.couleur = '';
+            user.settings.ville = 'Aubagne';
+            user.settings.nbrResultatMovie = 7;
+            user.settings.nbrResultatTravel = 7;
+            user.settings.nbrResultatSpotify = 7;
+            user.settings.nbrResultatWeather = 7; 
+            
+            user.save(function(err){
+                if(err){
+                    throw err;
+                }
+
+                res.redirect('/dashboard', { user : user });
+                //return done(null, newUser, req.flash('success_msg', 'Account created !'));
+            });   */    
+
+            res.redirect('/dashboard', { user : user });     
+        });
+    });
+
+    router.get('/dashboard', function(req, res){
+        User.findOne({ _id: req.user._id }).
+        exec(function(err, user){
+            console.log(user);
+            
+            res.render('secured/dashboard.ejs');
+        });
 	});
 
     router.get('/getToken', function(req, res){

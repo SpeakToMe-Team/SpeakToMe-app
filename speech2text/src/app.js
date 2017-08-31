@@ -1,5 +1,5 @@
 var Client = require('node-rest-client').Client;
-var client = new Client();
+
 var express = require('express');
 var path = require('path');
 var app = express();
@@ -92,7 +92,6 @@ var secure = express.Router();
 require('./app/routes/secure')(secure, passport);
 app.use('/', secure);
 
-
 var server = app.listen(port);
 
 /* Partie Socket.Io */
@@ -106,10 +105,14 @@ io.on('connection', function (socket) {
     socket.emit('answer', json);
     // Fin*/
     
+    socket.on('settings', function (settings) {
+        
+        console.log('settings ' + settings);        
+    });
 
     socket.on('message', function (message) {
         console.log('Un client me parle ! Il me dit : ' + message);
-         socket.emit('message', { 'title': "Bienvenue avec socket.io !" });
+        socket.emit('message', { 'title': "Bienvenue avec socket.io !" });
     });
 
     socket.on('question', function (json) {
@@ -121,14 +124,24 @@ io.on('connection', function (socket) {
         var longitude = json.position.longitude;            
 
         var args = {
-            path: { "query": json.question },
+            path: { "query": encodeURIComponent(json.question) },
             headers: { "secret": secret, "latitude": latitude, "longitude": longitude }
         };
+
+        console.log(args);
 
         /*// Si on ne veut pas utiliser l'api back
         var json = '{"intent":"movie","response":{"feed":{"page":1,"count":10,"results":[{"type":"movietheater","$":0},{"type":"movie","$":4},{"type":"theater","$":0},{"type":"location","$":0},{"type":"tvseries","$":0},{"type":"person","$":0},{"type":"character","$":0},{"type":"video","$":0},{"type":"photo","$":1},{"type":"news","$":0}],"totalResults":5,"movie":[{"code":134954,"originalTitle":"Lauf um dein Leben - Vom Junkie zum Ironman","productionYear":2008,"castingShort":{"directors":"Adnan K\u00f6se","actors":"Max Riemelt, Jasmin Schwiers, Uwe Ochsenknecht, Axel Stein, Robert Gwisdek"},"movieCertificate":{"certificate":{"code":14001,"$":"Interdit aux moins de 12 ans"}},"statistics":{"userRating":3.01613},"poster":{"path":"\/pictures\/17\/05\/22\/12\/38\/545710.jpg","href":"http:\/\/fr.web.img3.acsta.net\/pictures\/17\/05\/22\/12\/38\/545710.jpg"},"link":[{"rel":"aco:web","href":"http:\/\/www.allocine.fr\/film\/fichefilm_gen_cfilm=134954.html"}]},{"code":139589,"originalTitle":"Iron Man 3","productionYear":2013,"release":{"releaseDate":"2013-04-24"},"castingShort":{"directors":"Shane Black","actors":"Robert Downey Jr., Gwyneth Paltrow, Don Cheadle, Ben Kingsley, Guy Pearce"},"statistics":{"pressRating":3.15789,"userRating":3.97338},"poster":{"path":"\/medias\/nmedia\/18\/91\/08\/37\/20508296.jpg","href":"http:\/\/fr.web.img5.acsta.net\/medias\/nmedia\/18\/91\/08\/37\/20508296.jpg"},"link":[{"rel":"aco:web","href":"http:\/\/www.allocine.fr\/film\/fichefilm_gen_cfilm=139589.html"}]},{"code":136190,"originalTitle":"Iron Man 2","productionYear":2010,"release":{"releaseDate":"2010-04-28"},"castingShort":{"directors":"Jon Favreau","actors":"Robert Downey Jr., Don Cheadle, Scarlett Johansson, Mickey Rourke, Gwyneth Paltrow"},"statistics":{"pressRating":3.1,"userRating":3.50372},"poster":{"path":"\/medias\/nmedia\/18\/70\/45\/28\/19408942.jpg","href":"http:\/\/fr.web.img2.acsta.net\/medias\/nmedia\/18\/70\/45\/28\/19408942.jpg"},"link":[{"rel":"aco:web","href":"http:\/\/www.allocine.fr\/film\/fichefilm_gen_cfilm=136190.html"}]},{"code":53751,"originalTitle":"Iron Man","productionYear":2008,"release":{"releaseDate":"2008-04-30"},"castingShort":{"directors":"Jon Favreau","actors":"Robert Downey Jr., Terrence Howard, Gwyneth Paltrow, Jeff Bridges, Shaun Toub"},"movieCertificate":{"certificate":{"code":14031,"$":"A partir de 10 ans"}},"statistics":{"pressRating":3.41667,"userRating":4.01551},"poster":{"path":"\/medias\/nmedia\/18\/62\/89\/45\/18876909.jpg","href":"http:\/\/fr.web.img3.acsta.net\/medias\/nmedia\/18\/62\/89\/45\/18876909.jpg"},"link":[{"rel":"aco:web","href":"http:\/\/www.allocine.fr\/film\/fichefilm_gen_cfilm=53751.html"}]}],"media":[{"class":"picture","code":0,"rcode":21413720,"type":{"code":31001,"$":"Affiche"},"description":"Lauf um dein Leben - Vom Junkie zum Ironman : Affiche","rendition":[{"path":"\/pictures\/17\/05\/22\/12\/38\/545710.jpg","href":"http:\/\/fr.web.img3.acsta.net\/pictures\/17\/05\/22\/12\/38\/545710.jpg","format":{"code":30006,"$":"jpeg"}}]}]}}}';
         socket.emit('answer', json);
         // Fin*/
+
+        var options = {
+            mimetypes: {
+                    json: ["application/json","application/json;charset=utf-8"]                    
+                }
+            };
+
+        var client = new Client(options);
 
         client.get("http://frontend/api/speech?query=${query}", args,
         function (data, response) {

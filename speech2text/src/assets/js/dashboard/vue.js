@@ -1,3 +1,18 @@
+function test (event) {
+    if (event) {
+        alert(event.target.tagName)
+
+        var settings = {
+            ville: dashboard.villeInput,
+            movieRange: dashboard.movieRange
+        }
+
+        socket.emit('settings', settings );
+
+        $('#settings').modal('hide');
+    }
+}
+
 var dashboard = new Vue({
     el: "#dashboard",
     data: {
@@ -15,7 +30,12 @@ var dashboard = new Vue({
         contentTravel: '',        
         contentMovie: '',
         contentMusic:'',
-        compteur: 0
+        compteur: 0,
+        villeInput: '',
+        movieRange: 5,
+        weatherRange: 5,
+        spotifyRange: 5,
+        travelRange: 5
     },
     methods: {
         init: function () {
@@ -31,15 +51,20 @@ var dashboard = new Vue({
             this.contentTravel = ''
             this.contentMovie = ''
             this.contentMusic = ''
-            this.compteur = 0
+            this.compteur = 0            
         },
-        goto: function () {
-            var i = this.compteur + 1
-            var string = 'style-' + i
-            console.log('string : ' + string)
-            this.compteur = this.compteur + 1
-
-            return string
+        saveSettings: function (event) {
+            test(event);
+        },
+        reinitSettings: function (event) {
+            // Valeur pa rdéfaut
+            this.villeInput = ''
+            this.movieRange = 5
+            this.weatherRange = 5
+            this.spotifyRange = 5
+            this.travelRange = 5
+            test(event);
         }
     }
 });
+

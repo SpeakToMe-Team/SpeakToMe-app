@@ -22,11 +22,29 @@ var userSchema = mongoose.Schema({
         email: String,
         name: String,
         picture: String
-    },
+    },   
     token:{
         type: Schema.Types.ObjectId,
         ref: 'Token',
         default: null
+    },
+    settings: {
+        couleur: String,
+        ville: String,
+        nbrResultatMovie: { type: Number, min: 1, max: 20, default: 5 },
+        nbrResultatTravel: { type: Number, min: 1, max: 20, default: 5 },
+        nbrResultatSpotify: { type: Number, min: 1, max: 20, default: 5 },
+        nbrResultatWeather: { type: Number, min: 1, max: 20, default: 5 }    
+    }
+});
+
+var settingsSchema = mongoose.Schema({    
+    local: {
+        email: String
+    },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     }
 });
 
