@@ -572,3 +572,35 @@ input {
     opacity: 0.5;
 } */
 /* Fin Module yelp */
+
+/* Module musique
+ */
+.module-music{
+    background-color: black;
+}
+.module-music h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5em;
+    text-align: center;
+    color: white;
+    padding-top: 25px;
+    padding-bottom: 30px;
+}
+.module-music h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5em;
+    text-align: center;
+    color: white;
+    padding-top: 25px;
+}
+.module-music .frameSpot{
+    text-align: center;
+}
+.module-music iframe{
+    height: 90px;
+}
+.module-music .music{
+    text-align: center;
+    padding: 25px;
+}
+/* Fin Module yelp */
