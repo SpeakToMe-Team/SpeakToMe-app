@@ -3,7 +3,7 @@ class MusicModule {
 
     constructor(json) {
         this._jsonMusic = json;
-        this._limit = 3;
+        this._limit = 4;
     }
 
     get jsonMusic() {
@@ -47,7 +47,7 @@ class MusicModule {
             if (response.albums.items.length > 0) {
                 let albumsItems = response.albums.items;
                 if (albumsItems !== 'undefined') {
-                    return albumsItem.slice(0, this._limit);
+                    return albumsItems.slice(0, this._limit);
                 }
             }
     }
@@ -82,22 +82,26 @@ function traitementMusic(answer) {
     var i=0;
     if (typeof (artistList) !== 'undefined') {
         display.artists = artistList;
-        i=i+1;
+        i=i+artistList.length;
     }
     if (typeof (albumList) !== 'undefined') {
         display.albums = albumList;
-        i=i+1;
+        i=i+albumList.length;
     }
     if (typeof (trackList) !== 'undefined') {
         display.tracks = trackList;
-        i=i+1;
+        i=i+trackList.length;
     }
 
     if (i <= 0) {
 
         var stringVoiceMsg = "Je n'ai trouvé aucune musique qui corresponde à votre recherche.";
     }
-    else {
+    else if (i==1) {
+        var stringVoiceMsg = "Je viens de trouver un résultat qui correspond à votre recherche.";
+    }
+    else if(i>1) {
+
         var stringVoiceMsg = "Je viens de trouver " + i + " résultats qui correspondent à votre recherche.";
     }
 

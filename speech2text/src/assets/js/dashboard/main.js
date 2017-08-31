@@ -98,13 +98,11 @@ var show = function(answer) {
                     
                     break;
             }
-            
             break;
 
         case "music":
-            console.log(answer);
             traitementMusic(answer);
-
+            break;
 
         case "travel":
             traitementTravel(answer);
@@ -113,7 +111,6 @@ var show = function(answer) {
         default:
             parler("Désolé, je n'ai rien trouvé ! Veuillez recommencer !");
             break;
-
     }
 }
 /* Partie Socket IO pour l'envoi et la réception des questions/réponses */
