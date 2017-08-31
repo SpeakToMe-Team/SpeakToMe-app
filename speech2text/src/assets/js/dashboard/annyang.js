@@ -31,6 +31,7 @@ if (annyang) {
             
         },
         'speechi lire résultat *number': emitResultRequest,
+        'speechi stop': emitStopSpeech,
 
         // Pour toutes les recherches avec l'API : définir un mot clé 'ok google'...
         'speechi *question': emitQuestion
