@@ -39,7 +39,9 @@ class WeatherModule {
                 }
             }, this);
             console.log('jour ? : ' + this._jour);
-
+            if (this._jour == false) {
+                this._jour = 0;
+            }
             return this._jour;
         }else{
             return "Pas d'informations !";
