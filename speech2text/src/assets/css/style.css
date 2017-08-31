@@ -318,9 +318,6 @@ input {
     -webkit-animation-delay: 2s;
     background-color: rgba(157, 177, 185, 0.77);
 }
-.dashboard-page article:nth-child(2n){
-    padding-right: 20px;
-}
 .dashboard-page .result h2{
     background-color: #9fadb2;
     margin: 0px;
